@@ -12,7 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 
-namespace LPOOII_GRUPO05
+namespace Vistas
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml

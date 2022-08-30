@@ -5,7 +5,7 @@ using System.Data;
 using System.Linq;
 using System.Windows;
 
-namespace LPOOII_GRUPO05
+namespace Vistas
 {
     /// <summary>
     /// Interaction logic for App.xaml

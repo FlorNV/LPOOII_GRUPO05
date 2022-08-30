@@ -8,7 +8,7 @@
 // </auto-generated>
 //------------------------------------------------------------------------------
 
-namespace LPOOII_GRUPO05.Properties
+namespace Vistas.Properties
 {
 
 
