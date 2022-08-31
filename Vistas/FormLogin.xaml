@@ -1,0 +1,16 @@
+﻿<Window x:Class="Vistas.FormLogin"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Login" Height="256" Width="321">
+    <Grid Height="213" Width="308">
+        <Label Content="Usuario" Height="28" HorizontalAlignment="Left" Margin="32,58,0,0" Name="lblUsuario" VerticalAlignment="Top" />
+        <Label Content="Contraseña" Height="28" HorizontalAlignment="Left" Margin="12,105,0,0" Name="lblContrasena" VerticalAlignment="Top" />
+        <Label Content="¡Bienvenidos!" Height="28" HorizontalAlignment="Center" Margin="113,12,93,0" Name="lblBienvenida" VerticalAlignment="Top" FontSize="14" Width="102" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="104,60,0,0" Name="txtUsuario" VerticalAlignment="Top" Width="162" />
+        <PasswordBox Height="23" Margin="104,105,42,0" Name="txtContrasena" VerticalAlignment="Top" />
+        <Button Content="Aceptar" Height="23" HorizontalAlignment="Left" Margin="191,168,0,0" Name="btnAceptar" VerticalAlignment="Top" Width="75" Foreground="#FF238823" Click="btnAceptar_Click" />
+        <Button Content="Cancelar" Height="23" HorizontalAlignment="Left" Margin="50,168,0,0" Name="btnCancelar" VerticalAlignment="Top" Width="75" Foreground="#FFCA1441" Click="btnCancelar_Click" />
+        <Label Content="Debe completar este campo" Height="28" HorizontalAlignment="Left" Margin="104,80,0,0" Name="lblValidacionUsuario" VerticalAlignment="Top" FontSize="10" Foreground="#FFC82828" />
+        <Label Content="Debe completar este campo" FontSize="10" Foreground="#FFC82828" Height="28" HorizontalAlignment="Left" Margin="104,124,0,0" Name="lblValidacionContrasena" VerticalAlignment="Top" />
+    </Grid>
+</Window>
