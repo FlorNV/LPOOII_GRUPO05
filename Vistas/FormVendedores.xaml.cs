@@ -55,6 +55,7 @@ namespace Vistas
         {
             LimpiarCampos();
             HabilitarDeshabilitarBotones(false);
+            HabilitarDeshabilitarTextBox(false);
         }
 
         private void btnSalir_Click(object sender, RoutedEventArgs e)
