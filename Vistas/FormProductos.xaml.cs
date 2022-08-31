@@ -108,7 +108,7 @@ namespace Vistas
                 oProducto.Precio = precio;
 
                 MessageBox.Show("Código del producto: " + oProducto.CodProducto +
-                    "\Categoría: " + oProducto.Categoria +
+                    "\nCategoría: " + oProducto.Categoria +
                     "\nColor: " + oProducto.Color +
                     "\nDescripción: " +  oProducto.Descripcion + 
                     "\nPrecio:" + oProducto.Precio, "Datos del nuevo producto");
