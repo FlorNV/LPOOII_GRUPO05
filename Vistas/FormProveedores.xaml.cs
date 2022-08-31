@@ -61,7 +61,7 @@ namespace Vistas
 
         private void btnSalir_Click(object sender, RoutedEventArgs e)
         {
-            Application.Current.Shutdown();
+            this.Close();
         }
 
         private void LimpiarCampos()
