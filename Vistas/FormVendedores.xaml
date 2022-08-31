@@ -1,0 +1,23 @@
+﻿<Window x:Class="Vistas.FormVendedores"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="FormVendedores" Height="352" Width="825">
+    <Grid>
+        <Button Background="#FFF9F9F9" Content="Nuevo" Foreground="Red" Height="23" Margin="1,6,727,284" Name="btnNuevo" Width="75" Click="btnNuevo_Click" />
+        <Button Background="#FFF9F9F9" Content="Modificar" Foreground="Red" Height="23" HorizontalAlignment="Left" Margin="82,6,0,284" Name="btnModificar" Width="75" />
+        <Button Background="#FFF9F9F9" Content="Eliminar" Foreground="Red" Height="23" HorizontalAlignment="Left" Margin="163,6,0,284" Name="btnEliminar" Width="75" />
+        <Button Background="#FFF9F9F9" Content="Guardar" Foreground="Blue" Height="23" Margin="267,6,461,284" Name="btnGuardar" Width="75" Click="btnGuardar_Click" />
+        <Button Background="#FFF9F9F9" Content="Cancelar" Foreground="Blue" Height="23" Margin="348,6,380,284" Name="btnCancelar" Width="75" Click="btnCancelar_Click" />
+        <Button Background="#FFF9F9F9" Content="Primero" Foreground="Green" Height="23" Margin="471,6,257,284" Name="btnPrimero" Width="75" />
+        <Button Background="#FFF9F9F9" Content="Anterior" Foreground="Green" Height="23" HorizontalAlignment="Left" Margin="552,6,0,284" Name="btnAnterior" Width="75" />
+        <Button Background="#FFF9F9F9" Content="Siguiente" Foreground="Green" Height="23" Margin="633,6,95,284" Name="btnSiguiente" Width="75" />
+        <Button Background="#FFF9F9F9" Content="Último" Foreground="Green" Height="23" Margin="716,6,12,284" Name="btnUltimo" Width="75" />
+        <Button Content="Salir" Foreground="Blue" Height="23" HorizontalAlignment="Left" Margin="716,278,0,0" Name="btnSalir" VerticalAlignment="Top" Width="75" Click="btnSalir_Click" />
+        <Label Content="Legajo" Height="28" HorizontalAlignment="Left" Margin="308,108,0,0" Name="label1" VerticalAlignment="Top" />
+        <Label Content="Apellido" Height="28" HorizontalAlignment="Left" Margin="299,155,0,0" Name="label2" VerticalAlignment="Top" />
+        <Label Content="Nombre" Height="28" HorizontalAlignment="Left" Margin="299,199,0,0" Name="label3" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="359,113,0,0" Name="txtLegajo" VerticalAlignment="Top" Width="120" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="359,157,0,0" Name="txtApellido" VerticalAlignment="Top" Width="120" />
+        <TextBox Height="23" HorizontalAlignment="Left" Margin="359,199,0,0" Name="txtNombre" VerticalAlignment="Top" Width="120" />
+    </Grid>
+</Window>

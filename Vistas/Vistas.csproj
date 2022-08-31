@@ -58,11 +58,19 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="FormClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FormProveedores.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FormLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FormVendedores.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -77,11 +85,17 @@
     <Compile Include="FormProductos.xaml.cs">
       <DependentUpon>FormProductos.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FormClientes.xaml.cs">
+      <DependentUpon>FormClientes.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FormProveedores.xaml.cs">
       <DependentUpon>FormProveedores.xaml</DependentUpon>
     </Compile>
     <Compile Include="FormLogin.xaml.cs">
       <DependentUpon>FormLogin.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FormVendedores.xaml.cs">
+      <DependentUpon>FormVendedores.xaml</DependentUpon>
     </Compile>
     <Compile Include="MainWindow.xaml.cs">
       <DependentUpon>MainWindow.xaml</DependentUpon>
