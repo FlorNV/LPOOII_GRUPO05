@@ -35,8 +35,9 @@ namespace Vistas
                 if ((szUsuario == "admin" && szPassword == "admin") ||
                     (szUsuario == "vendedor" && szPassword == "vendedor"))
                 {
-                    FormProveedores frmProveedores = new FormProveedores();
-                    frmProveedores.Show();
+                    FormPrincipal frmPrincipal = new FormPrincipal();
+                    frmPrincipal.lblUsername.Content = txtUsuario.Text;
+                    frmPrincipal.Show();
                     this.Close();
                 }
                 else
