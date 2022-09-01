@@ -1,0 +1,46 @@
+﻿<Window x:Class="Vistas.FormPrincipal"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="Inicio" Height="300" Width="550" Loaded="Window_Loaded">
+    <Window.Resources>
+        <Style x:Key="MyButtonStyle" TargetType="Button">
+            <Setter Property="OverridesDefaultStyle" Value="True"/>
+            <Setter Property="Margin" Value="5"/>
+            <Setter Property="Template">
+                <Setter.Value>
+                    <ControlTemplate TargetType="Button">
+                        <Border Name="border" 
+                        BorderThickness="1"
+                        Padding="4,2" 
+                        BorderBrush="DarkGray" 
+                        CornerRadius="3" 
+                        Background="{TemplateBinding Background}">
+                            <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                        </Border>
+                        <ControlTemplate.Triggers>
+                            <Trigger Property="IsMouseOver" Value="True">
+                                <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                            </Trigger>
+                        </ControlTemplate.Triggers>
+                    </ControlTemplate>
+                </Setter.Value>
+            </Setter>
+        </Style>
+    </Window.Resources>
+    
+    <Grid>
+        <Grid.Background>
+            <ImageBrush ImageSource="/Vistas;component/Resources/background-1.jpg" />
+        </Grid.Background>
+        <Button Content="Proveedores" Height="40" HorizontalAlignment="Left" Margin="88,94,0,0" Name="btnProveedores" VerticalAlignment="Top" Width="130" FontSize="16" Click="btnProveedores_Click" Background="White" BorderBrush="{x:Null}" Style="{DynamicResource MyButtonStyle}"/>
+        <Button Content="Clientes" Height="40" HorizontalAlignment="Left" Margin="88,158,0,0" Name="btnClientes" VerticalAlignment="Top" Width="130" FontSize="16" Click="btnClientes_Click" Background="White" BorderBrush="{x:Null}" Style="{DynamicResource MyButtonStyle}"/>
+        <Button Content="Productos" Height="40" HorizontalAlignment="Left" Margin="318,94,0,0" Name="btnProductos" VerticalAlignment="Top" Width="130" FontSize="16" Click="btnProductos_Click" Background="White" BorderBrush="{x:Null}" FlowDirection="RightToLeft" Style="{DynamicResource MyButtonStyle}"/>
+        <Button Content="Vendedores" Height="40" HorizontalAlignment="Left" Margin="318,158,0,0" Name="btnVendedores" VerticalAlignment="Top" Width="130" FontSize="16" Click="btnVendedores_Click" Background="White" BorderBrush="{x:Null}" FlowDirection="RightToLeft" Style="{DynamicResource MyButtonStyle}" IsEnabled="False" />
+        <Label Content="Menú Principal" Height="36" HorizontalAlignment="Center" Margin="0,12,0,0" Name="lblTitulo" VerticalAlignment="Top" FontWeight="Bold" FontSize="18" FontStyle="Normal" HorizontalContentAlignment="Center" VerticalContentAlignment="Top" Width="478" />
+        <Button Content="Salir" Height="23" HorizontalAlignment="Right" Margin="0,20,12,0" Name="btnSalir" VerticalAlignment="Top" Width="75" Background="#FFFF4848" Foreground="White" BorderBrush="{x:Null}" Click="btnSalir_Click" Style="{DynamicResource MyButtonStyle}"/>
+        <Label Height="28" HorizontalAlignment="Left" Margin="59,0,0,0" Name="lblUsername" VerticalAlignment="Top" IsEnabled="True" FontWeight="Bold" Foreground="Black" />
+        <Label Content="Usuario:" Height="28" HorizontalAlignment="Left" Name="label1" VerticalAlignment="Top" />
+    </Grid>
+    
+    
+</Window>
