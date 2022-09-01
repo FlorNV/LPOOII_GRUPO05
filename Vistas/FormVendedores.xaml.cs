@@ -32,23 +32,24 @@ namespace Vistas
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
-
-            MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea agregar este vendedor?",
-                  "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (messageBoxResult == MessageBoxResult.Yes)
+            if (!ValidarTextBox())
             {
-                Vendedor oVendedor = new Vendedor();
-                oVendedor.Apellido = txtApellido.Text;
-                oVendedor.Nombre = txtNombre.Text;
-                oVendedor.Legajo = txtLegajo.Text;
+                MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea agregar este vendedor?",
+                  "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    Vendedor oVendedor = new Vendedor();
+                    oVendedor.Apellido = txtApellido.Text;
+                    oVendedor.Nombre = txtNombre.Text;
+                    oVendedor.Legajo = txtLegajo.Text;
 
-                MessageBox.Show("Legajo: " + oVendedor.Legajo +
-                    "\nApellido: " + oVendedor.Apellido +
-                    "\nNombre: " + oVendedor.Nombre + "Datos del Vendedor");
-                HabilitarDeshabilitarTextBox(false);
-                HabilitarDeshabilitarBotones(false);
+                    MessageBox.Show("Legajo: " + oVendedor.Legajo +
+                        "\nApellido: " + oVendedor.Apellido +
+                        "\nNombre: " + oVendedor.Nombre + "Datos del Vendedor");
+                    HabilitarDeshabilitarTextBox(false);
+                    HabilitarDeshabilitarBotones(false);
+                }
             }
-
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
@@ -92,5 +93,34 @@ namespace Vistas
             btnCancelar.IsEnabled = b;
         }
 
+        private bool ValidarTextBox()
+        {
+            bool bError = false;
+            if (txtLegajo.Text == String.Empty)
+            {
+                lblErrorLegajo.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorLegajo.Visibility = System.Windows.Visibility.Hidden;
+
+            if (txtApellido.Text == String.Empty)
+            {
+                lblErrorApellido.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorApellido.Visibility = System.Windows.Visibility.Hidden;
+
+            if (txtNombre.Text == String.Empty)
+            {
+                lblErrorNombre.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorNombre.Visibility = System.Windows.Visibility.Hidden;
+
+            return bError;
+        }
     }
 }

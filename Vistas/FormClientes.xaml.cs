@@ -32,23 +32,27 @@ namespace Vistas
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea agregar este cliente?",
-                   "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (messageBoxResult == MessageBoxResult.Yes)
+            if (!ValidarTextBox())
             {
-                Cliente oCliente = new Cliente();
-                oCliente.DNI = txtDNI.Text;
-                oCliente.Apellido = txtApellido.Text;
-                oCliente.Nombre = txtNombre.Text;
-                oCliente.Direccion = txtDireccion.Text;
+                MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea agregar este cliente?",
+                   "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    Cliente oCliente = new Cliente();
+                    oCliente.DNI = txtDNI.Text;
+                    oCliente.Apellido = txtApellido.Text;
+                    oCliente.Nombre = txtNombre.Text;
+                    oCliente.Direccion = txtDireccion.Text;
 
-                MessageBox.Show("DNI: " + oCliente.DNI +
-                    "\nApellido: " + oCliente.Apellido +
-                    "\nNombre: " + oCliente.Nombre +
-                    "\nDireccion: " + oCliente.Direccion, "Datos del Cliente");
-                HabilitarDeshabilitarTextBox(false);
-                HabilitarDeshabilitarBotones(false);
+                    MessageBox.Show("DNI: " + oCliente.DNI +
+                        "\nApellido: " + oCliente.Apellido +
+                        "\nNombre: " + oCliente.Nombre +
+                        "\nDireccion: " + oCliente.Direccion, "Datos del Cliente");
+                    HabilitarDeshabilitarTextBox(false);
+                    HabilitarDeshabilitarBotones(false);
+                }
             }
+
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
@@ -94,6 +98,50 @@ namespace Vistas
             btnCancelar.IsEnabled = b;
         }
 
+        private bool ValidarTextBox()
+        {
+            bool bError = false;
+            if (!txtDNI.Text.All(char.IsDigit))
+            {
+                lblErrorDNI.Content = "Este campo es numérico";
+                lblErrorDNI.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else if (txtDNI.Text.Length != 8)
+            {
+                lblErrorDNI.Content = "Debe contener 8 números";
+                lblErrorDNI.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorDNI.Visibility = System.Windows.Visibility.Hidden;
+
+            if (txtApellido.Text == String.Empty)
+            {
+                lblErrorApellido.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorApellido.Visibility = System.Windows.Visibility.Hidden;
+
+            if (txtNombre.Text == String.Empty)
+            {
+                lblErrorNombre.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorNombre.Visibility = System.Windows.Visibility.Hidden;
+
+            if (txtDireccion.Text == String.Empty)
+            {
+                lblErrorDireccion.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorDireccion.Visibility = System.Windows.Visibility.Hidden;
+
+            return bError;
+        }
 
     }
 }
