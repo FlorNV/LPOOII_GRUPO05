@@ -33,22 +33,25 @@ namespace Vistas
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea agregar este elemento?",
-                    "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
-            if (messageBoxResult == MessageBoxResult.Yes)
+            if (!ValidarTextBox())
             {
-                Proveedor oProveedor = new Proveedor();
-                oProveedor.CUIT = txtCUIT.Text;
-                oProveedor.RazonSocial = txtRazonSocial.Text;
-                oProveedor.Domicilio = txtDomicilio.Text;
-                oProveedor.Telefono = txtTelefono.Text;
+                MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea agregar este elemento?",
+                    "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    Proveedor oProveedor = new Proveedor();
+                    oProveedor.CUIT = txtCUIT.Text;
+                    oProveedor.RazonSocial = txtRazonSocial.Text;
+                    oProveedor.Domicilio = txtDomicilio.Text;
+                    oProveedor.Telefono = txtTelefono.Text;
 
-                MessageBox.Show("CUIT: " + oProveedor.CUIT +
-                    "\nRazon Social: " + oProveedor.RazonSocial +
-                    "\nDomicilio: " + oProveedor.Domicilio +
-                    "\nTeléfono: " + oProveedor.Telefono, "Datos del Proveedor");
-                HabilitarDeshabilitarTextBox(false);
-                HabilitarDeshabilitarBotones(false);
+                    MessageBox.Show("CUIT: " + oProveedor.CUIT +
+                        "\nRazon Social: " + oProveedor.RazonSocial +
+                        "\nDomicilio: " + oProveedor.Domicilio +
+                        "\nTeléfono: " + oProveedor.Telefono, "Datos del Proveedor");
+                    HabilitarDeshabilitarTextBox(false);
+                    HabilitarDeshabilitarBotones(false);
+                }
             }
         }
 
@@ -93,6 +96,56 @@ namespace Vistas
             btnAnterior.IsEnabled = !b;
             btnUltimo.IsEnabled = !b;
             btnCancelar.IsEnabled = b;
+        }
+
+        private bool ValidarTextBox()
+        {
+            bool bError = false;
+            if (txtCUIT.Text == String.Empty)
+            {
+                lblErrorCUIT.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else if (!txtCUIT.Text.All(char.IsDigit))
+            {
+                lblErrorCUIT.Content = "Este campo es numérico";
+                lblErrorCUIT.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorCUIT.Visibility = System.Windows.Visibility.Hidden;
+
+            if (txtRazonSocial.Text == String.Empty)
+            {
+                lblErrorRazonSocial.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorRazonSocial.Visibility = System.Windows.Visibility.Hidden;
+
+            if (txtDomicilio.Text == String.Empty)
+            {
+                lblErrorDomicilio.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorDomicilio.Visibility = System.Windows.Visibility.Hidden;
+
+            if (txtTelefono.Text == String.Empty)
+            {
+                lblErrorTelefono.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else if (!txtTelefono.Text.All(char.IsDigit))
+            {
+                lblErrorTelefono.Content = "Este campo es numérico";
+                lblErrorTelefono.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorTelefono.Visibility = System.Windows.Visibility.Hidden;
+
+            return bError;
         }
     }
 }

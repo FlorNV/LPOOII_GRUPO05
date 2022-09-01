@@ -84,37 +84,88 @@ namespace Vistas
         // Guardar un nuevo producto
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
-            MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea agregar este elemento?",
+            if (!ValidarTextBox())
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea agregar este elemento?",
                     "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-            decimal precio = 0;
-            try
-            {
-                precio = Decimal.Parse(txtPrecio.Text);
-            }
-            catch
-            {
-                MessageBox.Show("El campo precio debe ser un decimal!", "Verifique los campos");
-                return;
-            }
+                decimal precio = 0;
+                try
+                {
+                    precio = Decimal.Parse(txtPrecio.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("El campo precio debe ser un decimal!", "Verifique los campos");
+                    lblErrorPrecio.Content = "Debe ser un decimal";
+                    lblErrorPrecio.Visibility = System.Windows.Visibility.Visible;
+                    return;
+                }
 
-            if (messageBoxResult == MessageBoxResult.Yes)
-            {
-                Producto oProducto = new Producto();
-                oProducto.CodProducto = txtCodigo.Text;
-                oProducto.Categoria = txtCategoria.Text;
-                oProducto.Color = txtColor.Text;
-                oProducto.Descripcion = txtDescripcion.Text;
-                oProducto.Precio = precio;
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    Producto oProducto = new Producto();
+                    oProducto.CodProducto = txtCodigo.Text;
+                    oProducto.Categoria = txtCategoria.Text;
+                    oProducto.Color = txtColor.Text;
+                    oProducto.Descripcion = txtDescripcion.Text;
+                    oProducto.Precio = precio;
 
-                MessageBox.Show("Código del producto: " + oProducto.CodProducto +
-                    "\nCategoría: " + oProducto.Categoria +
-                    "\nColor: " + oProducto.Color +
-                    "\nDescripción: " +  oProducto.Descripcion + 
-                    "\nPrecio:" + oProducto.Precio, "Datos del nuevo producto");
-                HabilitarDeshabilitarTextBox(false);
-                HabilitarDeshabilitarBotones(false);
+                    MessageBox.Show("Código del producto: " + oProducto.CodProducto +
+                        "\nCategoría: " + oProducto.Categoria +
+                        "\nColor: " + oProducto.Color +
+                        "\nDescripción: " + oProducto.Descripcion +
+                        "\nPrecio:" + oProducto.Precio, "Datos del nuevo producto");
+                    HabilitarDeshabilitarTextBox(false);
+                    HabilitarDeshabilitarBotones(false);
+                }
             }
+        }
+
+        private bool ValidarTextBox()
+        {
+            bool bError = false;
+            if (txtCodigo.Text == String.Empty)
+            {
+                lblErrorCodigo.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorCodigo.Visibility = System.Windows.Visibility.Hidden;
+
+            if (txtCategoria.Text == String.Empty)
+            {
+                lblErrorCategoria.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorCategoria.Visibility = System.Windows.Visibility.Hidden;
+
+            if (txtColor.Text == String.Empty)
+            {
+                lblErrorColor.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorColor.Visibility = System.Windows.Visibility.Hidden;
+
+            if (txtDescripcion.Text == String.Empty)
+            {
+                lblErrorDescripcion.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorDescripcion.Visibility = System.Windows.Visibility.Hidden;
+
+            if (txtPrecio.Text == String.Empty)
+            {
+                lblErrorPrecio.Visibility = System.Windows.Visibility.Visible;
+                bError = true;
+            }
+            else
+                lblErrorPrecio.Visibility = System.Windows.Visibility.Hidden;
+
+            return bError;
         }
     }
 }

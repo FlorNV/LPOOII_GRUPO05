@@ -1,27 +1,32 @@
 ﻿<Window x:Class="Vistas.FormProductos"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="FormProductos" Height="362" Width="734">
-    <Grid Width="670">
-        <Label Content="Código:" Height="28" HorizontalAlignment="Left" Margin="240,86,0,0" Name="lblCodigo" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,88,255,0" Name="txtCodigo" VerticalAlignment="Top" Width="94" />
-        <Button Background="#FFF9F9F9" Content="Modificar" Foreground="Red" Height="23" HorizontalAlignment="Left" Margin="93,12,0,288" Name="btnModificar" Width="75" />
-        <Button Background="#FFF9F9F9" Content="Eliminar" Foreground="Red" Height="23" HorizontalAlignment="Left" Margin="174,12,0,288" Name="btnEliminar" Width="75" />
-        <Button Background="#FFF9F9F9" Content="Guardar" Foreground="Blue" Height="23" Margin="292,12,0,288" Name="btnGuardar" Width="75" HorizontalAlignment="Left" Click="btnGuardar_Click" />
-        <Button Background="#FFF9F9F9" Content="Cancelar" Foreground="Blue" Height="23" Margin="380,12,215,0" Name="btnCancelar" Width="75" VerticalAlignment="Top" Click="btnCancelar_Click" />
-        <Button Background="#FFF9F9F9" Content="Nuevo" Foreground="Red" Height="23" Margin="12,12,583,288" Name="btnNuevo" Width="75" Click="btnNuevo_Click" />
-        <Button Content="Salir" Foreground="Blue" Height="23" HorizontalAlignment="Left" Margin="583,288,0,0" Name="btnSalir" VerticalAlignment="Top" Width="75" Click="btnSalir_Click" />
-        <Label Content="Categoría:" Height="28" HorizontalAlignment="Left" Margin="240,120,0,0" Name="lblCategoria" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,122,255,0" Name="txtCategoria" VerticalAlignment="Top" Width="94" />
-        <Label Content="Color:" Height="28" HorizontalAlignment="Left" Margin="240,154,0,0" Name="lblColor" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,156,255,0" Name="txtColor" VerticalAlignment="Top" Width="94" />
-        <Label Content="Descripción:" Height="28" HorizontalAlignment="Left" Margin="240,188,0,0" Name="lblDescripcion" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,190,255,0" Name="txtDescripcion" VerticalAlignment="Top" Width="94" />
-        <Label Content="Precio:" Height="28" HorizontalAlignment="Left" Margin="240,222,0,0" Name="lblPrecio" VerticalAlignment="Top" />
-        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,224,255,0" Name="txtPrecio" VerticalAlignment="Top" Width="94" />
-        <Button Background="#FFF9F9F9" Content="Primero" Foreground="Green" Height="23" Margin="503,41,92,259" Name="btnPrimero" Width="75" />
-        <Button Background="#FFF9F9F9" Content="Anterior" Foreground="Green" Height="23" HorizontalAlignment="Left" Margin="503,12,0,288" Name="btnAnterior" Width="75" />
-        <Button Background="#FFF9F9F9" Content="Siguiente" Foreground="Green" Height="23" Margin="583,12,12,288" Name="btnSiguiente" Width="75" />
-        <Button Background="#FFF9F9F9" Content="Último" Foreground="Green" Height="23" Margin="583,41,12,259" Name="btnUltimo" Width="75" />
+        Title="FormProductos" Height="400" Width="800" WindowStartupLocation="CenterScreen">
+    <Grid>
+        <Label Content="Código:" Height="28" HorizontalAlignment="Left" Margin="240,78,0,0" Name="lblCodigo" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,80,255,0" Name="txtCodigo" VerticalAlignment="Top" Width="130" />
+        <Button Background="#FFF9F9F9" Content="Modificar" Foreground="Red" Height="23" HorizontalAlignment="Left" Margin="81,0,0,338" Name="btnModificar" Width="75" />
+        <Button Background="#FFF9F9F9" Content="Eliminar" Foreground="Red" Height="23" HorizontalAlignment="Left" Margin="162,0,0,338" Name="btnEliminar" Width="75" />
+        <Button Background="#FFF9F9F9" Content="Guardar" Foreground="Blue" Height="23" Margin="270,0,0,338" Name="btnGuardar" Width="75" HorizontalAlignment="Left" Click="btnGuardar_Click" />
+        <Button Background="#FFF9F9F9" Content="Cancelar" Foreground="Blue" Height="23" Margin="351,0,352,0" Name="btnCancelar" Width="75" VerticalAlignment="Top" Click="btnCancelar_Click" />
+        <Button Background="#FFF9F9F9" Content="Nuevo" Foreground="Red" Height="23" Margin="0,0,703,338" Name="btnNuevo" Width="75" Click="btnNuevo_Click" />
+        <Button Content="Salir" Foreground="Blue" Height="23" HorizontalAlignment="Left" Margin="703,338,0,0" Name="btnSalir" VerticalAlignment="Top" Width="75" Click="btnSalir_Click" />
+        <Label Content="Categoría:" Height="28" HorizontalAlignment="Left" Margin="240,128,0,0" Name="lblCategoria" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,130,255,0" Name="txtCategoria" VerticalAlignment="Top" Width="130" />
+        <Label Content="Color:" Height="28" HorizontalAlignment="Left" Margin="240,178,0,0" Name="lblColor" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,180,255,0" Name="txtColor" VerticalAlignment="Top" Width="130" />
+        <Label Content="Descripción:" Height="28" HorizontalAlignment="Left" Margin="240,228,0,0" Name="lblDescripcion" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,230,255,0" Name="txtDescripcion" VerticalAlignment="Top" Width="130" />
+        <Label Content="Precio:" Height="28" HorizontalAlignment="Left" Margin="240,278,0,0" Name="lblPrecio" VerticalAlignment="Top" />
+        <TextBox Height="23" HorizontalAlignment="Right" Margin="0,280,255,0" Name="txtPrecio" VerticalAlignment="Top" Width="130" />
+        <Button Background="#FFF9F9F9" Content="Primero" Foreground="Green" Height="23" Margin="541,0,162,338" Name="btnPrimero" Width="75" />
+        <Button Background="#FFF9F9F9" Content="Anterior" Foreground="Green" Height="23" HorizontalAlignment="Left" Margin="460,0,0,338" Name="btnAnterior" Width="75" />
+        <Button Background="#FFF9F9F9" Content="Siguiente" Foreground="Green" Height="23" Margin="622,0,81,338" Name="btnSiguiente" Width="75" />
+        <Button Background="#FFF9F9F9" Content="Último" Foreground="Green" Height="23" Margin="703,0,0,338" Name="btnUltimo" Width="75" />
+        <Label Content="Campo requerido" Visibility="Hidden" Height="24" HorizontalAlignment="Left" Margin="393,100,0,0" Name="lblErrorCodigo" VerticalAlignment="Top" FontSize="11" Foreground="#FFC82828" />
+        <Label Content="Campo requerido" Visibility="Hidden" Height="24" HorizontalAlignment="Left" Margin="393,150,0,0" Name="lblErrorCategoria" VerticalAlignment="Top" FontSize="11" Foreground="#FFC82828" />
+        <Label Content="Campo requerido" Visibility="Hidden" Height="24" HorizontalAlignment="Left" Margin="393,200,0,0" Name="lblErrorColor" VerticalAlignment="Top" FontSize="11" Foreground="#FFC82828" />
+        <Label Content="Campo requerido" Visibility="Hidden" Height="24" HorizontalAlignment="Left" Margin="393,250,0,0" Name="lblErrorDescripcion" VerticalAlignment="Top" FontSize="11" Foreground="#FFC82828" />
+        <Label Content="Campo requerido" Visibility="Hidden" Height="24" HorizontalAlignment="Left" Margin="393,301,0,0" Name="lblErrorPrecio" VerticalAlignment="Top" FontSize="11" Foreground="#FFC82828" />
     </Grid>
 </Window>
