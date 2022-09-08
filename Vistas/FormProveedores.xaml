@@ -1,34 +1,71 @@
 ﻿<Window x:Class="Vistas.FormProveedores"
         xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
-        Title="FormProveedores" Height="400" Width="800" WindowStartupLocation="CenterScreen">
-    <Grid>
-        <Button Content="Modificar" Height="23" Name="btnModificar" Width="75" Margin="84,0,0,338" Foreground="Red" HorizontalAlignment="Left" Background="#FFF9F9F9" />
-        <Button Content="Eliminar" Height="23" Name="btnEliminar" Width="75" Margin="166,0,0,338" Foreground="Red" HorizontalAlignment="Left" Background="#FFF9F9F9" />
-        <Button Content="Guardar" Height="23" Name="btnGuardar" Width="75" Margin="268,0,430,338" Click="btnGuardar_Click" Foreground="Blue" Background="#FFF9F9F9" />
-        <Button Content="Cancelar" Height="23" Name="btnCancelar" Width="75" Margin="352,0,350,338" Click="btnCancelar_Click" Foreground="Blue" Background="#FFF9F9F9" />
-        <Button Content="Primero" Height="23" Name="btnPrimero" Width="75" Margin="454,0,248,338" Foreground="Green" Background="#FFF9F9F9" />
-        <Button Content="Anterior" Height="23" Name="btnAnterior" Width="75" Margin="536,0,0,338" Foreground="Green" HorizontalAlignment="Left" Background="#FFF9F9F9" />
-        <Button Content="Siguiente" Height="23" Name="btnSiguiente" Width="75" Margin="618,0,84,338" Foreground="Green" Background="#FFF9F9F9" />
-        <Button Content="Último" Height="23" Name="btnUltimo" Width="75" Margin="698,0,0,338" Foreground="Green" Background="#FFF9F9F9" />
-        <Button Content="Nuevo" Height="23" Name="btnNuevo" Width="75" Margin="0,0,698,338" Click="btnNuevo_Click" Foreground="Red" Background="#FFF9F9F9" />
-        
-        <Label Content="CUIT:" Height="28" HorizontalAlignment="Left" Margin="278,106,0,0" Name="lblCUIT" VerticalAlignment="Top" FontSize="14" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="352,110,0,0" Name="txtCUIT" VerticalAlignment="Top" Width="147" />
-        
-        <Label Content="Razon Social:" Height="28" HorizontalAlignment="Left" Margin="233,163,0,0" Name="lblRazonSocial" VerticalAlignment="Top" FontSize="14" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="352,165,0,0" Name="txtRazonSocial" VerticalAlignment="Top" Width="147" />
-        
-        <Label Content="Domicilio:" Height="28" HorizontalAlignment="Left" Margin="249,219,0,0" Name="lblDomicilio" VerticalAlignment="Top" FontSize="14" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="352,221,0,0" Name="txtDomicilio" VerticalAlignment="Top" Width="147" />
-        
-        <Label Content="Teléfono:" Height="28" HorizontalAlignment="Left" Margin="253,276,0,0" Name="lblTelefono" VerticalAlignment="Top" FontSize="14" />
-        <TextBox Height="23" HorizontalAlignment="Left" Margin="352,278,0,0" Name="txtTelefono" VerticalAlignment="Top" Width="147" />
-        <Button Content="Salir" Height="23" HorizontalAlignment="Left" Margin="703,338,0,0" Name="btnSalir" VerticalAlignment="Top" Width="75" Click="btnSalir_Click" Foreground="Blue" />
-        <Label Content="Campo requerido" Visibility="Hidden" Height="28" HorizontalAlignment="Left" Margin="352,131,0,0" Name="lblErrorCUIT" VerticalAlignment="Top" Foreground="#FFC82828" />
-        <Label Content="Campo requerido" Visibility="Hidden" Height="28" HorizontalAlignment="Left" Margin="352,187,0,0" Name="lblErrorRazonSocial" VerticalAlignment="Top" Foreground="#FFC82828" />
-        <Label Content="Campo requerido" Visibility="Hidden" Height="28" HorizontalAlignment="Left" Margin="352,244,0,0" Name="lblErrorDomicilio" VerticalAlignment="Top" Foreground="#FFC82828" />
-        <Label Content="Campo requerido" Visibility="Hidden" Height="28" HorizontalAlignment="Left" Margin="352,300,0,0" Name="lblErrorTelefono" VerticalAlignment="Top" Foreground="#FFC82828" />
-    </Grid>
-    
+        Title="FormProveedores"
+        Height="400" 
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Border CornerRadius="10">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                <GradientStop Color="#060531" Offset="0" />
+                <GradientStop Color="#1b1448" Offset="0.75" />
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="40" />
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+                <Button Style="{StaticResource ButtonRosa}" Content="Nuevo" Name="btnNuevo" Click="btnNuevo_Click" />
+                <Button Style="{StaticResource ButtonRosa}" Content="Modificar" Name="btnModificar" />
+                <Button Style="{StaticResource ButtonRosa}" Content="Eliminar" Name="btnEliminar" Margin="0,0,25,0" />
+                <Button Style="{StaticResource ButtonAzul}" Content="Guardar" Name="btnGuardar" Click="btnGuardar_Click" />
+                <Button Style="{StaticResource ButtonAzul}" Content="Cancelar" Name="btnCancelar" Click="btnCancelar_Click" Margin="0,0,25,0" />
+                <Button Style="{StaticResource ButtonVerde}" Content="Primero" Name="btnPrimero" />
+                <Button Style="{StaticResource ButtonVerde}" Content="Anterior" Name="btnAnterior" />
+                <Button Style="{StaticResource ButtonVerde}" Content="Siguiente" Name="btnSiguiente" />
+                <Button Style="{StaticResource ButtonVerde}" Content="Último" Name="btnUltimo" Margin="0" />
+            </StackPanel>
+            <Grid Width="300" Margin="40" VerticalAlignment="Center" Grid.Row="1">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="0.5*" />
+                    <ColumnDefinition Width="*" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="28" />
+                    <RowDefinition Height="30" />
+                </Grid.RowDefinitions>
+                <Label Content="CUIT" Name="lblCUIT" Foreground="White" FontSize="14" />
+                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" Name="txtCUIT"/>
+                <Label Grid.Column="1" Grid.Row="1" Content="Campo requerido" Visibility="Hidden" Name="lblErrorCUIT" Foreground="#FB539B" />
+
+                <Label Grid.Row="2" Content="Razon Social" Name="lblApellido" Foreground="White" FontSize="14" />
+                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Name="txtRazonSocial" />
+                <Label Grid.Column="1" Grid.Row="3" Content="Campo requerido" Visibility="Hidden" Name="lblErrorRazonSocial" Foreground="#FB539B" />
+
+                <Label Grid.Row="4" Content="Domicilio" Name="lblDomicilio" Foreground="White" FontSize="14" />
+                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" Name="txtDomicilio" />
+                <Label Grid.Column="1" Grid.Row="5" Content="Campo requerido" Visibility="Hidden" Name="lblErrorDomicilio" Foreground="#FB539B" />
+
+                <Label Grid.Row="6" Content="Teléfono" Name="lblTelefono" Foreground="White" FontSize="14" />
+                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtTelefono" />
+                <Label Grid.Column="1" Grid.Row="7" Content="Campo requerido" Visibility="Hidden" Name="lblErrorTelefono" Foreground="#FB539B" />
+
+            </Grid>
+
+            <Button Style="{StaticResource ButtonStyle}" Content="Salir" Grid.Row="1" Background="#FFC047" Height="30" Margin="0,0,10,10" VerticalAlignment="Bottom" HorizontalAlignment="Right" Width="75" Name="btnSalir" Click="btnSalir_Click" />
+        </Grid>
+    </Border>    
 </Window>
