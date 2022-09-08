@@ -22,7 +22,7 @@ namespace Vistas
         {
             InitializeComponent();
         }
-
+        
         private void btnNuevo_Click(object sender, RoutedEventArgs e)
         {
             LimpiarCampos();
