@@ -103,13 +103,13 @@
                                 HorizontalAlignment="Center"
                                 Margin="0,15,0,0">
 
-                        <TextBlock Text="Forgot Password?"
+                        <TextBlock Text="¿Olvidó su contraseña?"
                                Foreground="DarkGray"
                                FontSize="12"
                                FontWeight="Medium"
                                FontFamily="Montserrat"/>
 
-                        <TextBlock Text="Reset"
+                        <TextBlock Text="Click aquí"
                                Foreground="White"
                                FontSize="12"
                                FontWeight="Medium"
