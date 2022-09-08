@@ -21,54 +21,63 @@ namespace Vistas
         public FormLogin()
         {
             InitializeComponent();
-            lblValidacionUsuario.Visibility = System.Windows.Visibility.Hidden;
-            lblValidacionContrasena.Visibility = System.Windows.Visibility.Hidden;
+            //lblValidacionUsuario.Visibility = System.Windows.Visibility.Hidden;
+            //lblValidacionContrasena.Visibility = System.Windows.Visibility.Hidden;
         }
 
-        private void btnAceptar_Click(object sender, RoutedEventArgs e)
+        //private void btnIngresar_Click(object sender, RoutedEventArgs e)
+        //{
+        //    ValidarInputs();
+        //    string szUsuario = txtUsuario.Text;
+        //    string szPassword = txtContrasena.Password;
+        //    if (szUsuario != "" && szPassword != "")
+        //    {
+        //        if ((szUsuario == "admin" && szPassword == "admin") ||
+        //            (szUsuario == "vendedor" && szPassword == "vendedor"))
+        //        {
+        //            FormPrincipal frmPrincipal = new FormPrincipal();
+        //            frmPrincipal.lblUsername.Content = txtUsuario.Text;
+        //            frmPrincipal.Show();
+        //            this.Close();
+        //        }
+        //        else
+        //            MessageBox.Show("Credenciales incorrectas");
+        //        clearTextBoxs();
+        //    }
+        //}
+
+        //private void ValidarInputs()
+        //{
+        //    if (txtUsuario.Text == "")
+        //        lblValidacionUsuario.Visibility = System.Windows.Visibility.Visible;
+        //    else
+        //        lblValidacionUsuario.Visibility = System.Windows.Visibility.Hidden;
+
+        //    if (txtContrasena.Password == "")
+        //        lblValidacionContrasena.Visibility = System.Windows.Visibility.Visible;
+        //    else
+        //        lblValidacionContrasena.Visibility = System.Windows.Visibility.Hidden;
+
+        //}
+
+        //private void clearTextBoxs()
+        //{
+        //    txtUsuario.Clear();
+        //    txtContrasena.Clear();
+        //}
+
+        private void Window_MouseDown(object sender, MouseButtonEventArgs e)
         {
-            ValidarInputs();
-            string szUsuario = txtUsuario.Text;
-            string szPassword = txtContrasena.Password;
-            if (szUsuario != "" && szPassword != "")
-            {
-                if ((szUsuario == "admin" && szPassword == "admin") ||
-                    (szUsuario == "vendedor" && szPassword == "vendedor"))
-                {
-                    FormPrincipal frmPrincipal = new FormPrincipal();
-                    frmPrincipal.lblUsername.Content = txtUsuario.Text;
-                    frmPrincipal.Show();
-                    this.Close();
-                }
-                else
-                    MessageBox.Show("Credenciales incorrectas");
-                clearTextBoxs();
-            }
+            if (e.LeftButton == MouseButtonState.Pressed)
+                DragMove();
         }
-
-        private void ValidarInputs()
+        private void btnMinimizar_Click(object sender, RoutedEventArgs e)
         {
-            if (txtUsuario.Text == "")
-                lblValidacionUsuario.Visibility = System.Windows.Visibility.Visible;
-            else
-                lblValidacionUsuario.Visibility = System.Windows.Visibility.Hidden;
-            
-            if (txtContrasena.Password == "")
-                lblValidacionContrasena.Visibility = System.Windows.Visibility.Visible;
-            else
-                lblValidacionContrasena.Visibility = System.Windows.Visibility.Hidden;
-
+            WindowState = WindowState.Minimized;
         }
-
-        private void clearTextBoxs()
+        private void btnCerrar_Click(object sender, RoutedEventArgs e)
         {
-            txtUsuario.Clear();
-            txtContrasena.Clear();
-        }
-
-        private void btnCancelar_Click(object sender, RoutedEventArgs e)
-        {
-            this.Close();
+            Application.Current.Shutdown();
         }
 
     }
