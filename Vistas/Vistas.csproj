@@ -55,6 +55,14 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Page Include="ControlUsuarioBtnMinCerrar.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="ControlUsuarioLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="FormPrincipal.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -86,6 +94,12 @@
     <Compile Include="App.xaml.cs">
       <DependentUpon>App.xaml</DependentUpon>
       <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="ControlUsuarioBtnMinCerrar.xaml.cs">
+      <DependentUpon>ControlUsuarioBtnMinCerrar.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="ControlUsuarioLogin.xaml.cs">
+      <DependentUpon>ControlUsuarioLogin.xaml</DependentUpon>
     </Compile>
     <Compile Include="FormPrincipal.xaml.cs">
       <DependentUpon>FormPrincipal.xaml</DependentUpon>
@@ -154,7 +168,15 @@
   <ItemGroup>
     <Resource Include="Resources\background.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <Resource Include="images\furniture.jpg" />
+    <Resource Include="images\icono-password.png" />
+    <Resource Include="images\icono-usuario.png" />
+    <Resource Include="images\logo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\logo2.jpg" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
