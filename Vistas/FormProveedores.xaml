@@ -38,13 +38,13 @@
                     <ColumnDefinition Width="*" />
                 </Grid.ColumnDefinitions>
                 <Grid.RowDefinitions>
-                    <RowDefinition Height="28" />
                     <RowDefinition Height="30" />
-                    <RowDefinition Height="28" />
                     <RowDefinition Height="30" />
-                    <RowDefinition Height="28" />
                     <RowDefinition Height="30" />
-                    <RowDefinition Height="28" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
                 <Label Content="CUIT" Name="lblCUIT" Foreground="White" FontSize="14" />
