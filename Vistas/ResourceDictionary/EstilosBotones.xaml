@@ -2,20 +2,74 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
     
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
-        <Setter Property="FontSize" Value="14" />
-        <Setter Property="Width" Value="75"/>
-        <Setter Property="Margin" Value="0,0,5,0" />
+        <Setter Property="OverridesDefaultStyle" Value="True" />
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Name="border" CornerRadius="3" BorderBrush="DarkGray"  BorderThickness="1" Background="{TemplateBinding Background}">
+                        <ContentPresenter HorizontalAlignment="Center" VerticalAlignment="Center" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter TargetName="border" Property="BorderBrush" Value="Black" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 
-    <Style x:Key="ButtonRosa" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyle}">
+    <Style x:Key="ButtonAnimationTrigger" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyle}" >
+        <Setter Property="FontSize" Value="14" />
+        <Setter Property="Width" Value="80"/>
+        <Setter Property="BorderThickness" Value="0" />
+        
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="FontWeight" Value="Bold" />
+                <Setter Property="Foreground" Value="White" />
+
+                <Trigger.EnterActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(Button.FontSize)" To="15" Duration="0:0:1" />
+                            <DoubleAnimation Storyboard.TargetProperty="(Button.Opacity)" To="0.9" Duration="0:0:1" />
+                            <!--
+                                        <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="White" Duration="0:0:1" />
+                                        -->
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.EnterActions>
+                <Trigger.ExitActions>
+                    <BeginStoryboard>
+                        <Storyboard>
+                            <DoubleAnimation Storyboard.TargetProperty="(Button.FontSize)" To="14" Duration="0:0:1" />
+                            <DoubleAnimation Storyboard.TargetProperty="(Button.Opacity)" To="1" Duration="0:0:1" />
+                            <!--
+                                        <ColorAnimation Storyboard.TargetProperty="(Button.Foreground).(SolidColorBrush.Color)" To="Black" Duration="0:0:1" FillBehavior="HoldEnd" />
+                                        -->
+                        </Storyboard>
+                    </BeginStoryboard>
+                </Trigger.ExitActions>
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style x:Key="ButtonRosa" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonAnimationTrigger}">
         <Setter Property="Background" Value="#FB539B" />
     </Style>
 
-    <Style x:Key="ButtonAzul" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyle}">
+    <Style x:Key="ButtonAzul" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonAnimationTrigger}">
         <Setter Property="Background" Value="#78A3FC" />
     </Style>
 
-    <Style x:Key="ButtonVerde" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyle}">
+    <Style x:Key="ButtonVerde" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonAnimationTrigger}">
         <Setter Property="Background" Value="#07F3C0" />
     </Style>
+
+    <Style x:Key="ButtonMenuPrincipal" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyle}">
+        <Setter Property="Padding" Value="4,2" />
+    </Style>
+    
 </ResourceDictionary>
