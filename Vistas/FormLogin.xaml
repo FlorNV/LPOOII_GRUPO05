@@ -34,14 +34,6 @@
                     <RowDefinition/>
                 </Grid.RowDefinitions>
                 
-                <Grid>
-                    <Grid.ColumnDefinitions>
-                        <ColumnDefinition/>
-                        <ColumnDefinition Width="25"/>
-                        <ColumnDefinition Width="25"/>
-                        <ColumnDefinition Width="5"/>
-                    </Grid.ColumnDefinitions>
-                </Grid>
                 <miControl:ControlUsuarioBtnMinCerrar x:Name="MiControlUsuarioLogin1"/>
                 <StackPanel Grid.Row="1">
                     <Image Source="/images/logo2.jpg"
