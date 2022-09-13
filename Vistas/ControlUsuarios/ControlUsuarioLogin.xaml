@@ -5,6 +5,18 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" MouseDown="Window_MouseDown"
              Background="Transparent">
+    
+            <UserControl.Resources>
+                <Storyboard x:Key="TestStoryboard">
+                    <DoubleAnimationUsingKeyFrames Storyboard.TargetProperty="RenderTransform.(TranslateTransform.X)" RepeatBehavior="5x">
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.03" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.06" Value="5"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.09" Value="0"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.12" Value="-5"/>
+                        <EasingDoubleKeyFrame KeyTime="0:0:0.15" Value="0"/>
+                    </DoubleAnimationUsingKeyFrames>
+                </Storyboard>
+            </UserControl.Resources>
 
                 <StackPanel Width="250"
                             Grid.Row="1"
@@ -35,6 +47,9 @@
                                         Stretch="None"
                                         AlignmentX="Left"/>
                         </TextBox.Background>
+                        <TextBox.RenderTransform>
+                            <TranslateTransform X="0" Y="0" />
+                        </TextBox.RenderTransform>
                     </TextBox>
                     <Label Content="Debe completar este campo" Height="28" HorizontalAlignment="Left" Margin="55,0,0,0" Name="lblValidacionUsuario" VerticalAlignment="Top" FontSize="11" Foreground="#FFC82828" />
 
@@ -63,7 +78,10 @@
                                         Stretch="None"
                                         AlignmentX="Left"/>
                         </PasswordBox.Background>
-                    </PasswordBox>
+                            <PasswordBox.RenderTransform>
+                                <TranslateTransform X="0" Y="0" />
+                            </PasswordBox.RenderTransform>
+                        </PasswordBox>
                     <Label Content="Debe completar este campo" Height="28" HorizontalAlignment="Left" Margin="55,0,0,0" Name="lblValidacionContrasena" VerticalAlignment="Top" FontSize="11" Foreground="#FFC82828" />
 
                     <Button x:Name="btnIngresar"                          

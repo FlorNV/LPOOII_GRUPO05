@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.Windows.Media.Animation;
 
 namespace Vistas
 {
@@ -42,8 +43,14 @@ namespace Vistas
                     window.Close();
                 }
                 else
-                    MessageBox.Show("Credenciales incorrectas");
-                clearTextBoxs();
+                {
+                    Storyboard myStoryboard = (Storyboard)this.Resources["TestStoryboard"];
+                    Storyboard.SetTarget(myStoryboard.Children.ElementAt(0) as DoubleAnimationUsingKeyFrames, txtUsuario);
+                    myStoryboard.Begin();
+                    Storyboard.SetTarget(myStoryboard.Children.ElementAt(0) as DoubleAnimationUsingKeyFrames, txtContrasena);
+                    myStoryboard.Begin();
+                    clearTextBoxs();
+                }
             }
         }
         private void ValidarInputs()
