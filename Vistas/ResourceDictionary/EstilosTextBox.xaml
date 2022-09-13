@@ -2,9 +2,23 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
 
     <Style x:Key="TextBoxStyle" TargetType="{x:Type TextBox}">
-        <Setter Property="Background" Value="Transparent" />
-        <Setter Property="BorderThickness" Value="1"/>
+        <Setter Property="FontSize" Value="14" />
         <Setter Property="Foreground" Value="White" />
         <Setter Property="CaretBrush" Value="White" />
+        <Setter Property="Padding" Value="4" />
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type TextBox}">
+                    <Border Name="border" CornerRadius="4" Background="#34268c">
+                        <ScrollViewer x:Name="PART_ContentHost" />
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsFocused" Value="true">
+                            <Setter TargetName="border" Property="Background" Value="#4a37c8" />
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
     </Style>
 </ResourceDictionary>
