@@ -167,5 +167,11 @@ namespace Vistas
 
             return bError;
         }
+
+        private void btnVerProductos_Click(object sender, RoutedEventArgs e)
+        {
+            WinProductos win = new WinProductos();
+            win.Show();
+        }
     }
 }
