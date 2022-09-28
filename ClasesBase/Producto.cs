@@ -47,34 +47,35 @@ namespace ClasesBase {
             get {
                 string result = null;
                 if (columnName == "CodProducto") { 
-                    if(!String.IsNullOrEmpty(CodProducto)) {
-                        result = "Debe ingresar el Código del Producto";
-                    } else if (CodProducto.Length < 3) {
+                    if(String.IsNullOrEmpty(CodProducto)) {
+                        result = "Campo requerido.";
+                    } /*
+                    else if (CodProducto.Length < 3) {
                         result = "Debe tener al menos 3 letras";
-                    }
+                    }*/
                 } else if (columnName == "Categoria") {
                     if (String.IsNullOrEmpty(Categoria)) {
-                        result = "Debe ingresar la Categoría del Producto";
+                        result = "Campo requerido.";
                     }
                 } else if (columnName == "Color") {
                     if (String.IsNullOrEmpty(Color)) {
-                        result = "Debe ingresar el Color del Producto";
+                        result = "Campo requerido.";
                     }
                 } else if (columnName == "Descripcion") {
                     if (String.IsNullOrEmpty(Descripcion)) {
-                        result = "Debe ingresar la Descripción del Producto";
+                        result = "Campo requerido.";
                     }
                 } 
-                /*else if (columnName == "Precio") {
+                else if(columnName == "Precio") {
                     decimal num;
-                    if (Precio == null) {
-                        result = "Debe ingresar el Precio del Producto";
+                    if (Precio == 0 || string.IsNullOrEmpty(Precio.ToString()) ) {
+                        result = "Campo requerido.";
                     } else if (!decimal.TryParse(Precio.ToString(), out num)) {
                         result = "Debe ingresar un número";
                     } else if (Precio < 0) {
-                        result = "El Precio debe ser mayor a $0.00";
+                        result = "Debe ser mayor a $0.00";
                     }
-                } */
+                }
 
                 return result;
             }
