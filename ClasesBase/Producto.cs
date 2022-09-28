@@ -67,13 +67,17 @@ namespace ClasesBase {
                     }
                 } 
                 else if(columnName == "Precio") {
-                    decimal num;
-                    if (Precio == 0 || string.IsNullOrEmpty(Precio.ToString()) ) {
-                        result = "Campo requerido.";
-                    } else if (!decimal.TryParse(Precio.ToString(), out num)) {
-                        result = "Debe ingresar un número";
-                    } else if (Precio < 0) {
-                        result = "Debe ser mayor a $0.00";
+                    try {
+                        decimal num;
+                        if (Precio == 0 || string.IsNullOrEmpty(Precio.ToString())) {
+                            result = "Campo requerido.";
+                        } else if (!decimal.TryParse(Precio.ToString(), out num)) {
+                            result = "Debe ingresar un número";
+                        } else if (Precio < 0) {
+                            result = "Debe ser mayor a $0.00";
+                        }
+                    } catch (FormatException e) {
+                        throw new FormatException("Debe ingresar un número");
                     }
                 }
 
