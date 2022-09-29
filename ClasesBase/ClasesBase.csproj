@@ -70,6 +70,7 @@
     </Compile>
     <Compile Include="Proveedor.cs" />
     <Compile Include="TrabajarProductos.cs" />
+    <Compile Include="TrabajarVendedores.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Vendedor.cs" />
     <Compile Include="Venta.cs" />

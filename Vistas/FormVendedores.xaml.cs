@@ -43,12 +43,58 @@ namespace Vistas
                     oVendedor.Nombre = txtNombre.Text;
                     oVendedor.Legajo = txtLegajo.Text;
 
+                    // TODO: Manejo de errores
+                    // TODO: Validar que un vendedor no tenga el mismo legajo
+
+                    // Insertar el nuevo vendedor
+                    ClasesBase.TrabajarVendedores.insertarVendedor(oVendedor);
+
                     MessageBox.Show("Legajo: " + oVendedor.Legajo +
                         "\nApellido: " + oVendedor.Apellido +
                         "\nNombre: " + oVendedor.Nombre + "Datos del Vendedor");
                     HabilitarDeshabilitarTextBox(false);
                     HabilitarDeshabilitarBotones(false);
                 }
+            }
+        }
+
+        private void btnModificar_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidarTextBox())
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea modificar este vendedor?",
+                  "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    Vendedor oVendedor = new Vendedor();
+                    oVendedor.Apellido = txtApellido.Text;
+                    oVendedor.Nombre = txtNombre.Text;
+                    oVendedor.Legajo = txtLegajo.Text;
+
+                    // TODO: Manejo de errores
+                    // TODO: Validar que un vendedor no tenga el mismo legajo
+
+                    // Guardar los cambios del vendedor
+                    ClasesBase.TrabajarVendedores.modificarVendedor(oVendedor);
+
+                    MessageBox.Show("Legajo: " + oVendedor.Legajo +
+                        "\nApellido: " + oVendedor.Apellido +
+                        "\nNombre: " + oVendedor.Nombre + "Datos del Vendedor");
+                    HabilitarDeshabilitarTextBox(false);
+                    HabilitarDeshabilitarBotones(false);
+                }
+            }
+        }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea eliminar este elemento?",
+                    "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                TrabajarVendedores.eliminarVendedor(txtLegajo.Text);
+                LimpiarCampos();
+                HabilitarDeshabilitarBotones(false);
             }
         }
 
@@ -121,6 +167,13 @@ namespace Vistas
                 lblErrorNombre.Visibility = System.Windows.Visibility.Hidden;
 
             return bError;
+        }
+
+        private void btnVerVendedores_Click(object sender, RoutedEventArgs e)
+        {
+            WinVendedores win = new WinVendedores();
+            win.Owner = this;
+            win.Show();
         }
     }
 }
