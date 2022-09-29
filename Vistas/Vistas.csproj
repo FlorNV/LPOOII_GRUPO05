@@ -55,8 +55,8 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
-    <Compile Include="Window1.xaml.cs">
-      <DependentUpon>Window1.xaml</DependentUpon>
+    <Compile Include="ListaDeEstados.xaml.cs">
+      <DependentUpon>ListaDeEstados.xaml</DependentUpon>
     </Compile>
     <Page Include="ControlUsuarios\ControlUsuarioBtnMinCerrar.xaml">
       <SubType>Designer</SubType>
@@ -135,7 +135,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
-    <Page Include="Window1.xaml">
+    <Page Include="ListaDeEstados.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -191,9 +191,6 @@
     </Resource>
   </ItemGroup>
   <ItemGroup />
-  <ItemGroup>
-    <Resource Include="Colores.xml" />
-  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
