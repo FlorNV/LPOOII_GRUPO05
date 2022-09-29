@@ -128,6 +128,64 @@ namespace Vistas
             }
         }
 
+        private void btnModificar_Click(object sender, RoutedEventArgs e)
+        {
+            if (!ValidarTextBox())
+            {
+                MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea modificar este elemento?",
+                    "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+
+                decimal precio = 0;
+                try
+                {
+                    precio = Decimal.Parse(txtPrecio.Text);
+                }
+                catch
+                {
+                    MessageBox.Show("El campo precio debe ser un decimal!", "Verifique los campos");
+                    lblErrorPrecio.Content = "Debe ser un decimal";
+                    lblErrorPrecio.Visibility = System.Windows.Visibility.Visible;
+                    return;
+                }
+
+                if (messageBoxResult == MessageBoxResult.Yes)
+                {
+                    Producto oProducto = new Producto();
+                    oProducto.CodProducto = txtCodigo.Text;
+                    oProducto.Categoria = txtCategoria.Text;
+                    oProducto.Color = txtColor.Text;
+                    oProducto.Descripcion = txtDescripcion.Text;
+                    oProducto.Precio = precio;
+
+                    // TODO: Manejo de errores
+                    // TODO: Validar que un producto no tenga el mismo codigo
+
+                    // Guardar los cambios del producto
+                    ClasesBase.TrabajarProductos.ModificarProducto(oProducto, oProducto.CodProducto);
+
+                    MessageBox.Show("Código del producto: " + oProducto.CodProducto +
+                        "\nCategoría: " + oProducto.Categoria +
+                        "\nColor: " + oProducto.Color +
+                        "\nDescripción: " + oProducto.Descripcion +
+                        "\nPrecio:" + oProducto.Precio, "Producto actualizado");
+                    HabilitarDeshabilitarTextBox(false);
+                    HabilitarDeshabilitarBotones(false);
+                }
+            }
+        }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e)
+        {
+            MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea eliminar este elemento?",
+                    "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            if (messageBoxResult == MessageBoxResult.Yes)
+            {
+                TrabajarProductos.eliminarProducto(txtCodigo.Text);
+                LimpiarCampos();
+                HabilitarDeshabilitarBotones(false);
+            }
+        }
+
         private bool ValidarTextBox()
         {
             bool bError = false;
@@ -177,7 +235,9 @@ namespace Vistas
         private void btnVerProductos_Click(object sender, RoutedEventArgs e)
         {
             WinProductos win = new WinProductos();
+            win.Owner = this;
             win.Show();
         }
+
     }
 }

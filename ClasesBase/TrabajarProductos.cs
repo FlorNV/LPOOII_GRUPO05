@@ -89,5 +89,35 @@ namespace ClasesBase
             cmd.ExecuteNonQuery();
             cnn.Close();
         }
+
+        // Obtener producto por codigo
+        public static Producto obtenerProductoPorCodigo(string codigo)
+        {
+            SqlConnection cn = new SqlConnection(ClasesBase.Properties.Settings.Default.muebleriaConnectionString);
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT * FROM Producto WHERE Prod_Codigo = @cod";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = cn;
+
+            // Paramatros
+            cmd.Parameters.AddWithValue("@cod", codigo);
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Producto oProducto = new Producto();
+                oProducto.CodProducto = row["Prod_Codigo"].ToString();
+                oProducto.Categoria = row["Prod_Categoria"].ToString();
+                oProducto.Color = row["Prod_Color"].ToString();
+                oProducto.Descripcion = row["Prod_Descripcion"].ToString();
+                oProducto.Precio = Convert.ToDecimal(row["Prod_Precio"].ToString());
+                return oProducto;
+            }
+
+            return null;
+        }
     }
 }
