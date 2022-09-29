@@ -4,8 +4,8 @@
         xmlns:svc="clr-namespace:ClasesBase;assembly=ClasesBase"
         Title="WinProductos" Height="300" Width="600" WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <ObjectDataProvider ObjectType="{x:Type svc:TrabajarProducto}"
-                            MethodName="getProductos"
+        <ObjectDataProvider ObjectType="{x:Type svc:TrabajarProductos}"
+                            MethodName="obtenerProductos"
                             x:Key="get_productos"/>
     </Window.Resources>
     <Grid>
