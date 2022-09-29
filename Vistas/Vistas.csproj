@@ -57,6 +57,7 @@
     </ApplicationDefinition>
     <Compile Include="ListaDeEstados.xaml.cs">
       <DependentUpon>ListaDeEstados.xaml</DependentUpon>
+    </Compile>
     <Compile Include="WinProductos.xaml.cs">
       <DependentUpon>WinProductos.xaml</DependentUpon>
     </Compile>
@@ -142,6 +143,9 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ListaDeEstados.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="WinProductos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
