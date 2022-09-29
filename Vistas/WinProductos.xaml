@@ -4,12 +4,13 @@
         xmlns:svc="clr-namespace:ClasesBase;assembly=ClasesBase"
         Title="WinProductos" Height="300" Width="600" WindowStartupLocation="CenterScreen">
     <Window.Resources>
-        <ObjectDataProvider ObjectType="{x:Type svc:TrabajarProducto}"
-                            MethodName="getProductos"
+        <ObjectDataProvider ObjectType="{x:Type svc:TrabajarProductos}"
+                            MethodName="obtenerProductos"
                             x:Key="get_productos"/>
     </Window.Resources>
     <Grid>
-        <ListView Name="Producto" ItemsSource="{Binding Source={StaticResource get_productos}}">
+        <ListView Name="Producto" ItemsSource="{Binding Source={StaticResource get_productos}}" 
+                  SelectionChanged="getCodigo_SelectionChanged" SelectionMode="Single">
             <ListView.View>
                 <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}"
                           ColumnHeaderTemplate="{StaticResource headerTemplate}">
@@ -18,6 +19,21 @@
                     <GridViewColumn Width="100" Header="Color" DisplayMemberBinding="{Binding Path=Prod_Color}" />
                     <GridViewColumn Width="140" Header="Descripción" DisplayMemberBinding="{Binding Path=Prod_Descripcion}" />
                     <GridViewColumn Width="140" Header="Precio" DisplayMemberBinding="{Binding Path=Prod_Precio}" />
+                    <!--<GridViewColumn Width="100" Header="Acciones" >
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <Button Name="btnEditar"
+                                        Content="Editar"
+                                        ClickMode="Press"
+                                        Foreground="White"
+                                        Background="#FF18AE55"
+                                        VerticalAlignment="Center"
+                                        HorizontalAlignment="Center"
+                                        Click="Editar_Click "/>
+
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>-->
                 </GridView>
             </ListView.View>
         </ListView>
