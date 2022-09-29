@@ -111,6 +111,12 @@ namespace Vistas
                     oProducto.Descripcion = txtDescripcion.Text;
                     oProducto.Precio = precio;
 
+                    // TODO: Manejo de errores
+                    // TODO: Validar que un producto no tenga el mismo codigo
+
+                    // Insertar el nuevo producto
+                    ClasesBase.TrabajarProductos.InsertarProducto(oProducto);
+
                     MessageBox.Show("Código del producto: " + oProducto.CodProducto +
                         "\nCategoría: " + oProducto.Categoria +
                         "\nColor: " + oProducto.Color +
@@ -166,6 +172,12 @@ namespace Vistas
                 lblErrorPrecio.Visibility = System.Windows.Visibility.Hidden;
 
             return bError;
+        }
+
+        private void btnVerProductos_Click(object sender, RoutedEventArgs e)
+        {
+            WinProductos win = new WinProductos();
+            win.Show();
         }
     }
 }

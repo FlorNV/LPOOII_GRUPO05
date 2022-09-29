@@ -57,6 +57,8 @@
     </ApplicationDefinition>
     <Compile Include="ListaDeEstados.xaml.cs">
       <DependentUpon>ListaDeEstados.xaml</DependentUpon>
+    <Compile Include="WinProductos.xaml.cs">
+      <DependentUpon>WinProductos.xaml</DependentUpon>
     </Compile>
     <Page Include="ControlUsuarios\ControlUsuarioBtnMinCerrar.xaml">
       <SubType>Designer</SubType>
@@ -131,11 +133,16 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ResourceDictionary\EstilosTabla.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ResourceDictionary\EstilosTextBox.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ListaDeEstados.xaml">
+    <Page Include="WinProductos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
