@@ -55,6 +55,8 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="ListaDeEstados.xaml.cs">
+      <DependentUpon>ListaDeEstados.xaml</DependentUpon>
     <Compile Include="WinProductos.xaml.cs">
       <DependentUpon>WinProductos.xaml</DependentUpon>
     </Compile>
@@ -104,6 +106,7 @@
     <Compile Include="ControlUsuarios\ControlUsuarioLogin.xaml.cs">
       <DependentUpon>ControlUsuarioLogin.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ConversionStringToBrush.cs" />
     <Compile Include="FormPrincipal.xaml.cs">
       <DependentUpon>FormPrincipal.xaml</DependentUpon>
     </Compile>
@@ -138,6 +141,7 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ListaDeEstados.xaml">
     <Page Include="WinProductos.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -188,6 +192,12 @@
   <ItemGroup>
     <Resource Include="images\logo2.jpg" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Estados.xml">
+      <SubType>Designer</SubType>
+    </Resource>
+  </ItemGroup>
+  <ItemGroup />
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.
