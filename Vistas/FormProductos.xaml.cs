@@ -39,7 +39,7 @@ namespace Vistas
             txtCategoria.Text = String.Empty;
             txtColor.Text = String.Empty;
             txtDescripcion.Text = String.Empty;
-            txtPrecio.Text = String.Empty;
+            txtPrecio.Text = "0";
         }
 
         // Habilita o no los campos de texto según el booleano

@@ -204,6 +204,9 @@
     <Resource Include="images\logo2.jpg" />
   </ItemGroup>
   <ItemGroup>
+    <WCFMetadata Include="Service References\" />
+  </ItemGroup>
+  <ItemGroup>
     <Resource Include="Estados.xml">
       <SubType>Designer</SubType>
     </Resource>
