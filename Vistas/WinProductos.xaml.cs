@@ -36,11 +36,21 @@ namespace Vistas
             Producto oProducto = TrabajarProductos.obtenerProductoPorCodigo(codProducto);
 
             ((FormProductos)this.Owner).txtCodigo.Text = oProducto.CodProducto;
-            ((FormProductos)this.Owner).txtCodigo.IsEnabled = false;
             ((FormProductos)this.Owner).txtCategoria.Text = oProducto.Categoria;
             ((FormProductos)this.Owner).txtColor.Text = oProducto.Color;
             ((FormProductos)this.Owner).txtDescripcion.Text = oProducto.Descripcion;
             ((FormProductos)this.Owner).txtPrecio.Text = oProducto.Precio.ToString();
+
+            // Mostrar Código
+            ((FormProductos)this.Owner).lblCodigo.Visibility = Visibility.Visible;
+            ((FormProductos)this.Owner).txtCodigo.Visibility = Visibility.Visible;
+
+            // Inhabilitar los TextBox
+            ((FormProductos)this.Owner).txtCodigo.IsEnabled = false;
+            ((FormProductos)this.Owner).txtCategoria.IsEnabled = false;
+            ((FormProductos)this.Owner).txtColor.IsEnabled = false;
+            ((FormProductos)this.Owner).txtDescripcion.IsEnabled = false;
+            ((FormProductos)this.Owner).txtPrecio.IsEnabled = false;
             
             this.Close();
         }
