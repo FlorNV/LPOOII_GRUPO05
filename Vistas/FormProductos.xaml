@@ -61,20 +61,22 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
-                <Label Grid.Row="0" Content="Codigo" Name="label1" Foreground="White" FontSize="14" />
-                <TextBox  Grid.Row="0" Style="{StaticResource TextBoxStyle}"  Grid.Column="1" Name="txtCodigo">
+                <Label Grid.Row="0" Content="Codigo" Name="lblCodigo" Foreground="White" FontSize="14" Visibility="Hidden" />
+                <TextBox  Grid.Row="0" Style="{StaticResource TextBoxStyle}"  Grid.Column="1" Name="txtCodigo" Visibility="Hidden">
+                    <!--
                     <TextBox.Text>
                         <Binding Path="CodProducto" Source="{StaticResource data}"
                          ValidatesOnExceptions="True" 
                          UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True">
                             <Binding.ValidationRules>
-                                <!--DataErrorValidationRule checks for validation 
-                            errors raised by the IDataErrorInfo object.-->
-                                <!--Alternatively, you can set ValidationOnDataErrors="True" on the Binding.-->
+                                DataErrorValidationRule checks for validation 
+                            errors raised by the IDataErrorInfo object.
+                                Alternatively, you can set ValidationOnDataErrors="True" on the Binding.
                                 <DataErrorValidationRule/>
                             </Binding.ValidationRules>
                         </Binding>
                     </TextBox.Text>
+                    -->
                 </TextBox>
                 <Label Grid.Column="1" Grid.Row="1" Content="Campo requerido" Visibility="Hidden" Name="lblErrorCodigo" Foreground="#FB539B" />
 

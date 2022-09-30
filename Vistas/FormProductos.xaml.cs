@@ -19,6 +19,8 @@ namespace Vistas
     /// </summary>
     public partial class FormProductos : Window
     {
+        private bool editMode = false;
+
         public FormProductos()
         {
             InitializeComponent();
@@ -40,6 +42,8 @@ namespace Vistas
             txtColor.Text = String.Empty;
             txtDescripcion.Text = String.Empty;
             txtPrecio.Text = "0";
+
+            editMode = false;
         }
 
         // Habilita o no los campos de texto según el booleano
@@ -79,6 +83,12 @@ namespace Vistas
         {
             LimpiarCampos();
             HabilitarDeshabilitarBotones(false);
+            ocultarTextBoxCodigo();
+        }
+
+        private void ocultarTextBoxCodigo() {
+            lblCodigo.Visibility = Visibility.Hidden;
+            txtCodigo.Visibility = Visibility.Hidden;
         }
 
         // Guardar un nuevo producto
@@ -113,65 +123,30 @@ namespace Vistas
 
                     // TODO: Manejo de errores
                     // TODO: Validar que un producto no tenga el mismo codigo
+                    if (editMode) {
+                        // Guardar los cambios del producto
+                        ClasesBase.TrabajarProductos.ModificarProducto(oProducto, oProducto.CodProducto);
+                        MessageBox.Show("Producto modificado", "Modificar");
+                    } else {
+                        // Insertar el nuevo producto
+                        ClasesBase.TrabajarProductos.InsertarProducto(oProducto);
+                        MessageBox.Show("Producto guardado", "Guardar");
+                    }
 
-                    // Insertar el nuevo producto
-                    ClasesBase.TrabajarProductos.InsertarProducto(oProducto);
-
-                    MessageBox.Show("Código del producto: " + oProducto.CodProducto +
-                        "\nCategoría: " + oProducto.Categoria +
-                        "\nColor: " + oProducto.Color +
-                        "\nDescripción: " + oProducto.Descripcion +
-                        "\nPrecio:" + oProducto.Precio, "Datos del nuevo producto");
                     HabilitarDeshabilitarTextBox(false);
                     HabilitarDeshabilitarBotones(false);
+
+                    LimpiarCampos();
                 }
             }
         }
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (!ValidarTextBox())
-            {
-                MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea modificar este elemento?",
-                    "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+            editMode = true;
 
-                decimal precio = 0;
-                try
-                {
-                    precio = Decimal.Parse(txtPrecio.Text);
-                }
-                catch
-                {
-                    MessageBox.Show("El campo precio debe ser un decimal!", "Verifique los campos");
-                    lblErrorPrecio.Content = "Debe ser un decimal";
-                    lblErrorPrecio.Visibility = System.Windows.Visibility.Visible;
-                    return;
-                }
+            habilitarEdicion(editMode);
 
-                if (messageBoxResult == MessageBoxResult.Yes)
-                {
-                    Producto oProducto = new Producto();
-                    oProducto.CodProducto = txtCodigo.Text;
-                    oProducto.Categoria = txtCategoria.Text;
-                    oProducto.Color = txtColor.Text;
-                    oProducto.Descripcion = txtDescripcion.Text;
-                    oProducto.Precio = precio;
-
-                    // TODO: Manejo de errores
-                    // TODO: Validar que un producto no tenga el mismo codigo
-
-                    // Guardar los cambios del producto
-                    ClasesBase.TrabajarProductos.ModificarProducto(oProducto, oProducto.CodProducto);
-
-                    MessageBox.Show("Código del producto: " + oProducto.CodProducto +
-                        "\nCategoría: " + oProducto.Categoria +
-                        "\nColor: " + oProducto.Color +
-                        "\nDescripción: " + oProducto.Descripcion +
-                        "\nPrecio:" + oProducto.Precio, "Producto actualizado");
-                    HabilitarDeshabilitarTextBox(false);
-                    HabilitarDeshabilitarBotones(false);
-                }
-            }
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -183,12 +158,14 @@ namespace Vistas
                 TrabajarProductos.eliminarProducto(txtCodigo.Text);
                 LimpiarCampos();
                 HabilitarDeshabilitarBotones(false);
+                ocultarTextBoxCodigo();
             }
         }
 
         private bool ValidarTextBox()
         {
             bool bError = false;
+            /*
             if (txtCodigo.Text == String.Empty)
             {
                 lblErrorCodigo.Visibility = System.Windows.Visibility.Visible;
@@ -196,6 +173,7 @@ namespace Vistas
             }
             else
                 lblErrorCodigo.Visibility = System.Windows.Visibility.Hidden;
+            */
 
             if (txtCategoria.Text == String.Empty)
             {
@@ -237,6 +215,14 @@ namespace Vistas
             WinProductos win = new WinProductos();
             win.Owner = this;
             win.Show();
+        }
+
+        private void habilitarEdicion(bool mode) {
+            //txtCodigo.IsEnabled = mode;
+            txtCategoria.IsEnabled = mode;
+            txtColor.IsEnabled = mode;
+            txtDescripcion.IsEnabled = mode;
+            txtPrecio.IsEnabled = mode;
         }
 
     }

@@ -16,9 +16,9 @@ namespace Vistas
     /// <summary>
     /// Interaction logic for Window1.xaml
     /// </summary>
-    public partial class Window1 : Window
+    public partial class ListaDeEstados : Window
     {
-        public Window1()
+        public ListaDeEstados()
         {
             InitializeComponent();
         }

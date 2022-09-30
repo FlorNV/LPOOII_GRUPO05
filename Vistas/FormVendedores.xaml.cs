@@ -18,6 +18,8 @@ namespace Vistas
     /// </summary>
     public partial class FormVendedores : Window
     {
+        private bool editMode = false;
+
         public FormVendedores()
         {
             InitializeComponent();
@@ -34,7 +36,7 @@ namespace Vistas
         {
             if (!ValidarTextBox())
             {
-                MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea agregar este vendedor?",
+                MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea guardar este vendedor?",
                   "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
@@ -46,44 +48,30 @@ namespace Vistas
                     // TODO: Manejo de errores
                     // TODO: Validar que un vendedor no tenga el mismo legajo
 
-                    // Insertar el nuevo vendedor
-                    ClasesBase.TrabajarVendedores.insertarVendedor(oVendedor);
+                    if (editMode) {
+                        //Modificar vendedor
+                        ClasesBase.TrabajarVendedores.modificarVendedor(oVendedor);
+                    } else {
+                        // Insertar el nuevo vendedor
+                        ClasesBase.TrabajarVendedores.insertarVendedor(oVendedor);
+                    }
 
-                    MessageBox.Show("Legajo: " + oVendedor.Legajo +
-                        "\nApellido: " + oVendedor.Apellido +
-                        "\nNombre: " + oVendedor.Nombre + "Datos del Vendedor");
+                    LimpiarCampos();
+
                     HabilitarDeshabilitarTextBox(false);
                     HabilitarDeshabilitarBotones(false);
+                    habilitarEdicion(editMode);
                 }
             }
         }
 
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
-            if (!ValidarTextBox())
-            {
-                MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea modificar este vendedor?",
-                  "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
-                if (messageBoxResult == MessageBoxResult.Yes)
-                {
-                    Vendedor oVendedor = new Vendedor();
-                    oVendedor.Apellido = txtApellido.Text;
-                    oVendedor.Nombre = txtNombre.Text;
-                    oVendedor.Legajo = txtLegajo.Text;
+            editMode = true;
+            habilitarEdicion(editMode);
 
-                    // TODO: Manejo de errores
-                    // TODO: Validar que un vendedor no tenga el mismo legajo
-
-                    // Guardar los cambios del vendedor
-                    ClasesBase.TrabajarVendedores.modificarVendedor(oVendedor);
-
-                    MessageBox.Show("Legajo: " + oVendedor.Legajo +
-                        "\nApellido: " + oVendedor.Apellido +
-                        "\nNombre: " + oVendedor.Nombre + "Datos del Vendedor");
-                    HabilitarDeshabilitarTextBox(false);
-                    HabilitarDeshabilitarBotones(false);
-                }
-            }
+            btnGuardar.IsEnabled = true;
+            btnCancelar.IsEnabled = true;
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -115,6 +103,8 @@ namespace Vistas
             txtLegajo.Text = String.Empty;
             txtApellido.Text = String.Empty;
             txtNombre.Text = String.Empty;
+
+            editMode = false;
         }
 
         private void HabilitarDeshabilitarTextBox(bool b)
@@ -174,6 +164,13 @@ namespace Vistas
             WinVendedores win = new WinVendedores();
             win.Owner = this;
             win.Show();
+        }
+
+        private void habilitarEdicion(bool mode) {
+            //txtCodigo.IsEnabled = mode;
+            txtApellido.IsEnabled = mode;
+            //txtLegajo.IsEnabled = mode;
+            txtNombre.IsEnabled = mode;
         }
     }
 }

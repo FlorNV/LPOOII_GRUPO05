@@ -36,9 +36,12 @@ namespace Vistas
             Vendedor oVendedor = TrabajarVendedores.obtenerVendedorPorLegajo(szLegajo);
 
             ((FormVendedores)this.Owner).txtLegajo.Text = oVendedor.Legajo;
-            ((FormVendedores)this.Owner).txtLegajo.IsEnabled = false;
             ((FormVendedores)this.Owner).txtApellido.Text = oVendedor.Apellido;
             ((FormVendedores)this.Owner).txtNombre.Text = oVendedor.Nombre;
+
+            ((FormVendedores)this.Owner).txtLegajo.IsEnabled = false;
+            ((FormVendedores)this.Owner).txtApellido.IsEnabled = false;
+            ((FormVendedores)this.Owner).txtNombre.IsEnabled = false;
 
             this.Close();
         }

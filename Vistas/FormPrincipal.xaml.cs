@@ -61,5 +61,10 @@ namespace Vistas {
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             verificarRol();
         }
+
+        private void button1_Click(object sender, RoutedEventArgs e) {
+            ListaDeEstados le = new ListaDeEstados();
+            le.Show();
+        }
     }
 }

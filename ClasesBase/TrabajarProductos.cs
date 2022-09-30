@@ -31,12 +31,12 @@ namespace ClasesBase
             SqlConnection cnn = new SqlConnection(ClasesBase.Properties.Settings.Default.muebleriaConnectionString);
 
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "INSERT INTO Producto (Prod_Codigo, Prod_Categoria, Prod_Color, Prod_Descripcion, Prod_Precio) VALUES (@cod, @categoria, @color, @descripcion, @precio)";
+            cmd.CommandText = "INSERT INTO Producto (Prod_Categoria, Prod_Color, Prod_Descripcion, Prod_Precio) VALUES (@categoria, @color, @descripcion, @precio)";
             cmd.CommandType = CommandType.Text;
             cmd.Connection = cnn;
 
             // Paramatros
-            cmd.Parameters.AddWithValue("@cod", prod.CodProducto);
+            //cmd.Parameters.AddWithValue("@cod", prod.CodProducto);
             cmd.Parameters.AddWithValue("@categoria", prod.Categoria);
             cmd.Parameters.AddWithValue("@color", prod.Color);
             cmd.Parameters.AddWithValue("@descripcion", prod.Descripcion);
