@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -56,11 +57,13 @@ namespace Vistas
                         ClasesBase.TrabajarVendedores.insertarVendedor(oVendedor);
                     }
 
-                    LimpiarCampos();
+                    Vendedor.DataContext = TrabajarVendedores.obtenerVendedores();
 
                     HabilitarDeshabilitarTextBox(false);
                     HabilitarDeshabilitarBotones(false);
                     habilitarEdicion(editMode);
+
+                    LimpiarCampos();
                 }
             }
         }
@@ -83,6 +86,7 @@ namespace Vistas
                 TrabajarVendedores.eliminarVendedor(txtLegajo.Text);
                 LimpiarCampos();
                 HabilitarDeshabilitarBotones(false);
+                Vendedor.DataContext = TrabajarVendedores.obtenerVendedores();
             }
         }
 
@@ -159,18 +163,30 @@ namespace Vistas
             return bError;
         }
 
-        private void btnVerVendedores_Click(object sender, RoutedEventArgs e)
-        {
-            WinVendedores win = new WinVendedores();
-            win.Owner = this;
-            win.Show();
-        }
-
         private void habilitarEdicion(bool mode) {
             //txtCodigo.IsEnabled = mode;
             txtApellido.IsEnabled = mode;
             //txtLegajo.IsEnabled = mode;
             txtNombre.IsEnabled = mode;
+        }
+
+
+        // Obtiene el legajo del vendedor seleccionado
+        private void getLegajo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataRowView dataRowView = Vendedor.SelectedItem as DataRowView;
+            string szLegajo = dataRowView[0].ToString();
+
+            Vendedor oVendedor = TrabajarVendedores.obtenerVendedorPorLegajo(szLegajo);
+
+            txtLegajo.Text = oVendedor.Legajo;
+            txtApellido.Text = oVendedor.Apellido;
+            txtNombre.Text = oVendedor.Nombre;
+
+            // Inhabilitar los TextBox
+            txtLegajo.IsEnabled = false;
+            txtApellido.IsEnabled = false;
+            txtNombre.IsEnabled = false;
         }
     }
 }

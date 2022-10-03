@@ -58,12 +58,6 @@
     <Compile Include="ListaDeEstados.xaml.cs">
       <DependentUpon>ListaDeEstados.xaml</DependentUpon>
     </Compile>
-    <Compile Include="WinProductos.xaml.cs">
-      <DependentUpon>WinProductos.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="WinVendedores.xaml.cs">
-      <DependentUpon>WinVendedores.xaml</DependentUpon>
-    </Compile>
     <Page Include="ControlUsuarios\ControlUsuarioBtnMinCerrar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -146,14 +140,6 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ListaDeEstados.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WinProductos.xaml">
-      <SubType>Designer</SubType>
-      <Generator>MSBuild:Compile</Generator>
-    </Page>
-    <Page Include="WinVendedores.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
