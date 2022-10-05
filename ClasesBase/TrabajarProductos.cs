@@ -5,9 +5,12 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 
+using System.Collections.ObjectModel;
+//using System.
+
 namespace ClasesBase
 {
-    public class TrabajarProductos
+    public class TrabajarProductos : ObservableCollection<Producto>
     {
         // Obtener todos los productos:
         public static DataTable obtenerProductos()
@@ -119,5 +122,16 @@ namespace ClasesBase
 
             return null;
         }
+
+        public static DataTable TraerProductos() { 
+            using (DataTable dt = new DataTable()) { 
+                using (SqlConnection cn = new SqlConnection( ClasesBase.Properties.Settings.Default.muebleriaConnectionString)) {
+                    using (SqlDataAdapter da = new SqlDataAdapter("SELECT * FROM Producto", cn)) { 
+                        da.Fill(dt); 
+                    } 
+                } 
+                return dt; 
+            } 
+        } 
     }
 }

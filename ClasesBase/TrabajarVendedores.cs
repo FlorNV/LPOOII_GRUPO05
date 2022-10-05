@@ -5,9 +5,11 @@ using System.Text;
 using System.Data;
 using System.Data.SqlClient;
 
+using System.Collections.ObjectModel;
+
 namespace ClasesBase
 {
-    public class TrabajarVendedores
+    public class TrabajarVendedores : ObservableCollection<Vendedor>
     {
         // Obtener todos los vendedores:
         public static DataTable obtenerVendedores()

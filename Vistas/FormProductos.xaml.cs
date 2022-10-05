@@ -11,6 +11,8 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+
+using System.Collections.ObjectModel;
 using ClasesBase;
 
 namespace Vistas
@@ -33,7 +35,7 @@ namespace Vistas
         {
             LimpiarCampos();
             HabilitarDeshabilitarTextBox(true);
-            HabilitarDeshabilitarBotones(true);
+            HabilitarDeshabilitarBotones(false);
         }
 
         // Limpia los campos de textos
@@ -61,17 +63,8 @@ namespace Vistas
         // Habilita o no los botones según el booleano
         private void HabilitarDeshabilitarBotones(bool b)
         {
-            btnGuardar.IsEnabled = b;
-            btnCancelar.IsEnabled = b;
-
-            btnNuevo.IsEnabled = !b;
-            btnModificar.IsEnabled = !b;
-            btnEliminar.IsEnabled = !b;
-            btnPrimero.IsEnabled = !b;
-            btnSiguiente.IsEnabled = !b;
-            btnAnterior.IsEnabled = !b;
-            btnUltimo.IsEnabled = !b;
-            btnCancelar.IsEnabled = b;
+            HabilitarBotonesABM(b);
+            HabilitarBotonesGuardarCancelar(!b);
         }
 
         // Cerrar el form actual
@@ -84,14 +77,9 @@ namespace Vistas
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarCampos();
-            HabilitarDeshabilitarBotones(false);
-            //ocultarTextBoxCodigo();
+            HabilitarDeshabilitarBotones(true);
+            HabilitarDeshabilitarTextBox(false);
         }
-
-        //private void ocultarTextBoxCodigo() {
-        //    lblCodigo.Visibility = Visibility.Hidden;
-        //    txtCodigo.Visibility = Visibility.Hidden;
-        //}
 
         // Guardar producto
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -134,10 +122,10 @@ namespace Vistas
                         MessageBox.Show("Producto guardado", "Guardar");
                     }
 
-                    Producto.DataContext = TrabajarProductos.obtenerProductos();
+                    Productos.DataContext = TrabajarProductos.obtenerProductos();
 
                     HabilitarDeshabilitarTextBox(false);
-                    HabilitarDeshabilitarBotones(false);
+                    HabilitarDeshabilitarBotones(true);
 
                     LimpiarCampos();
                 }
@@ -149,7 +137,7 @@ namespace Vistas
             editMode = true;
 
             habilitarEdicion(editMode);
-
+            HabilitarDeshabilitarBotones(false);
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -160,8 +148,10 @@ namespace Vistas
             {
                 TrabajarProductos.eliminarProducto(codigo);
                 LimpiarCampos();
-                HabilitarDeshabilitarBotones(false);
-                Producto.DataContext = TrabajarProductos.obtenerProductos();
+
+                HabilitarDeshabilitarBotones(true);
+
+                Productos.DataContext = TrabajarProductos.obtenerProductos();
             }
         }
 
@@ -187,23 +177,59 @@ namespace Vistas
 
         private void getCodigo_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
-            DataRowView dataRowView = Producto.SelectedItem as DataRowView;
-            string codProducto = dataRowView[0].ToString();
+            DataRowView dataRowView = Productos.SelectedItem as DataRowView;
+            if (dataRowView != null) {
+                
+                string codProducto = dataRowView[0].ToString();
 
-            Producto oProducto = TrabajarProductos.obtenerProductoPorCodigo(codProducto);
+                Producto oProducto = TrabajarProductos.obtenerProductoPorCodigo(codProducto);
 
-            codigo = oProducto.CodProducto;
-            txtCategoria.Text = oProducto.Categoria;
-            txtColor.Text = oProducto.Color;
-            txtDescripcion.Text = oProducto.Descripcion;
-            txtPrecio.Text = oProducto.Precio.ToString();
+                codigo = oProducto.CodProducto;
+                txtCategoria.Text = oProducto.Categoria;
+                txtColor.Text = oProducto.Color;
+                txtDescripcion.Text = oProducto.Descripcion;
+                txtPrecio.Text = oProducto.Precio.ToString();
 
-            // Inhabilitar los TextBox
-            txtCategoria.IsEnabled = false;
-            txtColor.IsEnabled = false;
-            txtDescripcion.IsEnabled = false;
-            txtPrecio.IsEnabled = false;
+                // Inhabilitar los TextBox
+                txtCategoria.IsEnabled = false;
+                txtColor.IsEnabled = false;
+                txtDescripcion.IsEnabled = false;
+                txtPrecio.IsEnabled = false;
+
+                HabilitarDeshabilitarBotones(true);
+            }
         }
 
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+            //productosList = convertToObservable( TrabajarProductos.obtenerProductos());
+            HabilitarDeshabilitarBotones(true);
+            HabilitarDeshabilitarTextBox(false);
+        }
+
+        private ObservableCollection<Producto> convertToObservable(DataTable dt) {
+            ObservableCollection<Producto> prods = new ObservableCollection<Producto>();
+            foreach (DataRow row in dt.Rows) {
+                prods.Add(new Producto() {
+                    CodProducto = Convert.ToString(row["Prod_Codigo"]),
+                    Categoria = (string)row["Prod_Categoria"],
+                    Color = (string)row["Prod_Color"],
+                    Descripcion = (string)row["Prod_Descripcion"],
+                    Precio = (decimal)row["Prod_Precio"]
+                });
+            }
+
+            return prods;
+        }
+
+        private void HabilitarBotonesGuardarCancelar(bool state) {
+            btnCancelar.IsEnabled = state;
+            btnGuardar.IsEnabled = state;
+        }
+
+        private void HabilitarBotonesABM(bool state) {
+            btnNuevo.IsEnabled = state;
+            btnModificar.IsEnabled = state;
+            btnEliminar.IsEnabled = state;
+        }
     }
 }
