@@ -14,7 +14,7 @@
     <Window.Resources>
         <ObjectDataProvider ObjectType="{x:Type svc:TrabajarVendedores}"
                             MethodName="obtenerVendedores"
-                            x:Key="get_vendedores"/>
+                            x:Key="list_vendedores"/>
     </Window.Resources>
 
     <Border CornerRadius="10">
@@ -69,7 +69,7 @@
                 <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" Name="txtNombre" />
                 <Label Grid.Column="1" Grid.Row="5" Content="Campo requerido" Visibility="Hidden" Name="lblErrorNombre" Foreground="#FB539B" />
             </Grid>
-            <Grid Width="400" Height="180" Margin="0,20,20,20" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2" DataContext="{StaticResource get_vendedores}" >
+            <Grid Width="400" Height="180" Margin="0,20,20,20" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2" DataContext="{StaticResource list_vendedores}" >
                 <ListView Name="Vendedor" Background="Transparent" ItemsSource="{Binding}" 
                   SelectionChanged="getLegajo_SelectionChanged" SelectionMode="Single">
                     <ListView.View>
