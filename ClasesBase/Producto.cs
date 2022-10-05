@@ -7,36 +7,51 @@ using System.Text.RegularExpressions;
 using System.ComponentModel;
 
 namespace ClasesBase {
-    public class Producto : IDataErrorInfo {
+    public class Producto : IDataErrorInfo, INotifyPropertyChanged {
         private string codProducto;
 
         public string CodProducto {
             get { return codProducto; }
-            set { codProducto = value; }
+            set { 
+                codProducto = value;
+                this.NotifyPropertyChanged("CodProducto");
+            }
         }
         private string categoria;
 
         public string Categoria {
             get { return categoria; }
-            set { categoria = value; }
+            set { 
+                categoria = value;
+                this.NotifyPropertyChanged("Categoria");
+            }
         }
         private string color;
 
         public string Color {
             get { return color; }
-            set { color = value; }
+            set { 
+                color = value;
+                this.NotifyPropertyChanged("Color");
+            }
         }
         private string descripcion;
 
         public string Descripcion {
             get { return descripcion; }
-            set { descripcion = value; }
+            set { 
+                descripcion = value;
+                this.NotifyPropertyChanged("Descripcion");
+            }
         }
         private decimal precio;
 
         public decimal Precio {
             get { return precio; }
-            set { precio = value; }
+            set { 
+                precio = value;
+                this.NotifyPropertyChanged("Precio");
+            }
         }
 
         public string Error {
@@ -83,6 +98,13 @@ namespace ClasesBase {
 
                 return result;
             }
+        }
+
+        public event PropertyChangedEventHandler PropertyChanged;
+
+        protected void NotifyPropertyChanged(string propName) {
+            if (this.PropertyChanged != null)
+                this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
     }
 }

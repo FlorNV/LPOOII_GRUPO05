@@ -3,11 +3,42 @@
 
     <Style x:Key="headerStyle" TargetType="{x:Type GridViewColumnHeader}">
         <Setter Property="Background" Value="#78A3FC"/>
+        <Setter Property="Height" Value="30"/>
     </Style>
 
     <DataTemplate x:Key="headerTemplate">
         <DockPanel>
-            <TextBlock FontSize="16" Foreground="White" HorizontalAlignment="Center" Text="{Binding}"/>
+            <TextBlock FontSize="14" HorizontalAlignment="Center" Text="{Binding}"/>
         </DockPanel>
     </DataTemplate>
+
+    <Style TargetType="{x:Type ListViewItem}"  >
+        <Setter Property="Height" Value="30" />
+        <Setter Property="Background" Value="#34268c" />
+        <Setter Property="Foreground" Value="White"/>
+        <Style.Triggers>
+            <Trigger Property="IsMouseOver" Value="True">
+                <Setter Property="Foreground" Value="Black" />
+                <Setter Property="Background" Value="#78A3FC" />
+            </Trigger>
+        </Style.Triggers>
+    </Style>
+
+    <Style TargetType="{x:Type ListView}"  >
+        <Setter Property="BorderThickness" Value="0" />
+    </Style>
+    
+    <Style TargetType="{x:Type ScrollBar}">
+        <Setter Property="Background" Value="#34268c" />
+        <Setter Property="BorderBrush" Value="#34268c" />
+        <!--<Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="{x:Type ScrollBar}">
+                    <Grid x:Name="bg" SnapsToDevicePixels="True">
+                        
+                    </Grid>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>-->
+    </Style>
 </ResourceDictionary>

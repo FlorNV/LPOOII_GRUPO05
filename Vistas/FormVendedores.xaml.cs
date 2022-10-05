@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Data;
 using System.Windows;
 using System.Windows.Controls;
 using System.Windows.Data;
@@ -29,7 +30,7 @@ namespace Vistas
         {
             LimpiarCampos();
             HabilitarDeshabilitarTextBox(true);
-            HabilitarDeshabilitarBotones(true);
+            HabilitarDeshabilitarBotones(false);
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -56,11 +57,13 @@ namespace Vistas
                         ClasesBase.TrabajarVendedores.insertarVendedor(oVendedor);
                     }
 
-                    LimpiarCampos();
+                    Vendedor.DataContext = TrabajarVendedores.obtenerVendedores();
 
                     HabilitarDeshabilitarTextBox(false);
-                    HabilitarDeshabilitarBotones(false);
+                    HabilitarDeshabilitarBotones(true);
                     habilitarEdicion(editMode);
+
+                    LimpiarCampos();
                 }
             }
         }
@@ -72,6 +75,8 @@ namespace Vistas
 
             btnGuardar.IsEnabled = true;
             btnCancelar.IsEnabled = true;
+
+            HabilitarDeshabilitarBotones(false);
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e)
@@ -82,14 +87,15 @@ namespace Vistas
             {
                 TrabajarVendedores.eliminarVendedor(txtLegajo.Text);
                 LimpiarCampos();
-                HabilitarDeshabilitarBotones(false);
+                HabilitarDeshabilitarBotones(true);
+                Vendedor.DataContext = TrabajarVendedores.obtenerVendedores();
             }
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
         {
             LimpiarCampos();
-            HabilitarDeshabilitarBotones(false);
+            HabilitarDeshabilitarBotones(true);
             HabilitarDeshabilitarTextBox(false);
         }
 
@@ -116,17 +122,8 @@ namespace Vistas
 
         private void HabilitarDeshabilitarBotones(bool b)
         {
-            btnGuardar.IsEnabled = b;
-            btnCancelar.IsEnabled = b;
-
-            btnNuevo.IsEnabled = !b;
-            btnModificar.IsEnabled = !b;
-            btnEliminar.IsEnabled = !b;
-            btnPrimero.IsEnabled = !b;
-            btnSiguiente.IsEnabled = !b;
-            btnAnterior.IsEnabled = !b;
-            btnUltimo.IsEnabled = !b;
-            btnCancelar.IsEnabled = b;
+            HabilitarBotonesABM(b);
+            HabilitarBotonesGuardarCancelar(!b);
         }
 
         private bool ValidarTextBox()
@@ -159,18 +156,51 @@ namespace Vistas
             return bError;
         }
 
-        private void btnVerVendedores_Click(object sender, RoutedEventArgs e)
-        {
-            WinVendedores win = new WinVendedores();
-            win.Owner = this;
-            win.Show();
-        }
-
         private void habilitarEdicion(bool mode) {
             //txtCodigo.IsEnabled = mode;
             txtApellido.IsEnabled = mode;
             //txtLegajo.IsEnabled = mode;
             txtNombre.IsEnabled = mode;
+        }
+
+
+        // Obtiene el legajo del vendedor seleccionado
+        private void getLegajo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        {
+            DataRowView dataRowView = Vendedor.SelectedItem as DataRowView;
+
+            if (dataRowView != null) {
+                string szLegajo = dataRowView[0].ToString();
+
+                Vendedor oVendedor = TrabajarVendedores.obtenerVendedorPorLegajo(szLegajo);
+
+                txtLegajo.Text = oVendedor.Legajo;
+                txtApellido.Text = oVendedor.Apellido;
+                txtNombre.Text = oVendedor.Nombre;
+
+                // Inhabilitar los TextBox
+                txtLegajo.IsEnabled = false;
+                txtApellido.IsEnabled = false;
+                txtNombre.IsEnabled = false;
+
+                HabilitarDeshabilitarBotones(true);
+            }
+        }
+
+        private void HabilitarBotonesGuardarCancelar(bool state) {
+            btnCancelar.IsEnabled = state;
+            btnGuardar.IsEnabled = state;
+        }
+
+        private void HabilitarBotonesABM(bool state) {
+            btnNuevo.IsEnabled = state;
+            btnModificar.IsEnabled = state;
+            btnEliminar.IsEnabled = state;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+            HabilitarDeshabilitarBotones(true);
+            HabilitarDeshabilitarTextBox(false);
         }
     }
 }
