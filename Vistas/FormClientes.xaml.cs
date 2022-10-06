@@ -18,6 +18,9 @@ namespace Vistas
     /// </summary>
     public partial class FormClientes : Window
     {
+
+        CollectionView Vista;
+
         public FormClientes()
         {
             InitializeComponent();
@@ -141,6 +144,32 @@ namespace Vistas
                 lblErrorDireccion.Visibility = System.Windows.Visibility.Hidden;
 
             return bError;
+        }
+
+        private void Window_Loaded(object sender, RoutedEventArgs e) {
+            Vista = (CollectionView)CollectionViewSource.GetDefaultView(grid_content.DataContext);
+        }
+
+        private void btnPrimero_Click(object sender, RoutedEventArgs e) {
+            Vista.MoveCurrentToFirst();
+        }
+
+        private void btnUltimo_Click(object sender, RoutedEventArgs e) {
+            Vista.MoveCurrentToLast();
+        }
+
+        private void btnAnterior_Click(object sender, RoutedEventArgs e) {
+            Vista.MoveCurrentToPrevious();
+            if (Vista.IsCurrentBeforeFirst) {
+                Vista.MoveCurrentToLast();
+            }
+        }
+
+        private void btnSiguiente_Click(object sender, RoutedEventArgs e) {
+            Vista.MoveCurrentToNext();
+            if (Vista.IsCurrentAfterLast) {
+                Vista.MoveCurrentToFirst();
+            }
         }
 
     }

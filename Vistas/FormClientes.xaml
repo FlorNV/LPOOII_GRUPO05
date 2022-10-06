@@ -9,7 +9,7 @@
         WindowStyle="None"
         ResizeMode="NoResize"
         Background="Transparent"
-        AllowsTransparency="True">
+        AllowsTransparency="True" Loaded="Window_Loaded">
     <Window.Resources>
         <ObjectDataProvider x:Key="list_clientes" 
                             ObjectType="{x:Type svc:TrabajarClientes}" 
@@ -33,10 +33,10 @@
                 <Button Style="{StaticResource ButtonRosa}" Content="Eliminar" Name="btnEliminar" Margin="0,0,25,0" />
                 <Button Style="{StaticResource ButtonAzul}" Content="Guardar" Name="btnGuardar" Click="btnGuardar_Click" />
                 <Button Style="{StaticResource ButtonAzul}" Content="Cancelar" Name="btnCancelar" Click="btnCancelar_Click" Margin="0,0,25,0" />
-                <Button Style="{StaticResource ButtonVerde}" Content="Primero" Name="btnPrimero" />
-                <Button Style="{StaticResource ButtonVerde}" Content="Anterior" Name="btnAnterior" />
-                <Button Style="{StaticResource ButtonVerde}" Content="Siguiente" Name="btnSiguiente" />
-                <Button Style="{StaticResource ButtonVerde}" Content="Último" Name="btnUltimo" Margin="0" />
+                <Button Style="{StaticResource ButtonVerde}" Content="Primero" Name="btnPrimero" Click="btnPrimero_Click" />
+                <Button Style="{StaticResource ButtonVerde}" Content="Anterior" Name="btnAnterior" Click="btnAnterior_Click" />
+                <Button Style="{StaticResource ButtonVerde}" Content="Siguiente" Name="btnSiguiente" Click="btnSiguiente_Click" />
+                <Button Style="{StaticResource ButtonVerde}" Content="Último" Name="btnUltimo" Margin="0" Click="btnUltimo_Click" />
             </StackPanel>
             <Grid Width="300" Margin="40" VerticalAlignment="Center" Grid.Row="1" 
                   Name="grid_content" DataContext="{Binding Source={StaticResource ResourceKey=list_clientes}}">
