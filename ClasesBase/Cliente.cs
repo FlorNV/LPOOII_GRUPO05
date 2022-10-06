@@ -8,6 +8,16 @@ namespace ClasesBase
 {
     public class Cliente : INotifyPropertyChanged
     {
+        private int id;
+
+        public int ID {
+            get { return id; }
+            set {
+                id = value;
+                Notificador("ID");
+            }
+        }
+
         private string dni;
 
         public string DNI
