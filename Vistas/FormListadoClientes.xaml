@@ -13,7 +13,9 @@
         <!-- Se define la vista de la coleccion -->
         <CollectionViewSource
             x:Key="ListaClientes"
-            Source="{StaticResource ResourceKey=list_clientes}">
+            Source="{StaticResource ResourceKey=list_clientes}"
+            Filter="eventVistaCliente_Filter">
+            <!--Es El evento filtrado-->
             <!-- Se define el orden de la vista -->
             <CollectionViewSource.SortDescriptions>
                 <componentModel:SortDescription PropertyName="DNI" Direction="Ascending" />
@@ -33,11 +35,6 @@
                 <RowDefinition Height="40" />
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Right" Margin="0,10,10,0">
-                <!-- Aqui vienen los filtros (textbox y botones) -->
-                <Button Style="{StaticResource ButtonVerdePlantilla}" Content="Filtrar" Name="btnPrimero" />
-            </StackPanel>
-            
             <!-- Grilla de clientes -->
             <Grid Width="403" Height="240" Margin="0,49,125,66" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1"  DataContext="{StaticResource ListaClientes}">
                 <ListView x:Name="Clientes" Background="Transparent" ItemsSource="{Binding}" 
@@ -64,6 +61,11 @@
                     HorizontalAlignment="Right" 
                     Name="btnSalir" 
                     Click="btnSalir_Click" />
+            <!-- Stack Panel del Filtrado -->
+            <StackPanel Height="77" HorizontalAlignment="Left" Margin="212,6,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="232" Grid.RowSpan="2">
+                <Label Content="Filtrado por Apellido:" Height="28" Name="label1" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Background="#FF78A3FC" />
+                <TextBox Height="24" Name="textBox1" Width="138" HorizontalContentAlignment="Left" TextAlignment="Left" VerticalContentAlignment="Bottom" Margin="10" TextChanged="textBox1_TextChanged" />
+            </StackPanel>
         </Grid>
     </Border>
     
