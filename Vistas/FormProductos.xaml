@@ -24,7 +24,7 @@
         <ObjectDataProvider 
             ObjectType="{x:Type svc:TrabajarProductos}"
             MethodName="obtenerProductos"
-            x:Key="get_productos"/>
+            x:Key="list_productos"/>
     </Window.Resources>
     <Border CornerRadius="10">
         <Border.Background>
@@ -120,7 +120,7 @@
                 </TextBox>
             </Grid>
 
-            <Grid Width="400" Height="240" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" DataContext="{StaticResource get_productos}">
+            <Grid Width="400" Height="240" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" DataContext="{StaticResource list_productos}">
                 <ListView x:Name="Productos" Background="Transparent" ItemsSource="{Binding}" 
                   SelectionChanged="getCodigo_SelectionChanged" SelectionMode="Single" >
                     <ListView.View>
