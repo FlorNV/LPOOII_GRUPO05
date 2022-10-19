@@ -3,7 +3,8 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:svc="clr-namespace:ClasesBase;assembly=ClasesBase"
         xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase"
-        Title="FormListadoClientes" Height="436" Width="674">
+        Title="FormListadoClientes" Height="436" Width="674"
+        WindowStartupLocation="CenterScreen">
     <Window.Resources>
         <ObjectDataProvider 
             ObjectType="{x:Type svc:TrabajarClientes}"
@@ -36,19 +37,37 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <!-- Grilla de clientes -->
-            <Grid Width="403" Height="240" Margin="0,49,125,66" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1"  DataContext="{StaticResource ListaClientes}">
-                <ListView x:Name="Clientes" Background="Transparent" ItemsSource="{Binding}" 
-                 SelectionMode="Single" Margin="-1,0,1,0">
-                    <ListView.View>
-                        <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}"
-                          ColumnHeaderTemplate="{StaticResource headerTemplate}">
-                            <GridViewColumn Width="80" Header="DNI" DisplayMemberBinding="{Binding DNI}" />
-                            <GridViewColumn Width="80" Header="Apellido" DisplayMemberBinding="{Binding Apellido}" />
-                            <GridViewColumn Width="80" Header="Nombre" DisplayMemberBinding="{Binding Nombre}" />
-                            <GridViewColumn Width="150" Header="Dirección" DisplayMemberBinding="{Binding Direccion}" />
-                        </GridView>
-                    </ListView.View>
-                </ListView>
+            <Grid Width="500" Height="240"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"  DataContext="{StaticResource ListaClientes}">
+                <!-- Boton para imprimir -->
+                <Button Style="{StaticResource ButtonAzulPlantilla}" 
+                    Content="Imprimir" 
+                    Grid.Row="1" 
+                    Height="30" 
+                    Margin="0,10,20,0" 
+                    VerticalAlignment="Top" 
+                    HorizontalAlignment="Right" 
+                    Name="btnImprimir" />
+                <!-- Documento dinamico -->
+                <FlowDocumentReader Foreground="White" Canvas.Left="12" Canvas.Top="28">
+                    <FlowDocument Name="DocMain">
+                        <Paragraph>Listado de Clientes</Paragraph>
+                        <BlockUIContainer>
+                            <ListView x:Name="Clientes" Background="Transparent" ItemsSource="{Binding}" 
+                                SelectionMode="Single" Margin="-1,0,1,0">
+                                <ListView.View>
+                                    <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}"
+                                              ColumnHeaderTemplate="{StaticResource headerTemplate}">
+                                        <GridViewColumn Width="100" Header="DNI" DisplayMemberBinding="{Binding DNI}" />
+                                        <GridViewColumn Width="100" Header="Apellido" DisplayMemberBinding="{Binding Apellido}" />
+                                        <GridViewColumn Width="100" Header="Nombre" DisplayMemberBinding="{Binding Nombre}" />
+                                        <GridViewColumn Width="150" Header="Dirección" DisplayMemberBinding="{Binding Direccion}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+                        </BlockUIContainer>
+                    </FlowDocument>                    
+                </FlowDocumentReader>
+                
             </Grid>
 
             <!-- Boton para salir de la ventana -->
