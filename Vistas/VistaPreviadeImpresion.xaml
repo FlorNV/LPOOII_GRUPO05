@@ -16,7 +16,6 @@
         <CollectionViewSource
             x:Key="ListaClientes"
             Source="{StaticResource ResourceKey=list_clientes}">
-            <!-- Falta filtrado-->
             <!-- Se define el orden de la vista -->
             <CollectionViewSource.SortDescriptions>
                 <componentModel:SortDescription PropertyName="DNI" Direction="Ascending" />
@@ -39,7 +38,7 @@
                     <FlowDocument Name="DocMain">
                         <Paragraph>Listado de Clientes</Paragraph>
                         <BlockUIContainer>
-                            <ListView x:Name="Clientes" Background="Transparent" ItemsSource="{Binding Source={StaticResource ResourceKey=ListaClientes}}" 
+                            <ListView x:Name="Clientes" Background="Transparent" 
                                     SelectionMode="Single" Margin="-1,0,1,0">
                                 <ListView.View>
                                     <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}"

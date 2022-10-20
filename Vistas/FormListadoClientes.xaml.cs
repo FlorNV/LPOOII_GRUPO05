@@ -61,7 +61,7 @@ namespace Vistas
 
         private void btnVistaPrevia_Click(object sender, RoutedEventArgs e)
         {
-            VistaPreviadeImpresion win = new VistaPreviadeImpresion();
+            VistaPreviadeImpresion win = new VistaPreviadeImpresion(vistaColeccionFiltrada);
             win.Show();
         }
         

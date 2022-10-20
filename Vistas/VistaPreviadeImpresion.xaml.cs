@@ -18,9 +18,13 @@ namespace Vistas
     /// </summary>
     public partial class VistaPreviadeImpresion : Window
     {
-        public VistaPreviadeImpresion()
+
+        public VistaPreviadeImpresion(CollectionViewSource vistaColeccionFiltrada)
         {
             InitializeComponent();
+            Binding binding = new Binding();
+            binding.Source = vistaColeccionFiltrada;
+            BindingOperations.SetBinding(Clientes, ListView.ItemsSourceProperty, binding);
         }
 
         private void btnSalir_Click(object sender, RoutedEventArgs e)
