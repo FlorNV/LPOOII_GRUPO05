@@ -1,0 +1,35 @@
+﻿<Window x:Class="Vistas.FormVentas"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="FormVentas" 
+        Height="400" 
+        Width="800"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        ResizeMode="NoResize"
+        Background="Transparent"
+        AllowsTransparency="True">
+    <Border CornerRadius="10">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                <GradientStop Color="#060531" Offset="0" />
+                <GradientStop Color="#1b1448" Offset="0.75" />
+            </LinearGradientBrush>
+        </Border.Background>
+        <DockPanel>
+            <Label Content="Nueva venta" Height="28" DockPanel.Dock="Top" Name="lblTitle" Foreground="White" />
+            <TabControl DockPanel.Dock="Bottom" Height="300" Name="tabControl1" Width="750" Background="{x:Null}" Foreground="White">
+                <TabItem Header="Datos" Name="tabDatos" Background="{x:Null}">
+                    <Grid>
+                        
+                    </Grid>
+                </TabItem>
+                <TabItem Header="Seleccionar Producto" Name="tabProductos" Background="{x:Null}">
+                    <Grid>
+
+                    </Grid>
+                </TabItem>
+            </TabControl>
+        </DockPanel>
+    </Border>
+</Window>
