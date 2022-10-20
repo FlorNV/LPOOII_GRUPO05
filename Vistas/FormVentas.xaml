@@ -17,19 +17,58 @@
             </LinearGradientBrush>
         </Border.Background>
         <DockPanel>
-            <Label Content="Nueva venta" Height="28" DockPanel.Dock="Top" Name="lblTitle" Foreground="White" />
-            <TabControl DockPanel.Dock="Bottom" Height="300" Name="tabControl1" Width="750" Background="{x:Null}" Foreground="White">
-                <TabItem Header="Datos" Name="tabDatos" Background="{x:Null}">
+            <Label Content="Nueva Venta" Height="40" DockPanel.Dock="Top" Name="lblTitle" Foreground="White" />
+            <Grid DockPanel.Dock="Bottom" Height="300" Name="grid1" Width="750" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                
+                <StackPanel Margin="30">
                     <Grid>
-                        
-                    </Grid>
-                </TabItem>
-                <TabItem Header="Seleccionar Producto" Name="tabProductos" Background="{x:Null}">
-                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="30" />
+                        </Grid.RowDefinitions>
 
+                        <Label Content="Fecha" Name="lblFechaVenta" Foreground="White" FontSize="14" />
+                        <DatePicker Grid.Column="1" />
+                        <Label Grid.Column="1" Grid.Row="1" Content="Campo requerido" Visibility="Hidden" Name="lblErrorFechaVenta" Foreground="#FB539B" />
                     </Grid>
-                </TabItem>
-            </TabControl>
+
+                    <GroupBox Header="Cliente" Name="gpbCliente" Width="300" Foreground="White">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="30" />
+                            </Grid.RowDefinitions>
+
+                            <ComboBox Grid.Column="2"  HorizontalAlignment="Left"  Name="comboBox1" VerticalAlignment="Center" Width="190" />
+
+                            <Label Content="DNI" Name="lblClienteDNI" Grid.Row="2" Foreground="White" FontSize="14" />
+                            <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="2" Name="txtClienteDNI"/>
+
+                            <Label Content="Apellido" Name="lblClienteApellido" Grid.Row="4" Foreground="White" FontSize="14" />
+                            <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="2" Name="txtClienteApellido"/>
+                            
+                        </Grid>
+                    </GroupBox>
+                </StackPanel>
+                
+            </Grid>
         </DockPanel>
     </Border>
 </Window>
