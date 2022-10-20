@@ -32,6 +32,15 @@ namespace Vistas
             this.Close();
         }
 
+        private void btnImprimir_Click(object sender, RoutedEventArgs e)
+        {
+            PrintDialog pdlg = new PrintDialog();
+            if (pdlg.ShowDialog() == true)
+            {
+                pdlg.PrintDocument(((IDocumentPaginatorSource)DocMain).DocumentPaginator, "Imprimir");
+            }
+        }
+
         //Evento que toma el cambio de texto del filtro
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e)
         {

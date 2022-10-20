@@ -36,17 +36,20 @@
                 <RowDefinition Height="40" />
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <!-- Grilla de clientes -->
-            <Grid Width="500" Height="240"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"  DataContext="{StaticResource ListaClientes}">
-                <!-- Boton para imprimir -->
-                <Button Style="{StaticResource ButtonAzulPlantilla}" 
+            
+            <!-- Boton para imprimir -->
+            <Button Style="{StaticResource ButtonAzulPlantilla}" 
                     Content="Imprimir" 
                     Grid.Row="1" 
                     Height="30" 
                     Margin="0,10,20,0" 
                     VerticalAlignment="Top" 
                     HorizontalAlignment="Right" 
-                    Name="btnImprimir" />
+                    Name="btnImprimir"
+                    Click="btnImprimir_Click"/>
+            
+            <!-- Grilla de clientes -->
+            <Grid Width="500" Height="240"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"  DataContext="{StaticResource ListaClientes}">
                 <!-- Documento dinamico -->
                 <FlowDocumentReader Foreground="White" Canvas.Left="12" Canvas.Top="28">
                     <FlowDocument Name="DocMain">
