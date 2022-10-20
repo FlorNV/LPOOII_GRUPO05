@@ -58,6 +58,12 @@ namespace Vistas
                 e.Accepted = false;
             }
         }
+
+        private void btnVistaPrevia_Click(object sender, RoutedEventArgs e)
+        {
+            VistaPreviadeImpresion win = new VistaPreviadeImpresion(vistaColeccionFiltrada);
+            win.Show();
+        }
         
 
     }
