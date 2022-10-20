@@ -64,6 +64,7 @@
     <Compile Include="ListaDeEstados.xaml.cs">
       <DependentUpon>ListaDeEstados.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValidarNumero.cs" />
     <Page Include="ControlUsuarios\ControlUsuarioBtnMinCerrar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

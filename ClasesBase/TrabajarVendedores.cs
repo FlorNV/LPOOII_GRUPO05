@@ -118,5 +118,31 @@ namespace ClasesBase
 
             return null;
         }
+
+        public ObservableCollection<Vendedor> obtenerVendedoresCollection() {
+            SqlConnection cnn = new SqlConnection(ClasesBase.Properties.Settings.Default.muebleriaConnectionString);
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT * FROM Vendedor";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = cnn;
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            ObservableCollection<Vendedor> vendedores = new ObservableCollection<Vendedor>();
+            foreach (DataRow row in dt.Rows) {
+                Vendedor oVendedor = new Vendedor();
+                oVendedor.ID = Convert.ToInt32(row["Vend_ID"]);
+                oVendedor.Apellido = row["Vend_Apellido"].ToString();
+                oVendedor.Nombre = row["Vend_Nombre"].ToString();
+                oVendedor.Legajo = row["Vend_Legajo"].ToString();
+
+                vendedores.Add(oVendedor);
+            }
+            return vendedores;
+        }
     }
 }

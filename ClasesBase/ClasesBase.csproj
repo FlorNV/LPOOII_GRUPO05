@@ -72,6 +72,7 @@
     <Compile Include="TrabajarClientes.cs" />
     <Compile Include="TrabajarProductos.cs" />
     <Compile Include="TrabajarVendedores.cs" />
+    <Compile Include="TrabajarVentas.cs" />
     <Compile Include="Usuario.cs" />
     <Compile Include="Vendedor.cs" />
     <Compile Include="Venta.cs" />
