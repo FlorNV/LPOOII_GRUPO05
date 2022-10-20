@@ -58,6 +58,12 @@ namespace Vistas
                 e.Accepted = false;
             }
         }
+
+        private void btnImprimir_Click(object sender, RoutedEventArgs e)
+        {
+            VistaPreviadeImpresion win = new VistaPreviadeImpresion();
+            win.Show();
+        }
         
 
     }
