@@ -10,6 +10,7 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using ClasesBase;
 
 namespace Vistas
 {
@@ -30,6 +31,15 @@ namespace Vistas
         private void btnSalir_Click(object sender, RoutedEventArgs e)
         {
             this.Close();
+        }
+
+        private void btnImprimir_Click(object sender, RoutedEventArgs e)
+        {
+            PrintDialog pdlg = new PrintDialog();
+            if (pdlg.ShowDialog() == true)
+            {
+                pdlg.PrintDocument(((IDocumentPaginatorSource)DocMain).DocumentPaginator, "Imprimir");
+            }
         }
     }
 }

@@ -63,7 +63,7 @@
                             Margin="0,20,20,0" 
                             VerticalAlignment="Top" 
                             HorizontalAlignment="Right" 
-                            Name="btnImprimir" />
+                            Name="btnImprimir" Click="btnImprimir_Click" />
                 <!-- Boton para salir de la ventana -->
                 <Button Style="{StaticResource ButtonAmarilloPlantilla}" 
                         Content="Salir" 
