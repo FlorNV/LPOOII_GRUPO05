@@ -55,6 +55,9 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Comprobante.xaml.cs">
+      <DependentUpon>Comprobante.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FormListadoClientes.xaml.cs">
       <DependentUpon>FormListadoClientes.xaml</DependentUpon>
     </Compile>
@@ -65,6 +68,10 @@
       <DependentUpon>ListaDeEstados.xaml</DependentUpon>
     </Compile>
     <Compile Include="ValidarNumero.cs" />
+    <Page Include="Comprobante.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="ControlUsuarios\ControlUsuarioBtnMinCerrar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>

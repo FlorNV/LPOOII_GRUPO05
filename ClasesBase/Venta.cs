@@ -3,8 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 
+using System.ComponentModel;
+
 namespace ClasesBase {
-    public class Venta {
+    public class Venta : IDataErrorInfo {
         private int nroFactura;
 
         public int NroFactura {
@@ -52,6 +54,54 @@ namespace ClasesBase {
         public decimal Importe {
             get { return importe; }
             set { importe = value; }
+        }
+
+        public string Error {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string this[string columnName] {
+            get {
+                string result = null;
+                if (columnName == "FechaFactura") {
+                    if (String.IsNullOrEmpty(FechaFactura.ToString())) {
+                        result = "Campo requerido.";
+                    } else if(DateTime.Compare(FechaFactura, DateTime.Now) < 0) {
+                        result = "Fecha no válida";
+                    }
+                    /*
+                    else if (CodProducto.Length < 3) {
+                        result = "Debe tener al menos 3 letras";
+                    }*/
+                } else if (columnName == "Legajo") {
+                    if (String.IsNullOrEmpty(Legajo)) {
+                        result = "Campo requerido.";
+                    }
+                } else if (columnName == "DNI") {
+                    if (String.IsNullOrEmpty(DNI)) {
+                        result = "Campo requerido.";
+                    }
+                } else if (columnName == "CodProducto") {
+                    if (String.IsNullOrEmpty(CodProducto)) {
+                        result = "Campo requerido.";
+                    }
+                } else if (columnName == "Cantidad") {
+                    try {
+                        int num;
+                        if (Cantidad == 0 || string.IsNullOrEmpty(Cantidad.ToString())) {
+                            result = "Campo requerido.";
+                        } else if (!int.TryParse(Cantidad.ToString(), out num)) {
+                            result = "Debe ingresar un número";
+                        } else if (Cantidad < 1) {
+                            result = "Debe ser mayor 1";
+                        }
+                    } catch (FormatException e) {
+                        throw new FormatException("Debe ingresar un número");
+                    }
+                }
+
+                return result;
+            }
         }
     }
 }

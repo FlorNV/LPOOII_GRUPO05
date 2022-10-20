@@ -20,20 +20,27 @@ namespace Vistas {
     /// Lógica de interacción para FormVentas.xaml
     /// </summary>
     public partial class FormVentas : Window {
+
+        private Producto productoSelected;
+        private Cliente clienteSelected;
+        private Vendedor vendedorSelected;
+
         public FormVentas() {
             InitializeComponent();
+            txtProductoCantidad.Text = "1";
+            dtpFechaVenta.Text = DateTime.Now.ToString();
         }
 
         private void cmbClientes_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            Cliente oCliente = cmbClientes.SelectedValue as Cliente;
-            txtClienteDNI.Text = oCliente.DNI;
-            txtClienteNombreCompleto.Text = oCliente.Apellido + ", " + oCliente.Nombre;
+            clienteSelected = cmbClientes.SelectedValue as Cliente;
+            txtClienteDNI.Text = clienteSelected.DNI;
+            txtClienteNombreCompleto.Text = clienteSelected.Apellido + ", " + clienteSelected.Nombre;
         }
 
         private void cmbVendedores_SelectionChanged(object sender, SelectionChangedEventArgs e) {
-            Vendedor oVendedor = cmbVendedores.SelectedValue as Vendedor;
-            txtVendedorLegajo.Text = oVendedor.Legajo;
-            txtVendedorNombreCompleto.Text = oVendedor.Apellido + ", " + oVendedor.Nombre;
+            vendedorSelected = cmbVendedores.SelectedValue as Vendedor;
+            txtVendedorLegajo.Text = vendedorSelected.Legajo;
+            txtVendedorNombreCompleto.Text = vendedorSelected.Apellido + ", " + vendedorSelected.Nombre;
         }
 
         private void Productos_SelectionChanged(object sender, SelectionChangedEventArgs e) {
@@ -43,11 +50,11 @@ namespace Vistas {
                 try {
                     string codProducto = dataRowView[0].ToString();
 
-                    Producto oProducto = TrabajarProductos.obtenerProductoPorCodigo(codProducto);
+                    productoSelected = TrabajarProductos.obtenerProductoPorCodigo(codProducto);
 
-                    txtProductoCodigo.Text = oProducto.CodProducto;
-                    txtProductoPrecio.Text = oProducto.Precio.ToString();
-                    txtProductoTotal.Text = (Convert.ToInt32(txtProductoCantidad.Text) * oProducto.Precio).ToString();
+                    txtProductoCodigo.Text = productoSelected.CodProducto;
+                    txtProductoPrecio.Text = productoSelected.Precio.ToString();
+                    txtProductoTotal.Text = (Convert.ToInt32(txtProductoCantidad.Text) * productoSelected.Precio).ToString();
                 } catch (Exception x) {
                     MessageBox.Show("Ingrese un número en cantidad");
                 }
@@ -83,7 +90,14 @@ namespace Vistas {
                         oVenta.Precio = Convert.ToDecimal(txtProductoPrecio.Text);
                         oVenta.Cantidad = Convert.ToInt32(txtProductoCantidad.Text);
                         oVenta.Importe = oVenta.Precio * oVenta.Cantidad;
-                        TrabajarVentas.insertarVenta(oVenta);
+
+                        // Asigno el resultado del nro de factura creado
+                        oVenta.NroFactura = TrabajarVentas.insertarVenta(oVenta);
+
+                        // Pasar datos al nuevo formulario
+                        Comprobante com = new Comprobante(oVenta, clienteSelected, productoSelected, vendedorSelected);
+                        com.Show();
+
                         MessageBox.Show("Venta Guardada", "Venta");
                         LimpiarCampos();
                     } catch (Exception x) {
@@ -107,7 +121,7 @@ namespace Vistas {
                             MessageBox.Show("Debe seleccionar un producto", "¡Atención!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
                         }
                     } else {
-                        MessageBox.Show("Debe indicar la fecha", "¡Atención!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
+                        lblErrorFechaVenta.Visibility = Visibility.Visible;
                     }
                 } else {
                     MessageBox.Show("Debe seleccionar un Vendedor", "¡Atención!", MessageBoxButton.OK, MessageBoxImage.Exclamation);
@@ -125,5 +139,6 @@ namespace Vistas {
             txtClienteDNI.Text = txtClienteNombreCompleto.Text = txtProductoCodigo.Text = txtProductoPrecio.Text = "";
             txtProductoTotal.Text = txtVendedorLegajo.Text = txtVendedorNombreCompleto.Text = "";
         }
+        
     }
 }

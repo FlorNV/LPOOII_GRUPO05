@@ -12,7 +12,7 @@
         xmlns:svc="clr-namespace:ClasesBase;assembly=ClasesBase"
        >
     <Window.Resources>
-        
+        <svc:Venta x:Key="data"/>
         <!-- Datos del cliente -->
         <ObjectDataProvider 
             ObjectType="{x:Type svc:TrabajarClientes}"
@@ -51,6 +51,32 @@
             MethodName="obtenerProductos"
             x:Key="list_productos"/>
 
+        <ControlTemplate x:Key="TextBoxErrorTemplate">
+            <DockPanel>
+                <Ellipse DockPanel.Dock="Right" Margin="2,0" Width="10" Height="10">
+                    <Ellipse.Fill>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#11FF1111" Offset="0" />
+                            <GradientStop Color="#FFFF0000" Offset="1" />
+                        </LinearGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <AdornedElementPlaceholder />
+            </DockPanel>
+        </ControlTemplate>
+        <Style x:Key="EstiloError" TargetType="TextBox">
+            <Setter Property="Margin" Value="4,4,10,4" />
+            <Setter Property="Validation.ErrorTemplate" Value="{StaticResource TextBoxErrorTemplate}" />
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip">
+                        <Setter.Value>
+                            <Binding Path="(Validation.Errors)[0].ErrorContent" RelativeSource="{x:Static RelativeSource.Self}" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
     </Window.Resources>
     <Border CornerRadius="10">
         <Border.Background>
@@ -171,7 +197,13 @@
                                 <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" Name="txtProductoCodigo" IsEnabled="False"/>
 
                                 <Label Content="Cantidad" Name="lblProductoCantidad" Grid.Column="3" Foreground="White" FontSize="14" />
-                                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="4" Name="txtProductoCantidad" Text="1" />
+                                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="4" Name="txtProductoCantidad" >
+                                    <TextBox.Text>
+                                        <Binding Path="Cantidad" Source="{StaticResource data}"
+                                            ValidatesOnExceptions="True" 
+                                            UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
+                                    </TextBox.Text>
+                                </TextBox>
 
                                 <Label Content="Precio" Name="lblProductoPrecio" Grid.Row="2" Grid.Column="0" Foreground="White" FontSize="14" />
                                 <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Name="txtProductoPrecio" IsEnabled="False"/>
