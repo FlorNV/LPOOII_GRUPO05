@@ -59,7 +59,7 @@ namespace Vistas
             }
         }
 
-        private void btnImprimir_Click(object sender, RoutedEventArgs e)
+        private void btnVistaPrevia_Click(object sender, RoutedEventArgs e)
         {
             VistaPreviadeImpresion win = new VistaPreviadeImpresion();
             win.Show();

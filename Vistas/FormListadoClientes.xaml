@@ -38,15 +38,7 @@
             </Grid.RowDefinitions>
             <!-- Grilla de clientes -->
             <Grid Width="500" Height="240"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"  DataContext="{StaticResource ListaClientes}">
-                <!-- Boton para imprimir -->
-                <Button Style="{StaticResource ButtonAzulPlantilla}" 
-                    Content="Imprimir" 
-                    Grid.Row="1" 
-                    Height="30" 
-                    Margin="0,10,20,0" 
-                    VerticalAlignment="Top" 
-                    HorizontalAlignment="Right" 
-                    Name="btnImprimir" />
+               
                 <!-- Documento dinamico -->
                 <FlowDocumentReader Foreground="White" Canvas.Left="12" Canvas.Top="28">
                     <FlowDocument Name="DocMain">
@@ -69,7 +61,16 @@
                 </FlowDocumentReader>
                 
             </Grid>
-
+            <!-- Boton Vista previa -->
+            <Button Style="{StaticResource ButtonAzulPlantilla}" 
+                    Content="Vista previa" 
+                    Grid.Row="1" 
+                    Height="30" 
+                    Margin="0,0,100,10" 
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Right" 
+                    Name="btnVistaPrevia"
+                    Click="btnVistaPrevia_Click"/>
             <!-- Boton para salir de la ventana -->
             <Button Style="{StaticResource ButtonAmarilloPlantilla}" 
                     Content="Salir" 
