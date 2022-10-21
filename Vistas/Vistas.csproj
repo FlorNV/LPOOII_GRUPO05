@@ -72,6 +72,9 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="VistaPreviadeImpresion.xaml.cs">
+      <DependentUpon>VistaPreviadeImpresion.xaml</DependentUpon>
+    </Compile>
     <Page Include="ControlUsuarios\ControlUsuarioBtnMinCerrar.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -162,6 +165,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ListaDeEstados.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="VistaPreviadeImpresion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
