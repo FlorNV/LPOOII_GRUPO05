@@ -7,6 +7,17 @@ using System.ComponentModel;
 
 namespace ClasesBase {
     public class Vendedor : INotifyPropertyChanged {
+
+        private int id;
+
+        public int ID {
+            get { return id; }
+            set {
+                id = value;
+                this.NotifyPropertyChanged("ID");
+            }
+        }
+
         private string legajo;
 
         public string Legajo {

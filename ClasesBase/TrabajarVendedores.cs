@@ -50,17 +50,17 @@ namespace ClasesBase
         }
 
         // Eliminar un vendedor:
-        public static void eliminarVendedor(String legajo)
+        public static void eliminarVendedor(int id)
         {
             SqlConnection cnn = new SqlConnection(ClasesBase.Properties.Settings.Default.muebleriaConnectionString);
 
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "DELETE FROM Vendedor WHERE Vend_Legajo = @legajo";
+            cmd.CommandText = "DELETE FROM Vendedor WHERE Vend_ID = @id";
             cmd.CommandType = CommandType.Text;
             cmd.Connection = cnn;
 
             // Paramatros
-            cmd.Parameters.AddWithValue("@legajo", legajo);
+            cmd.Parameters.AddWithValue("@id", id);
 
             // Ejecutar la query
             cnn.Open();
@@ -74,11 +74,12 @@ namespace ClasesBase
             SqlConnection cnn = new SqlConnection(ClasesBase.Properties.Settings.Default.muebleriaConnectionString);
 
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "UPDATE Vendedor SET Vend_Apellido = @apellido, Vend_Nombre = @nombre WHERE Vend_Legajo = @legajo";
+            cmd.CommandText = "UPDATE Vendedor SET  Vend_Legajo = @legajo, Vend_Apellido = @apellido, Vend_Nombre = @nombre WHERE Vend_ID = @id";
             cmd.CommandType = CommandType.Text;
             cmd.Connection = cnn;
 
             // Paramatros
+            cmd.Parameters.AddWithValue("@id", vendedor.ID);
             cmd.Parameters.AddWithValue("@legajo", vendedor.Legajo);
             cmd.Parameters.AddWithValue("@apellido", vendedor.Apellido);
             cmd.Parameters.AddWithValue("@nombre", vendedor.Nombre);
@@ -108,6 +109,7 @@ namespace ClasesBase
             foreach (DataRow row in dt.Rows)
             {
                 Vendedor oVendedor = new Vendedor();
+                oVendedor.ID = Convert.ToInt32(row["Vend_ID"]);
                 oVendedor.Legajo = row["Vend_Legajo"].ToString();
                 oVendedor.Apellido = row["Vend_Apellido"].ToString();
                 oVendedor.Nombre = row["Vend_Nombre"].ToString();
@@ -115,6 +117,32 @@ namespace ClasesBase
             }
 
             return null;
+        }
+
+        public ObservableCollection<Vendedor> obtenerVendedoresCollection() {
+            SqlConnection cnn = new SqlConnection(ClasesBase.Properties.Settings.Default.muebleriaConnectionString);
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT * FROM Vendedor";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = cnn;
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            ObservableCollection<Vendedor> vendedores = new ObservableCollection<Vendedor>();
+            foreach (DataRow row in dt.Rows) {
+                Vendedor oVendedor = new Vendedor();
+                oVendedor.ID = Convert.ToInt32(row["Vend_ID"]);
+                oVendedor.Apellido = row["Vend_Apellido"].ToString();
+                oVendedor.Nombre = row["Vend_Nombre"].ToString();
+                oVendedor.Legajo = row["Vend_Legajo"].ToString();
+
+                vendedores.Add(oVendedor);
+            }
+            return vendedores;
         }
     }
 }

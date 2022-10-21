@@ -51,6 +51,7 @@ namespace Vistas
 
                     if (editMode) {
                         //Modificar vendedor
+                        oVendedor.ID = Convert.ToInt32(txtID.Text);
                         ClasesBase.TrabajarVendedores.modificarVendedor(oVendedor);
                     } else {
                         // Insertar el nuevo vendedor
@@ -85,7 +86,7 @@ namespace Vistas
                     "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
-                TrabajarVendedores.eliminarVendedor(txtLegajo.Text);
+                TrabajarVendedores.eliminarVendedor(Convert.ToInt32(txtID.Text));
                 LimpiarCampos();
                 HabilitarDeshabilitarBotones(true);
                 Vendedor.DataContext = TrabajarVendedores.obtenerVendedores();
@@ -109,6 +110,7 @@ namespace Vistas
             txtLegajo.Text = String.Empty;
             txtApellido.Text = String.Empty;
             txtNombre.Text = String.Empty;
+            txtID.Text = String.Empty;
 
             editMode = false;
         }
@@ -159,7 +161,7 @@ namespace Vistas
         private void habilitarEdicion(bool mode) {
             //txtCodigo.IsEnabled = mode;
             txtApellido.IsEnabled = mode;
-            //txtLegajo.IsEnabled = mode;
+            txtLegajo.IsEnabled = mode;
             txtNombre.IsEnabled = mode;
         }
 
@@ -170,13 +172,14 @@ namespace Vistas
             DataRowView dataRowView = Vendedor.SelectedItem as DataRowView;
 
             if (dataRowView != null) {
-                string szLegajo = dataRowView[0].ToString();
+                string szLegajo = dataRowView[1].ToString();
 
                 Vendedor oVendedor = TrabajarVendedores.obtenerVendedorPorLegajo(szLegajo);
 
                 txtLegajo.Text = oVendedor.Legajo;
                 txtApellido.Text = oVendedor.Apellido;
                 txtNombre.Text = oVendedor.Nombre;
+                txtID.Text = oVendedor.ID.ToString();
 
                 // Inhabilitar los TextBox
                 txtLegajo.IsEnabled = false;

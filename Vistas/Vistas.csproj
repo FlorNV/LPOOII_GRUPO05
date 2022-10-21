@@ -55,12 +55,23 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="Comprobante.xaml.cs">
+      <DependentUpon>Comprobante.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FormListadoClientes.xaml.cs">
       <DependentUpon>FormListadoClientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="FormVentas.xaml.cs">
+      <DependentUpon>FormVentas.xaml</DependentUpon>
     </Compile>
     <Compile Include="ListaDeEstados.xaml.cs">
       <DependentUpon>ListaDeEstados.xaml</DependentUpon>
     </Compile>
+    <Compile Include="ValidarNumero.cs" />
+    <Page Include="Comprobante.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Compile Include="VistaPreviadeImpresion.xaml.cs">
       <DependentUpon>VistaPreviadeImpresion.xaml</DependentUpon>
     </Compile>
@@ -97,6 +108,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FormVendedores.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FormVentas.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>

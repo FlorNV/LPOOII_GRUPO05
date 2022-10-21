@@ -56,6 +56,7 @@
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
                     <RowDefinition Height="30" />
+                    <RowDefinition Height="30" />
                 </Grid.RowDefinitions>
                 <Label Content="Legajo" Name="label1" Foreground="White" FontSize="14" />
                 <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" Name="txtLegajo"/>
@@ -68,10 +69,12 @@
                 <Label Grid.Row="4" Content="Nombre" Name="label3" Foreground="White" FontSize="14" />
                 <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" Name="txtNombre" />
                 <Label Grid.Column="1" Grid.Row="5" Content="Campo requerido" Visibility="Hidden" Name="lblErrorNombre" Foreground="#FB539B" />
+
+                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtID" IsEnabled="False" />
             </Grid>
             <Grid Width="400" Height="180" Margin="0,20,20,20" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2" DataContext="{StaticResource list_vendedores}" >
                 <ListView Name="Vendedor" Background="Transparent" ItemsSource="{Binding}" 
-                  SelectionChanged="getLegajo_SelectionChanged" SelectionMode="Single">
+                  SelectionChanged="getLegajo_SelectionChanged" SelectionMode="Single" Margin="0,0,0,-14">
                     <ListView.View>
                         <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}"
                           ColumnHeaderTemplate="{StaticResource headerTemplate}">
