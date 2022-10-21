@@ -66,5 +66,11 @@ namespace Vistas {
             ListaDeEstados le = new ListaDeEstados();
             le.Show();
         }
+
+        private void btnVentas_Click(object sender, RoutedEventArgs e)
+        {
+            FormVentas formVentas = new FormVentas();
+            formVentas.Show();
+        }
     }
 }

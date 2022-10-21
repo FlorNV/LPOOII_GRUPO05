@@ -10,7 +10,7 @@
             ObjectType="{x:Type svc:TrabajarClientes}"
             MethodName="obtenerClientes"
             x:Key="list_clientes"/>
-        
+
         <!-- Se define la vista de la coleccion -->
         <CollectionViewSource
             x:Key="ListaClientes"
@@ -22,7 +22,7 @@
                 <componentModel:SortDescription PropertyName="DNI" Direction="Ascending" />
             </CollectionViewSource.SortDescriptions>
         </CollectionViewSource>
-       
+
     </Window.Resources>
     <Border CornerRadius="10">
         <Border.Background>
@@ -38,28 +38,18 @@
             </Grid.RowDefinitions>
             <!-- Grilla de clientes -->
             <Grid Width="500" Height="240"  VerticalAlignment="Center" HorizontalAlignment="Center" Grid.Row="1"  DataContext="{StaticResource ListaClientes}">
-               
-                <!-- Documento dinamico -->
-                <FlowDocumentReader Foreground="White" Canvas.Left="12" Canvas.Top="28">
-                    <FlowDocument Name="DocMain">
-                        <Paragraph>Listado de Clientes</Paragraph>
-                        <BlockUIContainer>
-                            <ListView x:Name="Clientes" Background="Transparent" ItemsSource="{Binding}" 
+                <ListView x:Name="Clientes" Background="Transparent" ItemsSource="{Binding}" 
                                 SelectionMode="Single" Margin="-1,0,1,0">
-                                <ListView.View>
-                                    <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}"
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}"
                                               ColumnHeaderTemplate="{StaticResource headerTemplate}">
-                                        <GridViewColumn Width="100" Header="DNI" DisplayMemberBinding="{Binding DNI}" />
-                                        <GridViewColumn Width="100" Header="Apellido" DisplayMemberBinding="{Binding Apellido}" />
-                                        <GridViewColumn Width="100" Header="Nombre" DisplayMemberBinding="{Binding Nombre}" />
-                                        <GridViewColumn Width="150" Header="Dirección" DisplayMemberBinding="{Binding Direccion}" />
-                                    </GridView>
-                                </ListView.View>
-                            </ListView>
-                        </BlockUIContainer>
-                    </FlowDocument>                    
-                </FlowDocumentReader>
-                
+                            <GridViewColumn Width="100" Header="DNI" DisplayMemberBinding="{Binding DNI}" />
+                            <GridViewColumn Width="100" Header="Apellido" DisplayMemberBinding="{Binding Apellido}" />
+                            <GridViewColumn Width="100" Header="Nombre" DisplayMemberBinding="{Binding Nombre}" />
+                            <GridViewColumn Width="150" Header="Dirección" DisplayMemberBinding="{Binding Direccion}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
             </Grid>
             <!-- Boton Vista previa -->
             <Button Style="{StaticResource ButtonAzulPlantilla}" 
@@ -88,5 +78,5 @@
             </StackPanel>
         </Grid>
     </Border>
-    
+
 </Window>
