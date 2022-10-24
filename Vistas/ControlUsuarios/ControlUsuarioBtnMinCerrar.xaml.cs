@@ -19,9 +19,12 @@ namespace Vistas
     /// </summary>
     public partial class ControlUsuarioBtnMinCerrar : UserControl
     {
+        public string TitleText { get; set; }
+
         public ControlUsuarioBtnMinCerrar()
         {
             InitializeComponent();
+            this.DataContext = this;
         }
         private void btnMinimizar_Click(object sender, RoutedEventArgs e)
         {

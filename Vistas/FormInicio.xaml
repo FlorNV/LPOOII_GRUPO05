@@ -1,0 +1,137 @@
+﻿<Window x:Class="Vistas.FormInicio"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:uc="clr-namespace:Vistas"
+        xmlns:viewmodels="clr-namespace:Vistas.Views"
+        Title="Inicio" Height="700" Width="1100"
+        WindowStartupLocation="CenterScreen"
+        WindowStyle="None"
+        AllowsTransparency="True"
+        Background="Transparent">
+    <Window.Resources>
+        <DataTemplate x:Name="AltaVenta" DataType="{x:Type viewmodels:UserControlAltaVenta}">
+            <viewmodels:UserControlAltaVenta DataContext="{Binding}" />
+        </DataTemplate>
+    </Window.Resources>
+    <Border CornerRadius="12" BorderThickness="3" >
+        <Border.BorderBrush>
+            <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                <GradientStop Color="#462AD8" Offset="0"/>
+                <GradientStop Color="#DA34AE" Offset="0.75"/>
+                <GradientStop Color="#8A16C1" Offset="1"/>
+            </LinearGradientBrush>
+        </Border.BorderBrush>
+
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                <GradientStop Color="#060531" Offset="0"/>
+                <GradientStop Color="#1B1448" Offset="0.75"/>
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid Name="Principal">
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="270" />
+                <ColumnDefinition />
+            </Grid.ColumnDefinitions>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="30"/>
+                <RowDefinition Height="100"/>
+                <RowDefinition/>
+            </Grid.RowDefinitions>
+            <Grid Name="ControlsTitle" Grid.ColumnSpan="2">
+                <uc:ControlUsuarioBtnMinCerrar x:Name="MiControlUsuarioLogin1" TitleText="Inicio"  Grid.ColumnSpan="2" />
+            </Grid>
+            <Grid Name="Header" Grid.Row="1" Grid.ColumnSpan="2" Background="#000022">
+                
+            </Grid>
+
+            <Grid Name="Menu" Grid.Row="2" Background="#1b1448">
+                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" >
+                    <ListView Margin="0,30,0,0" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListViewItem Height="55" Background="Transparent">
+                            <Button Name="btnInicio" Style="{StaticResource ButtonInicio}" Width="250"  HorizontalAlignment="Left" Cursor="Hand">
+                                <Grid Width="250">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image HorizontalAlignment="Center" Source="/images/icons/house-solid.png" />
+                                    <TextBlock Grid.Column="1" Text="Inicio" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Grid>
+                            </Button>
+                        </ListViewItem>
+                        
+                        <ListViewItem Height="60" Margin="0,10,0,0" Background="Transparent">
+                            <Button Name="btnProductos" Style="{StaticResource ButtonInicio}" Width="250"  HorizontalAlignment="Left" Cursor="Hand" Click="btnProductos_Click">
+                                <Grid Width="240">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image HorizontalAlignment="Center" Source="/images/icons/chair-solid.png" />
+                                    <TextBlock Grid.Column="1" Text="Productos" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Grid>
+                            </Button>
+                        </ListViewItem>
+
+                        <ListViewItem Height="60" Margin="0,10,0,0" Background="Transparent">
+                            <Button Name="btnClientes" Style="{StaticResource ButtonInicio}" Width="250"  HorizontalAlignment="Left" Cursor="Hand">
+                                <Grid Width="240">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image HorizontalAlignment="Center" Source="/images/icons/list-solid.png" />
+                                    <TextBlock Grid.Column="1" Text="Clientes" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Grid>
+                            </Button>
+                        </ListViewItem>
+
+                        <ListViewItem Height="60" Margin="0,10,0,0" Background="Transparent">
+                            <Button Name="btnProveedores" Style="{StaticResource ButtonInicio}" Width="250"  HorizontalAlignment="Left" Cursor="Hand">
+                                <Grid Width="240">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image HorizontalAlignment="Center" Source="/images/icons/box-solid.png" />
+                                    <TextBlock Grid.Column="1" Text="Proveedores" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Grid>
+                            </Button>
+                        </ListViewItem>
+
+                        <ListViewItem Height="60" Margin="0,10,0,0" Background="Transparent">
+                            <Button Name="btnVentas" Style="{StaticResource ButtonInicio}" Width="250"  HorizontalAlignment="Left" Cursor="Hand" Click="btnVentas_Click">
+                                <Grid Width="240">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image HorizontalAlignment="Center" Source="/images/icons/dollar-solid.png" />
+                                    <TextBlock Grid.Column="1" Text="Ventas" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Grid>
+                            </Button>
+                        </ListViewItem>
+
+                        <ListViewItem Height="60" Margin="0,10,0,0" Background="Transparent">
+                            <Button Name="btnUsuarios" Style="{StaticResource ButtonInicio}" Width="250"  HorizontalAlignment="Left" Cursor="Hand">
+                                <Grid Width="240">
+                                    <Grid.ColumnDefinitions>
+                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition />
+                                    </Grid.ColumnDefinitions>
+                                    <Image HorizontalAlignment="Center" Source="/images/icons/user-solid.png" />
+                                    <TextBlock Grid.Column="1" Text="Usuarios" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Grid>
+                            </Button>
+                        </ListViewItem>
+                    </ListView>
+                </StackPanel>
+            </Grid>
+            
+            <Grid Name="GridContent" Grid.Column="1" Grid.Row="2" Height="530" Width="800">
+                <ContentControl Content="{Binding}" />
+            </Grid>
+        </Grid>
+    </Border>
+</Window>

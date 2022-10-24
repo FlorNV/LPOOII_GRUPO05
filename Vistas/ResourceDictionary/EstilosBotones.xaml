@@ -21,6 +21,25 @@
         </Setter>
     </Style>
 
+    <Style x:Key="ButtonInicio" TargetType="{x:Type Button}">
+        <Setter Property="Background" Value="#462AD8"/>
+        
+        <Setter Property="Template">
+            <Setter.Value>
+                <ControlTemplate TargetType="Button">
+                    <Border Width="{TemplateBinding Width}" Height="{TemplateBinding Height}" Background="{TemplateBinding Background}" Padding="10">
+                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center"/>
+                    </Border>
+                    <ControlTemplate.Triggers>
+                        <Trigger Property="IsMouseOver" Value="True">
+                            <Setter Property="Background" Value="#28AEED"/>
+                        </Trigger>
+                    </ControlTemplate.Triggers>
+                </ControlTemplate>
+            </Setter.Value>
+        </Setter>
+    </Style>
+
     <Style x:Key="ButtonAnimationTrigger" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonStyle}" >
         <Setter Property="FontSize" Value="14" />
         <Setter Property="Width" Value="80"/>

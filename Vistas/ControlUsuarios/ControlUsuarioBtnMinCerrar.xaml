@@ -4,7 +4,8 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             xmlns:my="clr-namespace:Vistas">
+             xmlns:my="clr-namespace:Vistas"
+             x:Name="UserControlTitleButtons">
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
@@ -12,7 +13,7 @@
             <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="5"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="LOGIN"
+        <TextBlock Text="{Binding TitleText}"
                                Foreground="DarkGray"
                                FontSize="12"
                                FontFamily="Arial"
