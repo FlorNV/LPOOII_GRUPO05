@@ -19,15 +19,27 @@ namespace Vistas {
     public partial class FormInicio : Window {
         public FormInicio() {
             InitializeComponent();
+            DataContext = new UserControlInicio();
         }
 
         private void btnProductos_Click(object sender, RoutedEventArgs e) {
-            FormProductos frm = new FormProductos();
-            frm.Show();
+            DataContext = new UserControlProductos();
         }
 
         private void btnVentas_Click(object sender, RoutedEventArgs e) {
             DataContext = new UserControlAltaVenta();
+        }
+
+        private void btnClientes_Click(object sender, RoutedEventArgs e) {
+            DataContext = new UserControlClientes();
+        }
+
+        private void btnInicio_Click(object sender, RoutedEventArgs e) {
+            DataContext = new UserControlInicio();
+        }
+
+        private void btnProveedores_Click(object sender, RoutedEventArgs e) {
+            DataContext = new UserControlProveedores();
         }
     }
 }

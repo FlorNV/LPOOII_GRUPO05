@@ -139,5 +139,9 @@ namespace Vistas.Views {
             txtClienteDNI.Text = txtClienteNombreCompleto.Text = txtProductoCodigo.Text = txtProductoPrecio.Text = "";
             txtProductoTotal.Text = txtVendedorLegajo.Text = txtVendedorNombreCompleto.Text = "";
         }
+
+        private void btnSalir_Click(object sender, RoutedEventArgs e) {
+            Content = new UserControlInicio();
+        }
     }
 }

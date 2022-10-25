@@ -81,6 +81,7 @@
                 <GradientStop Color="#1b1448" Offset="0.75" />
             </LinearGradientBrush>
         </Border.Background>
+        <Grid>
         <DockPanel>
             <Label Content="Nueva Venta" Margin="0,10,0,0" FontSize="30" HorizontalAlignment="Center" Height="50" DockPanel.Dock="Top" Name="lblTitle" Foreground="White" />
             <Grid DockPanel.Dock="Bottom" Height="400" Name="grid1" Width="750" >
@@ -209,6 +210,7 @@
                             </Grid>
                         </StackPanel>
                     </GroupBox>
+                    <!--
                     <Grid Margin="0,30,0,0" Height="30">
                         <Grid.ColumnDefinitions>
                             <ColumnDefinition />
@@ -218,8 +220,23 @@
                         <Button Style="{StaticResource ButtonAzulPlantilla}" Content="Guardar" Name="btnGuardar" Click="btnGuardar_Click" />
                         <Button Style="{StaticResource ButtonAzulPlantilla}" Content="Cancelar" Name="btnCancelar" Grid.Column="1" Click="btnCancelar_Click" />
                     </Grid>
+                    -->
                 </StackPanel>
             </Grid>
         </DockPanel>
+
+            <Button Style="{StaticResource ButtonAzulPlantilla}" Content="Guardar" Name="btnGuardar" Click="btnGuardar_Click" Height="30" 
+                    Margin="0,0,230,20" 
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Right" />
+            <Button Style="{StaticResource ButtonAzulPlantilla}" Content="Cancelar" Name="btnCancelar" Grid.Column="1" Click="btnCancelar_Click" Height="30" 
+                    Margin="0,0,130,20" 
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Right" />
+            <Button Style="{StaticResource ButtonAmarillo}" Content="Atrás" Grid.Row="1" Height="30" 
+                    Margin="0,0,30,20" 
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Right" Name="btnSalir" Click="btnSalir_Click" />
+        </Grid>
     </Border>
 </UserControl>
