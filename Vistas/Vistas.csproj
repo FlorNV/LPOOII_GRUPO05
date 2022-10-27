@@ -236,6 +236,11 @@
   <ItemGroup>
     <Resource Include="media\Wildlife.wmv" />
   </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\pause_icon_white.png" />
+    <Resource Include="images\play_icon_white.png" />
+    <Resource Include="images\stop_icon_white.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
        Other similar extension points exist, see Microsoft.Common.targets.

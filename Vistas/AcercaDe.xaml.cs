@@ -27,7 +27,7 @@ namespace Vistas
             InitializeComponent();
 
             timer = new DispatcherTimer();
-            timer.Interval = TimeSpan.FromSeconds(0.01);
+            timer.Interval = TimeSpan.FromSeconds(1);
             timer.Tick += new EventHandler(timer_Tick);
 
             isDragging = false;
@@ -61,37 +61,11 @@ namespace Vistas
         private void btnStop_Click(object sender, RoutedEventArgs e)
         {
             video.Stop();
-
             sldVideo.Value = 0;
-        }
-
-        private void sldVideo_ValueChanged(object sender, RoutedPropertyChangedEventArgs<double> e)
-        {
-            //video.Position = TimeSpan.FromSeconds(sldVideo.Value);
-
-
-
-            //int SliderValue = (int)sldVideo.Value;
-
-            //TimeSpan ts = new TimeSpan(0, 0, 0, 0, SliderValue);
-            //video.Position = ts;
-
-
-
-
-
-            //isDragging = false;
-            //video.Position = TimeSpan.FromSeconds(sldVideo.Value);// La posición del MediaElement se actualiza para que coincida con el progreso del sliderTimeLine.
-
-            //int sliderValue = (int)sldVideo.Value;
-            //TimeSpan ts = new TimeSpan(0, 0, 0, 0, sliderValue);
-            //video.Position = ts;
         }
 
         private void video_MediaOpened(object sender, RoutedEventArgs e)
         {
-            //sldVideo.Maximum = video.NaturalDuration.TimeSpan.TotalMilliseconds;
-
             if (video.NaturalDuration.HasTimeSpan)
             {
                 TimeSpan ts = video.NaturalDuration.TimeSpan;
@@ -104,8 +78,6 @@ namespace Vistas
 
         private void video_MediaEnded(object sender, RoutedEventArgs e)
         {
-            //video.Stop();
-
             sldVideo.Value = 0;
         }
 
