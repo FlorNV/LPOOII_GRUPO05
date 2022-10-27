@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:uc="clr-namespace:Vistas"
         xmlns:viewmodels="clr-namespace:Vistas.Views"
-        Title="Inicio" Height="700" Width="1100"
+        Title="Inicio" Height="640" Width="1100"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -13,7 +13,8 @@
             <viewmodels:UserControlAltaVenta DataContext="{Binding}" />
         </DataTemplate>
     </Window.Resources>
-    <Border CornerRadius="12" BorderThickness="3" >
+    <Border CornerRadius="8" BorderThickness="0" Background="#F3F3F3" >
+        <!--
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
                 <GradientStop Color="#462AD8" Offset="0"/>
@@ -28,6 +29,7 @@
                 <GradientStop Color="#1B1448" Offset="0.75"/>
             </LinearGradientBrush>
         </Border.Background>
+        -->
         <Grid Name="Principal">
             <Grid.ColumnDefinitions>
                 <ColumnDefinition Width="270" />
@@ -35,7 +37,6 @@
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
                 <RowDefinition Height="30"/>
-                <RowDefinition Height="100"/>
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <Grid Name="ControlsTitle" Grid.ColumnSpan="2">

@@ -90,6 +90,9 @@
     <Compile Include="Views\UserControlProveedores.xaml.cs">
       <DependentUpon>UserControlProveedores.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Views\UserControlUsuarios.xaml.cs">
+      <DependentUpon>UserControlUsuarios.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VistaPreviadeImpresion.xaml.cs">
       <DependentUpon>VistaPreviadeImpresion.xaml</DependentUpon>
     </Compile>
@@ -210,6 +213,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="Views\UserControlUsuarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VistaPreviadeImpresion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -279,6 +286,10 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\icons\list-solid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\dash.png" />
+    <Resource Include="images\icons\x.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
