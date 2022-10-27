@@ -5,11 +5,11 @@ using System.Text;
 
 namespace ClasesBase {
     public class Usuario {
-        private int id;
+        private int legajo;
 
-        public int Id {
-            get { return id; }
-            set { id = value; }
+        public int Legajo {
+            get { return legajo; }
+            set { legajo = value; }
         }
         private string username;
 
@@ -28,6 +28,20 @@ namespace ClasesBase {
         public string Rol {
             get { return rol; }
             set { rol = value; }
+        }
+
+        private string apellido;
+
+        public string Apellido {
+            get { return apellido; }
+            set { apellido = value; }
+        }
+
+        private string nombre;
+
+        public string Nombre {
+            get { return nombre; }
+            set { nombre = value; }
         }
     }
 }

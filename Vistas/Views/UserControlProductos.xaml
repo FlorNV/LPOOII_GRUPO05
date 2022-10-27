@@ -29,7 +29,7 @@
             MethodName="obtenerProductos"
             x:Key="list_productos"/>
     </UserControl.Resources>
-    <Border CornerRadius="10">
+    <Border CornerRadius="15">
         <Border.Background>
             <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
                 <GradientStop Color="#060531" Offset="0" />

@@ -73,7 +73,7 @@
             </Style.Triggers>
         </Style>
     </UserControl.Resources>
-    <Border>
+    <Border CornerRadius="15">
         
         <Border.Background>
             <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">

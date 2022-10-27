@@ -6,7 +6,7 @@
              mc:Ignorable="d" 
              d:DesignHeight="530" d:DesignWidth="800" Background="Transparent"
              xmlns:svc="clr-namespace:ClasesBase;assembly=ClasesBase">
-    <Border CornerRadius="10">
+    <Border CornerRadius="15">
         <Border.Background>
             <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
                 <GradientStop Color="#060531" Offset="0" />

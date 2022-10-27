@@ -104,7 +104,6 @@
     <!-- PLANTILLAS -->
     <Style x:Key="ButtonStylePlantilla" TargetType="{x:Type Button}">
         <Setter Property="FontSize" Value="14" />
-        <Setter Property="Width" Value="80"/>
 
         <Setter Property="Validation.ErrorTemplate" Value="{StaticResource TextBoxErrorTemplate}" />
 

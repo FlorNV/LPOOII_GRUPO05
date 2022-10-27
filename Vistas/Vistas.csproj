@@ -70,6 +70,7 @@
     <Compile Include="ListaDeEstados.xaml.cs">
       <DependentUpon>ListaDeEstados.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\ValidacionGenericaTextBox.cs" />
     <Compile Include="ValidarNumero.cs" />
     <Page Include="Comprobante.xaml">
       <SubType>Designer</SubType>
@@ -193,6 +194,10 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ResourceDictionary\EstiloVentanas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Views\UserControlAltaVenta.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -290,6 +295,12 @@
   <ItemGroup>
     <Resource Include="images\icons\dash.png" />
     <Resource Include="images\icons\x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\right-from-bracket-solid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ResourceDictionary\Roles.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

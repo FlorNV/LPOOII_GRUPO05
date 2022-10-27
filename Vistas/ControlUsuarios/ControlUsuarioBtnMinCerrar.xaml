@@ -9,13 +9,12 @@
     <Grid>
         <Grid.ColumnDefinitions>
             <ColumnDefinition/>
-            <ColumnDefinition Width="25"/>
-            <ColumnDefinition Width="25"/>
-            <ColumnDefinition Width="5"/>
+            <ColumnDefinition Width="40"/>
+            <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
         <TextBlock Text="{Binding TitleText}"
-                               Foreground="#363636"
-                               FontSize="12"
+                               Foreground="#fff"
+                               FontSize="14"
                                FontFamily="Arial"
                                Grid.Column="0"
                                VerticalAlignment="Center"
@@ -23,24 +22,22 @@
         <Button Name="btnMinimizar"
                             BorderThickness="0"
                             Foreground="#363636"
-                            FontSize="16"
-                            FontFamily="Arial"
                             Cursor="Hand"
                             Grid.Column="1"
                             Click="btnMinimizar_Click">
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Background" Value="#28AEED"/>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#DEDEDE"/>
+                            <Setter Property="Background" Value="#278BEF"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
             </Button.Style>
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Border Width="20" Height="20" Background="{TemplateBinding Background}">
+                    <Border Width="20" Height="20" CornerRadius="50"  Background="{TemplateBinding Background}">
                         <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/images/icons/dash.png" />
                     </Border>
                 </ControlTemplate>
@@ -50,17 +47,15 @@
         <Button Name="btnCerrar"
                             BorderThickness="0"
                             Foreground="#363636"
-                            FontSize="12"
-                            FontFamily="Arial"
                             Cursor="Hand"
                             Grid.Column="2"
                             Click="btnCerrar_Click">
             <Button.Style>
                 <Style TargetType="Button">
-                    <Setter Property="Background" Value="Transparent"/>
+                    <Setter Property="Background" Value="#DA34AE"/>
                     <Style.Triggers>
                         <Trigger Property="IsMouseOver" Value="True">
-                            <Setter Property="Background" Value="#DEDEDE"/>
+                            <Setter Property="Background" Value="#C62DAE"/>
                         </Trigger>
                     </Style.Triggers>
                 </Style>
@@ -68,7 +63,7 @@
 
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Border Width="20" Height="20" Background="{TemplateBinding Background}">
+                    <Border Width="25" Height="25" CornerRadius="50" Background="{TemplateBinding Background}">
                         <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/images/icons/x.png" />
                     </Border>
                 </ControlTemplate>

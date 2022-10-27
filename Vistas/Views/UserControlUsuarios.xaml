@@ -4,8 +4,124 @@
              xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
-             d:DesignHeight="300" d:DesignWidth="300">
-    <Grid>
+             d:DesignHeight="540" d:DesignWidth="800" Background="Transparent"
+             xmlns:svc="clr-namespace:ClasesBase;assembly=ClasesBase"
+             xmlns:validar="clr-namespace:Vistas.Resources">
+    
+    <UserControl.Resources>
+        <ObjectDataProvider 
+            ObjectType="{x:Type svc:TrabajarUsuarios}"
+            MethodName="ObtenerUsuarios"
+            x:Key="listUsuarios"/>
+    </UserControl.Resources>
+    
+    <Border CornerRadius="15">
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                <GradientStop Color="#060531" Offset="0" />
+                <GradientStop Color="#1b1448" Offset="0.75" />
+            </LinearGradientBrush>
+        </Border.Background>
+        
+        <Grid>
+            <Grid.RowDefinitions>
+                <RowDefinition Height="20" />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition />
+                <RowDefinition Height="20" />
+            </Grid.RowDefinitions>
+            <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="20" />
+                <ColumnDefinition Width="100" />
+                <ColumnDefinition Width="150" />
+                <ColumnDefinition Width="30" />
+                <ColumnDefinition />
+                <ColumnDefinition />
+                <ColumnDefinition Width="20" />
+            </Grid.ColumnDefinitions>
             
-    </Grid>
+            <TextBlock Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Text="Gestión de Usuarios" Foreground="#fff" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+
+            <Label Content="Apellido" Name="lblApellido" Foreground="White" Grid.Column="1" Grid.Row="3" />
+            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtApellido" Grid.Column="2" Grid.Row="3" >
+                <Binding Path="Apellido" UpdateSourceTrigger="PropertyChanged" >
+                    <Binding.ValidationRules>
+                        <validar:ValidacionGenericaTextBox />
+                    </Binding.ValidationRules>
+                </Binding>
+            </TextBox>
+
+            <Label Content="Nombre" Name="lblNombre" Foreground="White" Grid.Column="1" Grid.Row="5" />
+            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtNombre" Grid.Column="2" Grid.Row="5"/>
+
+            <Label Content="Username" Name="lblNombreUsuario" Foreground="White" Grid.Column="1" Grid.Row="7" />
+            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtNombreUsuario" Grid.Column="2" Grid.Row="7"/>
+
+            <Label Content="Contraseña" Name="lblPassword" Foreground="White" Grid.Column="1" Grid.Row="9" />
+            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtPassword" Grid.Column="2" Grid.Row="9"/>
+
+            <Label Content="Rol" Name="lblRol" Foreground="White" Grid.Column="1" Grid.Row="11" />
+            <ComboBox Name="cmbRoles"  Grid.Column="2" Grid.Row="11" VerticalAlignment="Center" Text="Seleccione" SelectionChanged="cmbRoles_SelectionChanged">
+                <ComboBoxItem >Administrador</ComboBoxItem>
+                <ComboBoxItem IsSelected="True">Vendedor</ComboBoxItem>
+            </ComboBox>
+            
+
+            <Label Content="Legajo" Name="lblLegajo" Foreground="White" Grid.Column="1" Grid.Row="13" Visibility="Hidden" />
+            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtLegajo" Grid.Column="2" Grid.Row="13" Visibility="Hidden"/>
+
+            <Grid Grid.Column="1" Grid.ColumnSpan="2" Grid.Row="16">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource ButtonAzulPlantilla}" Width="120" Content="Guardar" Name="btnGuardar" />
+                <Button Style="{StaticResource ButtonAzulPlantilla}" Width="120" Content="Cancelar" Name="btnCancelar" Grid.Column="2" Click="btnCancelar_Click" />
+            </Grid>
+
+            <Grid Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="3">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+                <Button Style="{StaticResource ButtonRosaPlantilla}" Content="Nuevo" Name="btnNuevo" />
+                <Button Style="{StaticResource ButtonRosaPlantilla}" Content="Modificar" Name="btnModificar" Grid.Column="2" />
+                <Button Style="{StaticResource ButtonRosaPlantilla}" Content="Eliminar" Name="btnEliminar" Grid.Column="4" />
+            </Grid>
+
+            <Grid Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="5" Grid.RowSpan="12"  DataContext="{StaticResource listUsuarios}">
+                <ListView x:Name="Usuarios" Background="Transparent" ItemsSource="{Binding}" 
+                                SelectionMode="Single" SelectionChanged="Usuarios_SelectionChanged">
+                    <ListView.View>
+                        <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}" ColumnHeaderTemplate="{StaticResource headerTemplate}">
+                            <GridViewColumn Width="70" Header="Legajo" DisplayMemberBinding="{Binding Path=Usu_Legajo}" />
+                            <GridViewColumn Width="100" Header="Apellido" DisplayMemberBinding="{Binding Path=Usu_Apellido}" />
+                            <GridViewColumn Width="150" Header="Nombre" DisplayMemberBinding="{Binding Path=Usu_Nombre}" />
+                            <GridViewColumn Width="100" Header="Rol" DisplayMemberBinding="{Binding Path=Usu_Rol}" />
+                            <GridViewColumn Width="150" Header="Nombre de usuario" DisplayMemberBinding="{Binding Path=Usu_Username}" />
+                            <GridViewColumn Width="150" Header="Contraseña" DisplayMemberBinding="{Binding Path=Usu_Password}" />
+                        </GridView>
+                    </ListView.View>
+                </ListView>
+            </Grid>
+        </Grid>
+    </Border>
 </UserControl>

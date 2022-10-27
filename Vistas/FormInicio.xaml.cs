@@ -41,5 +41,9 @@ namespace Vistas {
         private void btnProveedores_Click(object sender, RoutedEventArgs e) {
             DataContext = new UserControlProveedores();
         }
+
+        private void btnUsuarios_Click(object sender, RoutedEventArgs e) {
+            DataContext = new UserControlUsuarios();
+        }
     }
 }

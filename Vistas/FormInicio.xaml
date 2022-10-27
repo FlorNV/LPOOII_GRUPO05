@@ -3,7 +3,7 @@
         xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
         xmlns:uc="clr-namespace:Vistas"
         xmlns:viewmodels="clr-namespace:Vistas.Views"
-        Title="Inicio" Height="640" Width="1100"
+        Title="Inicio" Height="600" Width="1100"
         WindowStartupLocation="CenterScreen"
         WindowStyle="None"
         AllowsTransparency="True"
@@ -13,7 +13,7 @@
             <viewmodels:UserControlAltaVenta DataContext="{Binding}" />
         </DataTemplate>
     </Window.Resources>
-    <Border CornerRadius="8" BorderThickness="0" Background="#F3F3F3" >
+    <Border CornerRadius="15" BorderThickness="0" Background="#060531" >
         <!--
         <Border.BorderBrush>
             <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
@@ -32,7 +32,7 @@
         -->
         <Grid Name="Principal">
             <Grid.ColumnDefinitions>
-                <ColumnDefinition Width="270" />
+                <ColumnDefinition Width="245" />
                 <ColumnDefinition />
             </Grid.ColumnDefinitions>
             <Grid.RowDefinitions>
@@ -42,96 +42,127 @@
             <Grid Name="ControlsTitle" Grid.ColumnSpan="2">
                 <uc:ControlUsuarioBtnMinCerrar x:Name="MiControlUsuarioLogin1" TitleText="Inicio"  Grid.ColumnSpan="2" />
             </Grid>
-            <Grid Name="Header" Grid.Row="1" Grid.ColumnSpan="2" Background="#000022">
-                
-            </Grid>
 
             <Grid Name="Menu" Grid.Row="2" Background="#1b1448">
-                <StackPanel VerticalAlignment="Top" HorizontalAlignment="Center" >
-                    <ListView Margin="0,30,0,0" Background="Transparent" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
-                        <ListViewItem Height="55" Background="Transparent">
-                            <Button Name="btnInicio" Style="{StaticResource ButtonInicio}" Width="250"  HorizontalAlignment="Left" Cursor="Hand" Click="btnInicio_Click">
-                                <Grid Width="250">
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="100" />
+                    <RowDefinition />
+                    <RowDefinition Height="80"/>
+                </Grid.RowDefinitions>
+                <Grid Name="DatosUsuario" HorizontalAlignment="Center">
+                    <StackPanel VerticalAlignment="Center">
+                        <TextBlock Text="Username" FontSize="22" FontWeight="Bold" Foreground="#fff" />
+                        <TextBlock Margin="0,10,0,20" FontSize="18" HorizontalAlignment="Center" Text="Username" Foreground="#fff" />
+                    </StackPanel>
+                </Grid>
+                <StackPanel HorizontalAlignment="Center" Grid.Row="1">
+                    <ListView  Background="Transparent" Width="220" ScrollViewer.HorizontalScrollBarVisibility="Disabled">
+                        <ListViewItem Height="50" Background="Transparent">
+                            <Button Name="btnInicio" Style="{StaticResource ButtonInicio}" Width="220"  HorizontalAlignment="Left" Cursor="Hand" Click="btnInicio_Click">
+                                <Grid Width="220">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="40" />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <Image HorizontalAlignment="Center" Source="/images/icons/house-solid.png" />
-                                    <TextBlock Grid.Column="1" Text="Inicio" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="Inicio" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                 </Grid>
                             </Button>
                         </ListViewItem>
                         
-                        <ListViewItem Height="60" Margin="0,10,0,0" Background="Transparent">
-                            <Button Name="btnProductos" Style="{StaticResource ButtonInicio}" Width="250"  HorizontalAlignment="Left" Cursor="Hand" Click="btnProductos_Click">
-                                <Grid Width="240">
+                        <ListViewItem Height="50" Margin="0,10,0,0" Background="Transparent">
+                            <Button Name="btnProductos" Style="{StaticResource ButtonInicio}" Width="220"  HorizontalAlignment="Left" Cursor="Hand" Click="btnProductos_Click">
+                                <Grid Width="220">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="40" />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <Image HorizontalAlignment="Center" Source="/images/icons/chair-solid.png" />
-                                    <TextBlock Grid.Column="1" Text="Productos" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="Productos" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                 </Grid>
                             </Button>
                         </ListViewItem>
 
-                        <ListViewItem Height="60" Margin="0,10,0,0" Background="Transparent">
-                            <Button Name="btnClientes" Style="{StaticResource ButtonInicio}" Width="250"  HorizontalAlignment="Left" Cursor="Hand" Click="btnClientes_Click">
-                                <Grid Width="240">
+                        <ListViewItem Height="50" Margin="0,10,0,0" Background="Transparent">
+                            <Button Name="btnClientes" Style="{StaticResource ButtonInicio}" Width="220"  HorizontalAlignment="Left" Cursor="Hand" Click="btnClientes_Click">
+                                <Grid Width="220">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="40" />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <Image HorizontalAlignment="Center" Source="/images/icons/list-solid.png" />
-                                    <TextBlock Grid.Column="1" Text="Clientes" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="Clientes" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                 </Grid>
                             </Button>
                         </ListViewItem>
 
-                        <ListViewItem Height="60" Margin="0,10,0,0" Background="Transparent">
-                            <Button Name="btnProveedores" Style="{StaticResource ButtonInicio}" Width="250"  HorizontalAlignment="Left" Cursor="Hand" Click="btnProveedores_Click">
-                                <Grid Width="240">
+                        <ListViewItem Height="50" Margin="0,10,0,0" Background="Transparent">
+                            <Button Name="btnProveedores" Style="{StaticResource ButtonInicio}" Width="220" Cursor="Hand" Click="btnProveedores_Click">
+                                <Grid Width="220">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="40" />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <Image HorizontalAlignment="Center" Source="/images/icons/box-solid.png" />
-                                    <TextBlock Grid.Column="1" Text="Proveedores" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="Proveedores" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                 </Grid>
                             </Button>
                         </ListViewItem>
 
-                        <ListViewItem Height="60" Margin="0,10,0,0" Background="Transparent">
-                            <Button Name="btnVentas" Style="{StaticResource ButtonInicio}" Width="250"  HorizontalAlignment="Left" Cursor="Hand" Click="btnVentas_Click">
-                                <Grid Width="240">
+                        <ListViewItem Height="50" Margin="0,10,0,0" Background="Transparent">
+                            <Button Name="btnVentas" Style="{StaticResource ButtonInicio}" Width="220"  HorizontalAlignment="Left" Cursor="Hand" Click="btnVentas_Click">
+                                <Grid Width="220">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="40" />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <Image HorizontalAlignment="Center" Source="/images/icons/dollar-solid.png" />
-                                    <TextBlock Grid.Column="1" Text="Ventas" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="Ventas" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                 </Grid>
                             </Button>
                         </ListViewItem>
 
-                        <ListViewItem Height="60" Margin="0,10,0,0" Background="Transparent">
-                            <Button Name="btnUsuarios" Style="{StaticResource ButtonInicio}" Width="250"  HorizontalAlignment="Left" Cursor="Hand">
-                                <Grid Width="240">
+                        <ListViewItem Height="50" Margin="0,10,0,0" Background="Transparent">
+                            <Button Name="btnUsuarios" Style="{StaticResource ButtonInicio}" Width="220"  HorizontalAlignment="Left" Cursor="Hand" Click="btnUsuarios_Click">
+                                <Grid Width="220">
                                     <Grid.ColumnDefinitions>
-                                        <ColumnDefinition Width="50" />
+                                        <ColumnDefinition Width="40" />
                                         <ColumnDefinition />
                                     </Grid.ColumnDefinitions>
                                     <Image HorizontalAlignment="Center" Source="/images/icons/user-solid.png" />
-                                    <TextBlock Grid.Column="1" Text="Usuarios" FontSize="30" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                    <TextBlock Grid.Column="1" Text="Usuarios" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
                                 </Grid>
                             </Button>
                         </ListViewItem>
                     </ListView>
                 </StackPanel>
+                
+                <Grid Grid.Row="2" HorizontalAlignment="Center">
+                    <Button Name="btnCerrarSesion" Style="{StaticResource ButtonInicio}" Width="150" Height="40" Background="#FB539B" HorizontalAlignment="Left" Cursor="Hand" Click="btnInicio_Click">
+                        <Grid Width="150">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="40" />
+                                <ColumnDefinition />
+                            </Grid.ColumnDefinitions>
+                            <Image HorizontalAlignment="Center" Source="/images/icons/right-from-bracket-solid.png" />
+                            <TextBlock Grid.Column="1" Text="Salir" FontSize="24" FontWeight="SemiBold" VerticalAlignment="Center" HorizontalAlignment="Center" />
+                        </Grid>
+                    </Button>
+                </Grid>
             </Grid>
             
-            <Grid Name="GridContent" Grid.Column="1" Grid.Row="2" Height="530" Width="800">
-                <ContentControl Content="{Binding}" />
+            <Grid Name="GridContent" Grid.Column="1" Grid.Row="2">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="15" />
+                    <ColumnDefinition />
+                    <ColumnDefinition Width="15" />
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="15" />
+                    <RowDefinition />
+                    <RowDefinition Height="15" />
+                </Grid.RowDefinitions>
+                <ContentControl Grid.Column="1" Grid.Row="1" Content="{Binding}" />
             </Grid>
         </Grid>
     </Border>
