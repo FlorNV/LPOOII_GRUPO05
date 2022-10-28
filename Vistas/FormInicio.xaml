@@ -51,8 +51,8 @@
                 </Grid.RowDefinitions>
                 <Grid Name="DatosUsuario" HorizontalAlignment="Center">
                     <StackPanel VerticalAlignment="Center">
-                        <TextBlock Text="Username" FontSize="22" FontWeight="Bold" Foreground="#fff" />
-                        <TextBlock Margin="0,10,0,20" FontSize="18" HorizontalAlignment="Center" Text="Username" Foreground="#fff" />
+                        <TextBlock Text="Username" Name="textUsername" FontSize="22" HorizontalAlignment="Center" FontWeight="Bold" Foreground="#fff" />
+                        <TextBlock Margin="0,10,0,20" Name="textRol" FontSize="18" HorizontalAlignment="Center" Text="Rol" Foreground="#fff" />
                     </StackPanel>
                 </Grid>
                 <StackPanel HorizontalAlignment="Center" Grid.Row="1">
@@ -138,7 +138,7 @@
                 </StackPanel>
                 
                 <Grid Grid.Row="2" HorizontalAlignment="Center">
-                    <Button Name="btnCerrarSesion" Style="{StaticResource ButtonInicio}" Width="150" Height="40" Background="#FB539B" HorizontalAlignment="Left" Cursor="Hand" Click="btnInicio_Click">
+                    <Button Name="btnCerrarSesion" Style="{StaticResource ButtonInicio}" Width="150" Height="40" Background="#FB539B" HorizontalAlignment="Left" Cursor="Hand" Click="btnCerrarSesion_Click">
                         <Grid Width="150">
                             <Grid.ColumnDefinitions>
                                 <ColumnDefinition Width="40" />

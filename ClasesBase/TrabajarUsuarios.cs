@@ -111,10 +111,29 @@ namespace ClasesBase {
             return dt;
         }
 
-        public static 
-    }
+        public static Usuario VerificarUsuario(string username, string password) {
+            SqlConnection cnn = new SqlConnection(ClasesBase.Properties.Settings.Default.muebleriaConnectionString);
 
-    public class Rol {
-        public string name;
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT * FROM Usuario WHERE Usu_Username = @username AND Usu_Password = @password";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = cnn;
+            cmd.Parameters.AddWithValue("@password", password);
+            cmd.Parameters.AddWithValue("@username", username);
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            foreach (DataRow row in dt.Rows) {
+                Usuario usuario = new Usuario();
+                usuario.Username = row["Usu_Username"].ToString();
+                usuario.Rol = row["Usu_Rol"].ToString();
+                return usuario;
+            }
+
+            return null;
+        }
     }
 }

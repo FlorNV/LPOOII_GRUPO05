@@ -9,10 +9,16 @@
              xmlns:validar="clr-namespace:Vistas.Resources">
     
     <UserControl.Resources>
+        <svc:Usuario x:Key="data"/>
         <ObjectDataProvider 
             ObjectType="{x:Type svc:TrabajarUsuarios}"
             MethodName="ObtenerUsuarios"
             x:Key="listUsuarios"/>
+
+        <ObjectDataProvider 
+            ObjectType="{x:Type svc:TrabajarUsuarios}"
+            MethodName="Roles"
+            x:Key="roles"/>
     </UserControl.Resources>
     
     <Border CornerRadius="15">
@@ -58,26 +64,50 @@
 
             <Label Content="Apellido" Name="lblApellido" Foreground="White" Grid.Column="1" Grid.Row="3" />
             <TextBox Style="{StaticResource TextBoxStyle}" Name="txtApellido" Grid.Column="2" Grid.Row="3" >
-                <Binding Path="Apellido" UpdateSourceTrigger="PropertyChanged" >
-                    <Binding.ValidationRules>
-                        <validar:ValidacionGenericaTextBox />
-                    </Binding.ValidationRules>
-                </Binding>
+                <TextBox.Text>
+                    <Binding Path="Apellido" Source="{StaticResource data}"
+                         ValidatesOnExceptions="True" 
+                         UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
+                </TextBox.Text>
             </TextBox>
 
             <Label Content="Nombre" Name="lblNombre" Foreground="White" Grid.Column="1" Grid.Row="5" />
-            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtNombre" Grid.Column="2" Grid.Row="5"/>
+            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtNombre" Grid.Column="2" Grid.Row="5">
+                <TextBox.Text>
+                    <Binding Path="Nombre" Source="{StaticResource data}"
+                         ValidatesOnExceptions="True" 
+                         UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
+                </TextBox.Text>
+            </TextBox>
 
             <Label Content="Username" Name="lblNombreUsuario" Foreground="White" Grid.Column="1" Grid.Row="7" />
-            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtNombreUsuario" Grid.Column="2" Grid.Row="7"/>
+            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtNombreUsuario" Grid.Column="2" Grid.Row="7">
+                <TextBox.Text>
+                    <Binding Path="Username" Source="{StaticResource data}"
+                         ValidatesOnExceptions="True" 
+                         UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
+                </TextBox.Text>
+            </TextBox>
 
             <Label Content="Contraseña" Name="lblPassword" Foreground="White" Grid.Column="1" Grid.Row="9" />
-            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtPassword" Grid.Column="2" Grid.Row="9"/>
+            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtPassword" Grid.Column="2" Grid.Row="9">
+                <TextBox.Text>
+                    <Binding Path="Password" Source="{StaticResource data}"
+                         ValidatesOnExceptions="True" 
+                         UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
+                </TextBox.Text>
+            </TextBox>
 
             <Label Content="Rol" Name="lblRol" Foreground="White" Grid.Column="1" Grid.Row="11" />
             <ComboBox Name="cmbRoles"  Grid.Column="2" Grid.Row="11" VerticalAlignment="Center" Text="Seleccione" SelectionChanged="cmbRoles_SelectionChanged">
                 <ComboBoxItem >Administrador</ComboBoxItem>
                 <ComboBoxItem IsSelected="True">Vendedor</ComboBoxItem>
+                
+                <ComboBox.SelectedItem>
+                        <Binding Path="Rol" Source="{StaticResource data}"
+                         ValidatesOnExceptions="True" 
+                         UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
+                </ComboBox.SelectedItem>
             </ComboBox>
             
 
@@ -90,7 +120,7 @@
                     <ColumnDefinition Width="15" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource ButtonAzulPlantilla}" Width="120" Content="Guardar" Name="btnGuardar" />
+                <Button Style="{StaticResource ButtonAzulPlantilla}" Width="120" Content="Guardar" Name="btnGuardar" Click="btnGuardar_Click" />
                 <Button Style="{StaticResource ButtonAzulPlantilla}" Width="120" Content="Cancelar" Name="btnCancelar" Grid.Column="2" Click="btnCancelar_Click" />
             </Grid>
 
@@ -102,9 +132,9 @@
                     <ColumnDefinition Width="15" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
-                <Button Style="{StaticResource ButtonRosaPlantilla}" Content="Nuevo" Name="btnNuevo" />
-                <Button Style="{StaticResource ButtonRosaPlantilla}" Content="Modificar" Name="btnModificar" Grid.Column="2" />
-                <Button Style="{StaticResource ButtonRosaPlantilla}" Content="Eliminar" Name="btnEliminar" Grid.Column="4" />
+                <Button Style="{StaticResource ButtonRosaPlantilla}" Content="Nuevo" Name="btnNuevo" Click="btnNuevo_Click" />
+                <Button Style="{StaticResource ButtonRosaPlantilla}" Content="Modificar" Name="btnModificar" Grid.Column="2" Click="btnModificar_Click" />
+                <Button Style="{StaticResource ButtonRosaPlantilla}" Content="Eliminar" Name="btnEliminar" Grid.Column="4" Click="btnEliminar_Click" />
             </Grid>
 
             <Grid Grid.Column="4" Grid.ColumnSpan="2" Grid.Row="5" Grid.RowSpan="12"  DataContext="{StaticResource listUsuarios}">

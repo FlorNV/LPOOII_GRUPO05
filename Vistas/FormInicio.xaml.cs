@@ -11,15 +11,22 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using Vistas.Views;
+using ClasesBase;
 
 namespace Vistas {
     /// <summary>
     /// Lógica de interacción para FormInicio.xaml
     /// </summary>
     public partial class FormInicio : Window {
-        public FormInicio() {
+        public FormInicio(Usuario userLog) {
             InitializeComponent();
+            textUsername.Text = userLog.Username;
+            textRol.Text = userLog.Rol;
             DataContext = new UserControlInicio();
+
+            if (userLog.Rol == "Vendedor") {
+                btnUsuarios.IsEnabled = false;
+            }
         }
 
         private void btnProductos_Click(object sender, RoutedEventArgs e) {
@@ -44,6 +51,19 @@ namespace Vistas {
 
         private void btnUsuarios_Click(object sender, RoutedEventArgs e) {
             DataContext = new UserControlUsuarios();
+        }
+
+        private void btnCerrarSesion_Click(object sender, RoutedEventArgs e) {
+            CerrarSesion();
+        }
+
+        private void CerrarSesion() {
+            var res = MessageBox.Show("¿Cerrar Sesión?", "Logout", MessageBoxButton.YesNo);
+            if (MessageBoxResult.Yes == res) {
+                FormLogin frm = new FormLogin();
+                frm.Show();
+                this.Close();
+            }
         }
     }
 }

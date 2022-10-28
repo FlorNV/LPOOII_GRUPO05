@@ -12,14 +12,29 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Data;
+using ClasesBase;
 
 namespace Vistas.Views {
     /// <summary>
     /// Lógica de interacción para UserControlUsuarios.xaml
     /// </summary>
     public partial class UserControlUsuarios : UserControl {
+
+        private bool editMode = false;
+
         public UserControlUsuarios() {
             InitializeComponent();
+
+            HabilitarBotonesInicio();
+            HabilitarDeshabilitarTextBox(false);
+        }
+
+        private void HabilitarBotonesInicio() {
+            btnCancelar.IsEnabled = false;
+            btnGuardar.IsEnabled = false;
+            btnModificar.IsEnabled = false;
+            btnEliminar.IsEnabled = false;
+            btnNuevo.IsEnabled = true;
         }
             
         private void habilitarEdicion(bool mode) {
@@ -45,24 +60,34 @@ namespace Vistas.Views {
             HabilitarBotonesGuardarCancelar(!b);
         }
 
+        private void HabilitarDeshabilitarTextBox(bool b) {
+            //txtCodigo.IsEnabled = b;
+            txtApellido.IsEnabled = b;
+            txtNombre.IsEnabled = b;
+            txtNombreUsuario.IsEnabled = b;
+            txtPassword.IsEnabled = b;
+        }
+
+        private void LimpiarCampos() {
+            //txtCodigo.Text = String.Empty;
+            txtPassword.Text = String.Empty;
+            txtNombreUsuario.Text = String.Empty;
+            txtNombre.Text = String.Empty;
+            txtLegajo.Text = String.Empty;
+            txtApellido.Text = String.Empty;
+
+            editMode = false;
+        }
+
         private void Usuarios_SelectionChanged(object sender, SelectionChangedEventArgs e) {
             DataRowView dataRowView = Usuarios.SelectedItem as DataRowView;
-            //MessageBox.Show(dataRowView.ToString());
             if (dataRowView != null) {
                 txtLegajo.Text = dataRowView[0].ToString();
                 txtApellido.Text = dataRowView[1].ToString();
                 txtNombre.Text = dataRowView[2].ToString();
-                cmbRoles.SelectedItem = dataRowView[3].ToString();
+                cmbRoles.SelectedValue = dataRowView[3].ToString();
                 txtNombreUsuario.Text = dataRowView[4].ToString();
                 txtPassword.Text = dataRowView[5].ToString();
-
-                // Inhabilitar los TextBox
-                /*
-                txtCategoria.IsEnabled = false;
-                txtColor.IsEnabled = false;
-                txtDescripcion.IsEnabled = false;
-                txtPrecio.IsEnabled = false;
-                 * */
 
                 HabilitarDeshabilitarBotones(true);
             }
@@ -72,7 +97,70 @@ namespace Vistas.Views {
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e) {
-            txtNombre.Text = cmbRoles.SelectedItem.ToString();
+            LimpiarCampos();
+            HabilitarBotonesInicio();
+            HabilitarDeshabilitarTextBox(false);
+        }
+
+        private void btnNuevo_Click(object sender, RoutedEventArgs e) {
+            LimpiarCampos();
+            HabilitarDeshabilitarTextBox(true);
+            HabilitarDeshabilitarBotones(false);
+        }
+
+        private void btnModificar_Click(object sender, RoutedEventArgs e) {
+            editMode = true;
+
+            habilitarEdicion(editMode);
+            HabilitarDeshabilitarBotones(false);
+        }
+
+        private void btnGuardar_Click(object sender, RoutedEventArgs e) {
+            if (cmbRoles.SelectedItem != null) {
+                MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea guardar este elemento?",
+                   "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
+
+                if (messageBoxResult == MessageBoxResult.Yes) {
+                    Usuario usr = new Usuario();
+                    usr.Apellido = txtApellido.Text;
+                    usr.Nombre = txtNombre.Text;
+                    usr.Username = txtNombreUsuario.Text;
+                    usr.Password = txtPassword.Text;
+                    usr.Rol = (cmbRoles.SelectedItem as String).Substring(38);
+                    if (editMode) {
+                        usr.Legajo = Convert.ToInt32(txtLegajo.Text);
+                        TrabajarUsuarios.ModificarUsuario(usr); ;
+                        MessageBox.Show("Usuario modificado", "Modificar");
+                    } else {
+                        TrabajarUsuarios.InsertarUsuario(usr);
+                        MessageBox.Show("Usuario guardado", "Guardar");
+                    }
+
+                    Usuarios.DataContext = TrabajarUsuarios.ObtenerUsuarios();
+
+                    HabilitarDeshabilitarTextBox(false);
+                    HabilitarBotonesInicio();
+
+                    LimpiarCampos();
+                }
+            } else {
+                MessageBox.Show("Seleccione un Rol", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
+        }
+
+        private void btnEliminar_Click(object sender, RoutedEventArgs e) {
+            if(!String.IsNullOrEmpty(txtLegajo.Text)) {
+                MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea eliminar este usuario?",
+                    "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                if (messageBoxResult == MessageBoxResult.Yes) {
+                    TrabajarUsuarios.EliminarUsuario(Convert.ToInt32(txtLegajo.Text));
+                    LimpiarCampos();
+
+                    HabilitarBotonesInicio();
+
+                    Usuarios.DataContext = TrabajarUsuarios.ObtenerUsuarios();
+                }
+            }
         }
         
 
