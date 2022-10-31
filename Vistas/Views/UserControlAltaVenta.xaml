@@ -1,0 +1,242 @@
+﻿<UserControl x:Class="Vistas.Views.UserControlAltaVenta"
+             xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+             xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+             xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" 
+             xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
+             mc:Ignorable="d" 
+             d:DesignHeight="530" d:DesignWidth="800" Background="Transparent"
+             xmlns:svc="clr-namespace:ClasesBase;assembly=ClasesBase">
+    <UserControl.Resources>
+        <svc:Venta x:Key="data"/>
+        <!-- Datos del cliente -->
+        <ObjectDataProvider 
+            ObjectType="{x:Type svc:TrabajarClientes}"
+            MethodName="obtenerClientes"
+            x:Key="listClientes"/>
+
+        <DataTemplate x:Key="LayoutClientes" >
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Text="{Binding Path=DNI}" />
+                <TextBlock Text=" - " />
+                <TextBlock Text="{Binding Path=Apellido}" FontWeight="Bold" />
+                <TextBlock Text=", " />
+                <TextBlock Text="{Binding Path=Nombre}" FontWeight="Bold" />
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- Datos del vendedor -->
+        <ObjectDataProvider 
+            ObjectType="{x:Type svc:TrabajarVendedores}"
+            MethodName="obtenerVendedoresCollection"
+            x:Key="listVendedores"/>
+
+        <DataTemplate x:Key="LayoutVendedores" >
+            <StackPanel Orientation="Horizontal" >
+                <TextBlock Text="{Binding Path=Legajo}" />
+                <TextBlock Text=" - " />
+                <TextBlock Text="{Binding Path=Apellido}" FontWeight="Bold" />
+                <TextBlock Text=", " />
+                <TextBlock Text="{Binding Path=Nombre}" FontWeight="Bold" />
+            </StackPanel>
+        </DataTemplate>
+
+        <!-- Datos de Productos -->
+        <ObjectDataProvider 
+            ObjectType="{x:Type svc:TrabajarProductos}"
+            MethodName="obtenerProductos"
+            x:Key="list_productos"/>
+
+        <ControlTemplate x:Key="TextBoxErrorTemplate">
+            <DockPanel>
+                <Ellipse DockPanel.Dock="Right" Margin="2,0" Width="10" Height="10">
+                    <Ellipse.Fill>
+                        <LinearGradientBrush>
+                            <GradientStop Color="#11FF1111" Offset="0" />
+                            <GradientStop Color="#FFFF0000" Offset="1" />
+                        </LinearGradientBrush>
+                    </Ellipse.Fill>
+                </Ellipse>
+                <AdornedElementPlaceholder />
+            </DockPanel>
+        </ControlTemplate>
+        <Style x:Key="EstiloError" TargetType="TextBox">
+            <Setter Property="Margin" Value="4,4,10,4" />
+            <Setter Property="Validation.ErrorTemplate" Value="{StaticResource TextBoxErrorTemplate}" />
+            <Style.Triggers>
+                <Trigger Property="Validation.HasError" Value="True">
+                    <Setter Property="ToolTip">
+                        <Setter.Value>
+                            <Binding Path="(Validation.Errors)[0].ErrorContent" RelativeSource="{x:Static RelativeSource.Self}" />
+                        </Setter.Value>
+                    </Setter>
+                </Trigger>
+            </Style.Triggers>
+        </Style>
+    </UserControl.Resources>
+    <Border CornerRadius="15">
+        
+        <Border.Background>
+            <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                <GradientStop Color="#060531" Offset="0" />
+                <GradientStop Color="#1b1448" Offset="0.75" />
+            </LinearGradientBrush>
+        </Border.Background>
+        <Grid>
+        <DockPanel>
+            <Label Content="Nueva Venta" Margin="0,10,0,0" FontSize="30" HorizontalAlignment="Center" Height="50" DockPanel.Dock="Top" Name="lblTitle" Foreground="White" />
+            <Grid DockPanel.Dock="Bottom" Height="400" Name="grid1" Width="750" >
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition />
+                    <ColumnDefinition />
+                </Grid.ColumnDefinitions>
+
+                <StackPanel Margin="10">
+                    <Grid>
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition Width="0.5*" />
+                            <ColumnDefinition Width="*" />
+                        </Grid.ColumnDefinitions>
+                        <Grid.RowDefinitions>
+                            <RowDefinition Height="30" />
+                            <RowDefinition Height="30" />
+                        </Grid.RowDefinitions>
+
+                        <Label Content="Fecha" Name="lblFechaVenta" Foreground="White" FontSize="14" />
+                        <DatePicker Grid.Column="1" Name="dtpFechaVenta" />
+                        <Label Grid.Column="1" Grid.Row="1" Content="Campo requerido" Visibility="Hidden" Name="lblErrorFechaVenta" Foreground="#FB539B" />
+                    </Grid>
+
+                    <GroupBox Header="Cliente" Name="gpbCliente" Width="300" Foreground="White" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="30" />
+                            </Grid.RowDefinitions>
+
+                            <Label Content="Seleccione" Name="lblSeleccioneCliente"  Foreground="White" FontSize="14" />
+                            <ComboBox Grid.Column="2"  HorizontalAlignment="Left"  Name="cmbClientes" VerticalAlignment="Center" Width="190" ItemsSource="{Binding Source={StaticResource listClientes}}" ItemTemplate="{DynamicResource LayoutClientes}" SelectedValue="{Binding ID, Mode=TwoWay}" SelectionChanged="cmbClientes_SelectionChanged" />
+
+                            <Label Content="DNI" Name="lblClienteDNI" Grid.Row="2" Foreground="White" FontSize="14" />
+                            <TextBox Style="{StaticResource TextBoxStyle}"  Grid.Row="2" Grid.Column="2" Name="txtClienteDNI" IsEnabled="False" />
+
+                            <Label Content="Nombre" Name="lblClienteNombreCompleto" Grid.Row="4" Foreground="White" FontSize="14" />
+                            <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="2" Name="txtClienteNombreCompleto" IsEnabled="False"/>
+                            <!--
+                            <Label Content="Nombre" Name="lblClienteNombre" Grid.Row="6" Foreground="White" />
+                            <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="2" Name="txtClienteNombre"/>
+                            -->
+                        </Grid>
+                    </GroupBox>
+
+                    <GroupBox Header="Vendedor" Name="gpbVendedor" Width="300" Foreground="White" Padding="5">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="0.5*" />
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="30" />
+                                <RowDefinition Height="10" />
+                                <RowDefinition Height="30" />
+                            </Grid.RowDefinitions>
+
+                            <Label Content="Seleccione" Name="lblVendedor"  Foreground="White" FontSize="14" />
+                            <ComboBox Grid.Column="2"  HorizontalAlignment="Left"  Name="cmbVendedores" VerticalAlignment="Center" Width="190" ItemsSource="{Binding Source={StaticResource listVendedores}}" ItemTemplate="{DynamicResource LayoutVendedores}" SelectedValue="{Binding ID, Mode=TwoWay}" SelectionChanged="cmbVendedores_SelectionChanged" />
+
+                            <Label Content="N° Legajo" Name="lblVendedorLegajo" Grid.Row="2" Foreground="White" FontSize="14" />
+                            <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="2" Name="txtVendedorLegajo" IsEnabled="False"/>
+
+                            <Label Content="Nombre" Name="lblVendedorNombreCompleto" Grid.Row="4" Foreground="White" FontSize="14" />
+                            <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="2" Name="txtVendedorNombreCompleto" IsEnabled="False"/>
+                        </Grid>
+                    </GroupBox>
+                </StackPanel>
+
+                <StackPanel Margin="10" Grid.Column="1">
+                    <GroupBox Header="Producto" Name="gpbProducto" Width="350" Foreground="White" Padding="5">
+                        <StackPanel DataContext="{StaticResource list_productos}">
+                            <ListView x:Name="Productos" Background="Transparent" ItemsSource="{Binding}" SelectionMode="Single" Height="150" SelectionChanged="Productos_SelectionChanged">
+                                <ListView.View>
+                                    <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}" ColumnHeaderTemplate="{StaticResource headerTemplate}">
+                                        <GridViewColumn Width="80" Header="Código" DisplayMemberBinding="{Binding Path=Prod_Codigo}" />
+                                        <GridViewColumn Width="100" Header="Categoría" DisplayMemberBinding="{Binding Path=Prod_Categoria}" />
+                                        <GridViewColumn Width="80" Header="Color" DisplayMemberBinding="{Binding Path=Prod_Color}" />
+                                        <GridViewColumn Width="140" Header="Descripción" DisplayMemberBinding="{Binding Path=Prod_Descripcion}" />
+                                        <GridViewColumn Width="80" Header="Precio" DisplayMemberBinding="{Binding Path=Prod_Precio}" />
+                                    </GridView>
+                                </ListView.View>
+                            </ListView>
+
+                            <Grid Margin="0,40,0,0">
+                                <Grid.ColumnDefinitions>
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="10" />
+                                    <ColumnDefinition Width="*" />
+                                    <ColumnDefinition Width="*" />
+                                </Grid.ColumnDefinitions>
+                                <Grid.RowDefinitions>
+                                    <RowDefinition Height="30" />
+                                    <RowDefinition Height="20" />
+                                    <RowDefinition Height="30" />
+                                </Grid.RowDefinitions>
+
+                                <Label Content="Código" Name="lblProductoCodigo" Foreground="White" FontSize="14" />
+                                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" Name="txtProductoCodigo" IsEnabled="False"/>
+
+                                <Label Content="Cantidad" Name="lblProductoCantidad" Grid.Column="3" Foreground="White" FontSize="14" />
+                                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="4" Name="txtProductoCantidad" >
+                                    <TextBox.Text>
+                                        <Binding Path="Cantidad" Source="{StaticResource data}"
+                                            ValidatesOnExceptions="True" 
+                                            UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
+                                    </TextBox.Text>
+                                </TextBox>
+
+                                <Label Content="Precio" Name="lblProductoPrecio" Grid.Row="2" Grid.Column="0" Foreground="White" FontSize="14" />
+                                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Name="txtProductoPrecio" IsEnabled="False"/>
+
+                                <Label Content="Total" Name="lblProductoTotal" Grid.Row="2" Grid.Column="3" Foreground="White" FontSize="14" />
+                                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="4" Name="txtProductoTotal" IsEnabled="False"/>
+                            </Grid>
+                        </StackPanel>
+                    </GroupBox>
+                    <!--
+                    <Grid Margin="0,30,0,0" Height="30">
+                        <Grid.ColumnDefinitions>
+                            <ColumnDefinition />
+                            <ColumnDefinition />
+                        </Grid.ColumnDefinitions>
+
+                        <Button Style="{StaticResource ButtonAzulPlantilla}" Content="Guardar" Name="btnGuardar" Click="btnGuardar_Click" />
+                        <Button Style="{StaticResource ButtonAzulPlantilla}" Content="Cancelar" Name="btnCancelar" Grid.Column="1" Click="btnCancelar_Click" />
+                    </Grid>
+                    -->
+                </StackPanel>
+            </Grid>
+        </DockPanel>
+
+            <Button Style="{StaticResource ButtonAzulPlantilla}" Content="Guardar" Name="btnGuardar" Click="btnGuardar_Click" Height="30" 
+                    Margin="0,0,230,20" 
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Right" />
+            <Button Style="{StaticResource ButtonAzulPlantilla}" Content="Cancelar" Name="btnCancelar" Grid.Column="1" Click="btnCancelar_Click" Height="30" 
+                    Margin="0,0,130,20" 
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Right" />
+            <Button Style="{StaticResource ButtonAmarillo}" Content="Atrás" Grid.Row="1" Height="30" 
+                    Margin="0,0,30,20" 
+                    VerticalAlignment="Bottom" 
+                    HorizontalAlignment="Right" Name="btnSalir" Click="btnSalir_Click" />
+        </Grid>
+    </Border>
+</UserControl>

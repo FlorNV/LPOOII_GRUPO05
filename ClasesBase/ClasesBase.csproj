@@ -71,6 +71,7 @@
     <Compile Include="Proveedor.cs" />
     <Compile Include="TrabajarClientes.cs" />
     <Compile Include="TrabajarProductos.cs" />
+    <Compile Include="TrabajarUsuarios.cs" />
     <Compile Include="TrabajarVendedores.cs" />
     <Compile Include="TrabajarVentas.cs" />
     <Compile Include="Usuario.cs" />

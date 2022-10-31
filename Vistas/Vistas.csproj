@@ -58,6 +58,9 @@
     <Compile Include="Comprobante.xaml.cs">
       <DependentUpon>Comprobante.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FormInicio.xaml.cs">
+      <DependentUpon>FormInicio.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FormListadoClientes.xaml.cs">
       <DependentUpon>FormListadoClientes.xaml</DependentUpon>
     </Compile>
@@ -67,11 +70,30 @@
     <Compile Include="ListaDeEstados.xaml.cs">
       <DependentUpon>ListaDeEstados.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Resources\ValidacionGenericaTextBox.cs" />
     <Compile Include="ValidarNumero.cs" />
     <Page Include="Comprobante.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Compile Include="Views\UserControlAltaVenta.xaml.cs">
+      <DependentUpon>UserControlAltaVenta.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControlClientes.xaml.cs">
+      <DependentUpon>UserControlClientes.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControlInicio.xaml.cs">
+      <DependentUpon>UserControlInicio.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControlProductos.xaml.cs">
+      <DependentUpon>UserControlProductos.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControlProveedores.xaml.cs">
+      <DependentUpon>UserControlProveedores.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Views\UserControlUsuarios.xaml.cs">
+      <DependentUpon>UserControlUsuarios.xaml</DependentUpon>
+    </Compile>
     <Compile Include="VistaPreviadeImpresion.xaml.cs">
       <DependentUpon>VistaPreviadeImpresion.xaml</DependentUpon>
     </Compile>
@@ -80,6 +102,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="ControlUsuarios\ControlUsuarioLogin.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FormInicio.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -168,6 +194,34 @@
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
+    <Page Include="ResourceDictionary\EstiloVentanas.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControlAltaVenta.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControlClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControlInicio.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControlProductos.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControlProveedores.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="Views\UserControlUsuarios.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="VistaPreviadeImpresion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -225,6 +279,28 @@
     <Resource Include="Estados.xml">
       <SubType>Designer</SubType>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\dollar-solid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\box-solid.png" />
+    <Resource Include="images\icons\chair-solid.png" />
+    <Resource Include="images\icons\house-solid.png" />
+    <Resource Include="images\icons\user-solid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\list-solid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\dash.png" />
+    <Resource Include="images\icons\x.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\right-from-bracket-solid.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="ResourceDictionary\Roles.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
