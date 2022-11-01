@@ -164,7 +164,7 @@ namespace Vistas
         }
 
         private void ActualizarDatos() {
-            grid_content.DataContext = TrabajarClientes.ObtenerClientesStatic();
+            grid_content.DataContext = TrabajarClientes.ObtenerClientes();
             Vista = (CollectionView)CollectionViewSource.GetDefaultView(grid_content.DataContext);
         }
 

@@ -34,14 +34,6 @@ namespace Vistas.Views {
             HabilitarDeshabilitarTextBox(false);
         }
 
-        private void HabilitarBotonesInicio() {
-            btnCancelar.IsEnabled = false;
-            btnGuardar.IsEnabled = false;
-            btnModificar.IsEnabled = false;
-            btnEliminar.IsEnabled = false;
-            btnNuevo.IsEnabled = true;
-        }
-
         private void btnNuevo_Click(object sender, RoutedEventArgs e) {
             LimpiarCampos();
             HabilitarDeshabilitarTextBox(true);
@@ -62,16 +54,16 @@ namespace Vistas.Views {
                     oCliente.Direccion = txtDireccion.Text;
 
                     if (editMode) {
-                        // Guardar los cambios del producto
+                        // Guardar los cambios del cliente
                         ClasesBase.TrabajarClientes.ModificarCliente(oCliente, Convert.ToInt32(txtID.Text));
                         MessageBox.Show("Cliente modificado", "Modificar");
                     } else {
-                        // Insertar el nuevo producto
+                        // Insertar el nuevo cliente
                         ClasesBase.TrabajarClientes.InsertarCliente(oCliente);
                         MessageBox.Show("Cliente guardado", "Guardar");
                     }
 
-                    //grid_content.DataContext = TrabajarClientes.ObtenerClientesStatic();
+                    //grid_content.DataContext = TrabajarClientes.ObtenerClientes();
 
                     ActualizarDatos();
 
@@ -96,12 +88,13 @@ namespace Vistas.Views {
             Content = new UserControlInicio();
         }
 
-        private void LimpiarCampos() {
-            txtDNI.Text = String.Empty;
-            txtApellido.Text = String.Empty;
-            txtNombre.Text = String.Empty;
-            txtDireccion.Text = String.Empty;
-            txtID.Text = String.Empty;
+        private void HabilitarBotonesInicio()
+        {
+            btnCancelar.IsEnabled = false;
+            btnGuardar.IsEnabled = false;
+            btnModificar.IsEnabled = true;
+            btnEliminar.IsEnabled = true;
+            btnNuevo.IsEnabled = true;
         }
 
         private void HabilitarDeshabilitarTextBox(bool b) {
@@ -115,6 +108,57 @@ namespace Vistas.Views {
             HabilitarBotonesABM(b);
             HabilitarBotonesGuardarCancelar(!b);
             HabilitarBotonesAnteriorSiguiente(b);
+        }
+        private void HabilitarBotonesABM(bool state)
+        {
+            btnNuevo.IsEnabled = state;
+            btnModificar.IsEnabled = state;
+            btnEliminar.IsEnabled = state;
+        }
+
+        private void HabilitarBotonesGuardarCancelar(bool state)
+        {
+            btnCancelar.IsEnabled = state;
+            btnGuardar.IsEnabled = state;
+        }
+        
+        private void HabilitarBotonesAnteriorSiguiente(bool state)
+        {
+            btnPrimero.IsEnabled = state;
+            btnAnterior.IsEnabled = state;
+            btnSiguiente.IsEnabled = state;
+            btnUltimo.IsEnabled = state;
+        }
+
+        private void OcultarID(bool state)
+        {
+            if (state)
+            {
+                lblID.Visibility = Visibility.Hidden;
+                txtID.Visibility = Visibility.Hidden;
+            }
+            else
+            {
+                lblID.Visibility = Visibility.Visible;
+                txtID.Visibility = Visibility.Visible;
+            }
+        }
+
+        private void LimpiarCampos()
+        {
+            txtDNI.Text = String.Empty;
+            txtApellido.Text = String.Empty;
+            txtNombre.Text = String.Empty;
+            txtDireccion.Text = String.Empty;
+            txtID.Text = String.Empty;
+        }
+
+        private void habilitarEdicion(bool mode)
+        {
+            txtDNI.IsEnabled = mode;
+            txtNombre.IsEnabled = mode;
+            txtApellido.IsEnabled = mode;
+            txtDireccion.IsEnabled = mode;
         }
 
         private bool ValidarTextBox() {
@@ -158,7 +202,7 @@ namespace Vistas.Views {
         }
 
         private void ActualizarDatos() {
-            grid_content.DataContext = TrabajarClientes.ObtenerClientesStatic();
+            grid_content.DataContext = TrabajarClientes.ObtenerClientes();
             Vista = (CollectionView)CollectionViewSource.GetDefaultView(grid_content.DataContext);
         }
 
@@ -184,46 +228,12 @@ namespace Vistas.Views {
             }
         }
 
-        private void HabilitarBotonesGuardarCancelar(bool state) {
-            btnCancelar.IsEnabled = state;
-            btnGuardar.IsEnabled = state;
-        }
-
-        private void HabilitarBotonesABM(bool state) {
-            btnNuevo.IsEnabled = state;
-            btnModificar.IsEnabled = state;
-            btnEliminar.IsEnabled = state;
-        }
-
-        private void HabilitarBotonesAnteriorSiguiente(bool state) {
-            btnPrimero.IsEnabled = state;
-            btnAnterior.IsEnabled = state;
-            btnSiguiente.IsEnabled = state;
-            btnUltimo.IsEnabled = state;
-        }
-
-        private void habilitarEdicion(bool mode) {
-            txtDNI.IsEnabled = mode;
-            txtNombre.IsEnabled = mode;
-            txtApellido.IsEnabled = mode;
-            txtDireccion.IsEnabled = mode;
-        }
-
         private void btnModificar_Click(object sender, RoutedEventArgs e) {
             editMode = true;
 
             habilitarEdicion(editMode);
             HabilitarDeshabilitarBotones(false);
-        }
-
-        private void OcultarID(bool state) {
-            if (state) {
-                lblID.Visibility = Visibility.Hidden;
-                txtID.Visibility = Visibility.Hidden;
-            } else {
-                lblID.Visibility = Visibility.Visible;
-                txtID.Visibility = Visibility.Visible;
-            }
+            ActualizarDatos();
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e) {

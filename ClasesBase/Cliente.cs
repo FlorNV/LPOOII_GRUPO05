@@ -10,9 +10,11 @@ namespace ClasesBase
     {
         private int id;
 
-        public int ID {
+        public int ID
+        {
             get { return id; }
-            set {
+            set
+            {
                 id = value;
                 Notificador("ID");
             }

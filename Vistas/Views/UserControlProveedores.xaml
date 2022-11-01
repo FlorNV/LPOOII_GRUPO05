@@ -5,7 +5,21 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="530" d:DesignWidth="800" Background="Transparent"
-             xmlns:svc="clr-namespace:ClasesBase;assembly=ClasesBase">
+             xmlns:svc="clr-namespace:ClasesBase;assembly=ClasesBase"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase">
+    <UserControl.Resources>
+        <ObjectDataProvider x:Key="list_proveedores" 
+                            ObjectType="{x:Type svc:TrabajarProveedores}" 
+                            MethodName="ObtenerProveedores" />
+        <!-- Se define la vista de la coleccion -->
+        <CollectionViewSource
+            x:Key="ListaProveedores"
+            Source="{StaticResource ResourceKey=list_proveedores}"
+            Filter="eventVistaProveedor_Filter">
+            <!--Es El evento filtrado-->
+        </CollectionViewSource>
+    </UserControl.Resources>
+
     <Border CornerRadius="15">
         <Border.Background>
             <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
@@ -15,28 +29,39 @@
         </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="30" />
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
+            <Label Content="Gestión de Proveedores" FontSize="30" HorizontalAlignment="Center" Height="50" Name="lblTitle" Foreground="White" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
                 <Button Style="{StaticResource ButtonRosa}" Content="Nuevo" Name="btnNuevo" Click="btnNuevo_Click" />
-                <Button Style="{StaticResource ButtonRosa}" Content="Modificar" Name="btnModificar" />
-                <Button Style="{StaticResource ButtonRosa}" Content="Eliminar" Name="btnEliminar" Margin="0,0,25,0" />
+                <Button Style="{StaticResource ButtonRosa}" Content="Modificar" Name="btnModificar" Click="btnModificar_Click" />
+                <Button Style="{StaticResource ButtonRosa}" Content="Eliminar" Name="btnEliminar" Margin="0,0,25,0" Click="btnEliminar_Click" />
                 <Button Style="{StaticResource ButtonAzul}" Content="Guardar" Name="btnGuardar" Click="btnGuardar_Click" />
                 <Button Style="{StaticResource ButtonAzul}" Content="Cancelar" Name="btnCancelar" Click="btnCancelar_Click" Margin="0,0,25,0" />
-                <Button Style="{StaticResource ButtonVerde}" Content="Primero" Name="btnPrimero" />
-                <Button Style="{StaticResource ButtonVerde}" Content="Anterior" Name="btnAnterior" />
-                <Button Style="{StaticResource ButtonVerde}" Content="Siguiente" Name="btnSiguiente" />
-                <Button Style="{StaticResource ButtonVerde}" Content="Último" Name="btnUltimo" Margin="0" />
+                <Button Style="{StaticResource ButtonVerde}" Name="btnPrimero" Click="btnPrimero_Click">
+                    <Image Source="/images/icons/first.png" />
+                </Button>
+                <Button Style="{StaticResource ButtonVerde}" Name="btnAnterior" Click="btnAnterior_Click">
+                    <Image Source="/images/icons/previous.png" />
+                </Button>
+                <Button Style="{StaticResource ButtonVerde}" Name="btnSiguiente" Click="btnSiguiente_Click">
+                    <Image Source="/images/icons/next.png" />
+                </Button>
+                <Button Style="{StaticResource ButtonVerde}" Name="btnUltimo" Margin="0" Click="btnUltimo_Click">
+                    <Image Source="/images/icons/last.png" />
+                </Button>
             </StackPanel>
-            <Grid Grid.Row="1" >
+            <Grid Grid.Row="2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="350" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
 
-                <Grid  Width="300" Margin="30,50" HorizontalAlignment="Left" Grid.Row="1">
+                <Grid Width="300" Margin="30,50,10,50" HorizontalAlignment="Left" Grid.Row="1" 
+                      Name="grid_content" DataContext="{Binding Source={StaticResource ResourceKey=ListaProveedores}}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
                         <ColumnDefinition Width="*" />
@@ -50,32 +75,61 @@
                         <RowDefinition Height="30" />
                         <RowDefinition Height="30" />
                         <RowDefinition Height="30" />
+                        <RowDefinition Height="30" />
                     </Grid.RowDefinitions>
                     <Label Content="CUIT" Name="lblCUIT" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" Name="txtCUIT"/>
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" Name="txtCUIT" Text="{Binding CUIT}"/>
                     <Label Grid.Column="1" Grid.Row="1" Content="Campo requerido" Visibility="Hidden" Name="lblErrorCUIT" Foreground="#FB539B" />
 
                     <Label Grid.Row="2" Content="Razon Social" Name="lblApellido" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Name="txtRazonSocial" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Name="txtRazonSocial" Text="{Binding RazonSocial}" />
                     <Label Grid.Column="1" Grid.Row="3" Content="Campo requerido" Visibility="Hidden" Name="lblErrorRazonSocial" Foreground="#FB539B" />
 
                     <Label Grid.Row="4" Content="Domicilio" Name="lblDomicilio" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" Name="txtDomicilio" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" Name="txtDomicilio" Text="{Binding Domicilio}" />
                     <Label Grid.Column="1" Grid.Row="5" Content="Campo requerido" Visibility="Hidden" Name="lblErrorDomicilio" Foreground="#FB539B" />
 
                     <Label Grid.Row="6" Content="Teléfono" Name="lblTelefono" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtTelefono" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtTelefono" Text="{Binding Telefono}" />
                     <Label Grid.Column="1" Grid.Row="7" Content="Campo requerido" Visibility="Hidden" Name="lblErrorTelefono" Foreground="#FB539B" />
 
+                    <Label Grid.Row="8" Content="ID" Name="lblID" Foreground="White" FontSize="14" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="8" Grid.Column="1" Name="txtID" Text="{Binding ID}" IsEnabled="False" />
+
                 </Grid>
 
-                <Grid Width="400" Height="350" Margin="0,50,30,0" Grid.Column="1" VerticalAlignment="Top">
-                    
+                <Grid Width="400" Height="300" Margin="0,50,30,0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <!-- Stack Panel del Filtrado -->
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Name="stackPanel1" VerticalAlignment="Top" Width="400">
+                        <Label Content="Buscar por Razon Social:" Height="28" Name="label11" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Foreground="#fff" />
+                        <TextBox Style="{StaticResource TextBoxStyle}" Name="txtConsulta" Width="150" HorizontalContentAlignment="Left" Margin="10" TextChanged="txtConsulta_TextChanged" />
+                    </StackPanel>
+                    <!-- Grilla de proveedores -->
+                    <Grid Width="400" Height="300" Grid.Row="1" VerticalAlignment="Top" DataContext="{StaticResource ListaProveedores}">
+                        <ListView x:Name="Proveedores" Background="Transparent" ItemsSource="{Binding}" 
+                                SelectionMode="Single" SelectionChanged="Proveedores_SelectionChanged">
+                            <ListView.View>
+                                <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}"
+                                          ColumnHeaderTemplate="{StaticResource headerTemplate}">
+                                    <GridViewColumn Width="40" Header="ID" DisplayMemberBinding="{Binding ID}" />
+                                    <GridViewColumn Width="100" Header="CUIT" DisplayMemberBinding="{Binding CUIT}" />
+                                    <GridViewColumn Width="200" Header="Razon Social" DisplayMemberBinding="{Binding RazonSocial}" />
+                                    <GridViewColumn Width="200" Header="Domicilio" DisplayMemberBinding="{Binding Domicilio}" />
+                                    <GridViewColumn Width="100" Header="Teléfono" DisplayMemberBinding="{Binding Telefono}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
                 </Grid>
+                
             </Grid>
             <Button Style="{StaticResource ButtonAmarilloPlantilla}" 
                     Content="Atrás" 
-                    Grid.Row="1" 
+                    Grid.Row="2" 
                     Height="30" 
                     Margin="0,0,30,20" 
                     VerticalAlignment="Bottom" 

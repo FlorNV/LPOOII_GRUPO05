@@ -1,6 +1,6 @@
 ﻿<ResourceDictionary xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
                     xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml">
-    
+
     <!-- ESTILOS -->
     <Style x:Key="ButtonStyle" TargetType="{x:Type Button}">
         <Setter Property="OverridesDefaultStyle" Value="True" />
@@ -91,6 +91,7 @@
 
     <Style x:Key="ButtonVerde" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonAnimationTrigger}">
         <Setter Property="Background" Value="#07F3C0" />
+        <Setter Property="Width" Value="30" />
     </Style>
 
     <Style x:Key="ButtonAmarillo" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonAnimationTrigger}">
@@ -167,7 +168,8 @@
     <Style x:Key="ButtonAmarilloPlantilla" TargetType="{x:Type Button}" BasedOn="{StaticResource ButtonAnimationTrigger}">
         <Setter Property="Background" Value="#FFC047" />
     </Style>
-    
+
+
     <!-- Estilo Botones DataError -->
     <ControlTemplate x:Key="TextBoxErrorTemplate">
         <DockPanel>
@@ -184,5 +186,7 @@
             </Trigger>
         </Style.Triggers>
     </Style>
+    
+    
 
 </ResourceDictionary>
