@@ -55,6 +55,9 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="AcercaDe.xaml.cs">
+      <DependentUpon>AcercaDe.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Comprobante.xaml.cs">
       <DependentUpon>Comprobante.xaml</DependentUpon>
     </Compile>
@@ -72,6 +75,10 @@
     </Compile>
     <Compile Include="Resources\ValidacionGenericaTextBox.cs" />
     <Compile Include="ValidarNumero.cs" />
+    <Page Include="AcercaDe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Comprobante.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -301,6 +308,12 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ResourceDictionary\Roles.xml" />
+    <Resource Include="media\Wildlife.wmv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\pause_icon_white.png" />
+    <Resource Include="images\play_icon_white.png" />
+    <Resource Include="images\stop_icon_white.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

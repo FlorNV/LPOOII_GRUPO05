@@ -1,0 +1,62 @@
+﻿<Window x:Class="Vistas.AcercaDe"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        Title="AcercaDe" Height="350" Width="500" Loaded="Window_Loaded" WindowStartupLocation="CenterScreen">
+
+    <StackPanel>
+        <StackPanel.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#060531" Offset="0" />
+                    <GradientStop Color="#1b1448" Offset="0.75" />
+                </LinearGradientBrush>
+        </StackPanel.Background>
+
+        <!-- Video -->
+        <StackPanel VerticalAlignment="Top">
+            <MediaElement Name="video" 
+                          Height="240" 
+                          Stretch="UniformToFill" 
+                          MediaOpened="video_MediaOpened" 
+                          MediaEnded="video_MediaEnded" />
+        </StackPanel>
+
+        <!-- Slider del reproductor -->
+        <StackPanel>
+            <Slider Name="sldVideo" 
+                    MouseLeftButtonUp="sldVideo_MouseLeftButtonUp" 
+                    Thumb.DragCompleted="sldVideo_DragCompleted" 
+                    Thumb.DragStarted="sldVideo_DragStarted"
+                    Style="{StaticResource CustomSlider}" />
+        </StackPanel>
+        
+        <!-- Botones del reproductor -->
+        <StackPanel Orientation="Horizontal" Height="50" VerticalAlignment="Bottom" HorizontalAlignment="Center">
+
+            <!-- Boton Play -->
+            <Button Name="btnPlay" 
+                    Width="30" Height="30" 
+                    Margin="0,0,6,0" 
+                    Click="btnPlay_Click" 
+                    Style="{StaticResource ButtonAzulPlantilla}">
+                <Image HorizontalAlignment="Center" Source="/images/play_icon_white.png" Margin="2" />
+            </Button>
+
+            <!-- Botone Pause -->
+            <Button Name="btnPause" 
+                    Width="30" Height="30" 
+                    Margin="0,0,6,0" 
+                    Click="btnPause_Click" 
+                    Style="{StaticResource ButtonAzulPlantilla}">
+                <Image HorizontalAlignment="Center" Source="/images/pause_icon_white.png" />
+            </Button>
+
+            <!-- Boton Stop -->
+            <Button Name="btnStop" 
+                    Width="30" Height="30" 
+                    Click="btnStop_Click" 
+                    Style="{StaticResource ButtonAzulPlantilla}">
+                <Image HorizontalAlignment="Center" Source="/images/stop_icon_white.png" Margin="4" />
+            </Button>
+        </StackPanel>
+    </StackPanel>
+</Window>
