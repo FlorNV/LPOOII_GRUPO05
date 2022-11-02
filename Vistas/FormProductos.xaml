@@ -110,7 +110,7 @@
                     </TextBox.Text>
                 </TextBox>
 
-                <Label Grid.Row="6" Content="Precio" Name="label5" Foreground="White" FontSize="14" />
+                <Label Grid.Row="6" Content="Precioo" Name="label5" Foreground="White" FontSize="14" />
                 <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtPrecio" >
                     <TextBox.Text>
                         <Binding Path="Precio" Source="{StaticResource data}"
@@ -118,6 +118,7 @@
                          UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
                     </TextBox.Text>
                 </TextBox>
+
             </Grid>
 
             <Grid Width="400" Height="240" Margin="20" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" DataContext="{StaticResource list_productos}">
