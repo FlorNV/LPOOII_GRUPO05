@@ -170,6 +170,8 @@ namespace Vistas.Views {
                         MessageBox.Show("Producto guardado", "Guardar");
                     }
 
+                    MessageBox.Show(oProducto.Imagen);
+
                     Productos.DataContext = TrabajarProductos.obtenerProductos();
 
                     HabilitarDeshabilitarTextBox(false);

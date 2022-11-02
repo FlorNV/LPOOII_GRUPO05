@@ -77,7 +77,7 @@ namespace ClasesBase
             SqlConnection cnn = new SqlConnection(ClasesBase.Properties.Settings.Default.muebleriaConnectionString);
 
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "UPDATE Producto SET Prod_Categoria = @categoria, Prod_Color = @color, Prod_Descripcion = @descripcion, Prod_Precio = @precio, @imagen = Prod_Imagen WHERE Prod_Codigo = @cod";
+            cmd.CommandText = "UPDATE Producto SET Prod_Categoria = @categoria, Prod_Color = @color, Prod_Descripcion = @descripcion, Prod_Precio = @precio, Prod_Imagen = @imagen WHERE Prod_Codigo = @cod";
             cmd.CommandType = CommandType.Text;
             cmd.Connection = cnn;
 
