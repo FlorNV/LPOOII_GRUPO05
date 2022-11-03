@@ -37,13 +37,15 @@
                     <RowDefinition Height="30"/>
                     <RowDefinition/>
                 </Grid.RowDefinitions>
+
                 
                 <miControl:ControlUsuarioBtnMinCerrar x:Name="MiControlUsuarioLogin1" TitleText="Login" Grid.ColumnSpan="2" />
                 <StackPanel Grid.Row="1" Grid.ColumnSpan="2">
+
                     <Image Source="/images/logo2.jpg"
                            Width="250" Height="160"
                            Margin="0,30,0,0"/>
-                    <miControl:ControlUsuarioLogin x:Name="MiControlUsuarioLogin2"/>
+                    <miControl:ControlUsuarioLogin x:Name="MiControlUsuarioLogin2" />
                 </StackPanel>
             </Grid>
         </Border>

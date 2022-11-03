@@ -67,6 +67,9 @@
     <Compile Include="FormListadoClientes.xaml.cs">
       <DependentUpon>FormListadoClientes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FormPresentacion.xaml.cs">
+      <DependentUpon>FormPresentacion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FormVentas.xaml.cs">
       <DependentUpon>FormVentas.xaml</DependentUpon>
     </Compile>
@@ -117,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FormListadoClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FormPresentacion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -288,6 +295,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\equalizer.PNG" />
     <Resource Include="images\icons\dollar-solid.png" />
   </ItemGroup>
   <ItemGroup>

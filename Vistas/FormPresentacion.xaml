@@ -1,0 +1,107 @@
+﻿<Window x:Class="Vistas.FormPresentacion"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+         xmlns:miControl="clr-namespace:Vistas"
+        Title="Reproductor" Height="400" Width="600" WindowStartupLocation="CenterScreen"
+        WindowStyle="None" ResizeMode="NoResize" MouseDown="Window_MouseDown"
+        Background="Transparent" AllowsTransparency="True">
+   
+    <Border CornerRadius="12">
+        <Border.Background>
+            <ImageBrush ImageSource="/images/equalizer.PNG" Stretch="Fill"/>
+        </Border.Background>
+        <Border CornerRadius="10"
+                BorderThickness="3"
+                Opacity="0.85">
+            <Border.BorderBrush>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,1">
+                    <GradientStop Color="#462AD8" Offset="0"/>
+                    <GradientStop Color="#DA34AE" Offset="0.75"/>
+                    <GradientStop Color="#8A16C1" Offset="1"/>
+                </LinearGradientBrush>
+            </Border.BorderBrush>
+            <Border.Background>
+                <LinearGradientBrush StartPoint="0,1" EndPoint="1,0">
+                    <GradientStop Color="#87106A" Offset="0"/>
+                    <GradientStop Color="#1B1448" Offset="0.5"/>
+                </LinearGradientBrush>
+            </Border.Background>
+
+            <Grid>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="30"/>
+                    <RowDefinition />
+                    <RowDefinition Height="60"/>
+                </Grid.RowDefinitions>
+                <miControl:ControlUsuarioBtnMinCerrar TitleText="REPRODUCTOR" x:Name="MiControlUsuarioLogin1"/>
+                <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Stretch">
+                    <MediaElement Height="1" Name="myAudio" Width="220" DataContext="{Binding}" />
+                    <Button Content="Cargar Cancion" Height="50" Name="btnLoadSong" Width="155"  Foreground="White" FontSize="14" Click="btnLoadSong_Click" Margin="10,30,10,10">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#462AD8" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#28AEED" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" Height="40" CornerRadius="20" Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                    <Label BorderBrush="Gray" Height="34" Name="lblPathSong" Width="484" Foreground="White" Margin="10" HorizontalContentAlignment="Center" VerticalContentAlignment="Center" BorderThickness="1" />
+                    <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="10">
+                        <Button Height="50" Width="50" Name="btnPlay" Click="btnPlay_Click" Margin="20">
+                            <StackPanel>
+                                <Polygon Points="0,0 0,26 17,13" Fill="Black" HorizontalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                        <Button Height="50" Width="50" Name="btnPausa"  Click="btnPausa_Click" Margin="20">
+                            <StackPanel>
+                                <StackPanel Orientation="Horizontal" HorizontalAlignment="Center">
+                                    <Polygon Points="0,0 0,20 6,20 6,0" Fill="Black" Margin="3" />
+                                    <Polygon Points="0,0 0,20 6,20 6,0" Fill="Black" Margin="3" />
+                                </StackPanel>
+                            </StackPanel>
+                        </Button>
+                        <Button Height="50" Width="50" Name="btnStop"  Click="btnStop_Click" Margin="20" VerticalAlignment="Stretch">
+                            <StackPanel HorizontalAlignment="Center" VerticalAlignment="Center">
+                                <Polygon Points="0,0 0,17 17,17 17,0" Fill="Black" HorizontalAlignment="Center" />
+                            </StackPanel>
+                        </Button>
+                    </StackPanel>
+                </StackPanel>
+                <StackPanel Grid.Row="2">
+                    <Button Grid.Row="2" x:Name="btnLogin" BorderThickness="0" Content="Ir al Login" Foreground="White" FontSize="14" FontFamily="Montserrat" Cursor="Hand" Click="btnLogin_Click">
+                        <Button.Style>
+                            <Style TargetType="Button">
+                                <Setter Property="Background" Value="#462AD8" />
+                                <Style.Triggers>
+                                    <Trigger Property="IsMouseOver" Value="True">
+                                        <Setter Property="Background" Value="#28AEED" />
+                                    </Trigger>
+                                </Style.Triggers>
+                            </Style>
+                        </Button.Style>
+                        <Button.Template>
+                            <ControlTemplate TargetType="Button">
+                                <Border Width="150" Height="40" CornerRadius="20" Background="{TemplateBinding Background}">
+                                    <ContentPresenter VerticalAlignment="Center" HorizontalAlignment="Center" />
+                                </Border>
+                            </ControlTemplate>
+                        </Button.Template>
+                    </Button>
+                </StackPanel>
+            </Grid>
+        </Border>
+    </Border>
+
+
+    
+</Window>
