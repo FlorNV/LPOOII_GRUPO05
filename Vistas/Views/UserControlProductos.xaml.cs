@@ -11,9 +11,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-
 using System.Collections.ObjectModel;
 using System.Data;
+using Microsoft.Win32;
 using ClasesBase;
 
 namespace Vistas.Views {
@@ -24,6 +24,7 @@ namespace Vistas.Views {
 
         private bool editMode = false;
         private string codigo = "";
+        private string imgProductoRuta = "";
 
         public UserControlProductos() {
             InitializeComponent();
@@ -37,6 +38,7 @@ namespace Vistas.Views {
             btnGuardar.IsEnabled = false;
             btnModificar.IsEnabled = false;
             btnEliminar.IsEnabled = false;
+            btnCargarImg.IsEnabled = false;
             btnNuevo.IsEnabled = true;
         }
 
@@ -56,6 +58,8 @@ namespace Vistas.Views {
             txtColor.Text = String.Empty;
             txtDescripcion.Text = String.Empty;
             txtPrecio.Text = "0";
+            imgProducto.Source = null;
+            imgProductoRuta = "";
 
             editMode = false;
         }
@@ -91,6 +95,35 @@ namespace Vistas.Views {
             HabilitarDeshabilitarTextBox(false);
         }
 
+        // Cargar una imagen
+        private void btnCargarImg_Click(object sender, RoutedEventArgs e)
+        {
+            OpenFileDialog ofd = new OpenFileDialog();
+            ofd.Filter = "Archivos de imagen (.jpg)|*.jpg|All Files (*.*)|*.*";
+            ofd.FilterIndex = 1;
+            ofd.Multiselect = false;
+
+            if (ofd.ShowDialog() == true)
+            {
+                try
+                {
+                    BitmapImage img = new BitmapImage();
+                    img.BeginInit();
+                    img.UriSource = new Uri(ofd.FileName);
+                    img.EndInit();
+                    img.Freeze();
+
+                    imgProducto.Source = img;
+                    imgProductoRuta = ofd.FileName;
+                }
+                catch(Exception err)
+                {
+                    MessageBox.Show("Error al cargar una imagen", "Error");
+                }
+            }
+        }
+
+
         // Guardar producto
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
         {
@@ -114,23 +147,30 @@ namespace Vistas.Views {
 
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
+
+
                     Producto oProducto = new Producto();
                     oProducto.Categoria = txtCategoria.Text;
                     oProducto.Color = txtColor.Text;
                     oProducto.Descripcion = txtDescripcion.Text;
                     oProducto.Precio = precio;
 
-                    // TODO: Manejo de errores
-                    // TODO: Validar que un producto no tenga el mismo codigo
-                    if (editMode) {
+                    oProducto.Imagen = imgProductoRuta;
+
+                    if (editMode)
+                    {
                         // Guardar los cambios del producto
                         ClasesBase.TrabajarProductos.ModificarProducto(oProducto, codigo);
                         MessageBox.Show("Producto modificado", "Modificar");
-                    } else {
+                    }
+                    else
+                    {
                         // Insertar el nuevo producto
                         ClasesBase.TrabajarProductos.InsertarProducto(oProducto);
                         MessageBox.Show("Producto guardado", "Guardar");
                     }
+
+                    MessageBox.Show(oProducto.Imagen);
 
                     Productos.DataContext = TrabajarProductos.obtenerProductos();
 
@@ -200,6 +240,25 @@ namespace Vistas.Views {
                 txtDescripcion.Text = oProducto.Descripcion;
                 txtPrecio.Text = oProducto.Precio.ToString();
 
+
+                // Cargar imagen
+                if (oProducto.Imagen == "" || oProducto.Imagen == null)
+                {
+                    imgProducto.Source = null;
+                    imgProductoRuta = "";
+                }
+                else
+                {
+                    BitmapImage img = new BitmapImage();
+                    img.BeginInit();
+                    img.UriSource = new Uri(oProducto.Imagen);
+                    img.EndInit();
+                    img.Freeze();
+
+                    imgProducto.Source = img;
+                    imgProductoRuta = oProducto.Imagen;
+                }
+
                 // Inhabilitar los TextBox
                 txtCategoria.IsEnabled = false;
                 txtColor.IsEnabled = false;
@@ -234,6 +293,7 @@ namespace Vistas.Views {
         private void HabilitarBotonesGuardarCancelar(bool state) {
             btnCancelar.IsEnabled = state;
             btnGuardar.IsEnabled = state;
+            btnCargarImg.IsEnabled = state;
         }
 
         private void HabilitarBotonesABM(bool state) {
