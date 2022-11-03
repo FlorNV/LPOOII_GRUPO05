@@ -53,24 +53,32 @@
             </Grid>
             <!-- Boton Vista previa -->
             <Button Style="{StaticResource ButtonAzulPlantilla}" 
-                    Content="Vista previa" 
                     Grid.Row="1" 
                     Height="30" 
                     Margin="0,0,100,10" 
                     VerticalAlignment="Bottom" 
                     HorizontalAlignment="Right" 
                     Name="btnVistaPrevia"
-                    Click="btnVistaPrevia_Click"/>
+                    Click="btnVistaPrevia_Click" Width="123" ToolTip="Vista Previa de Impresion">
+                <StackPanel Height="29" Width="112" Orientation="Horizontal">
+                    <Image Source="/Vistas;component/images/icons/vista-previa.png" Height="17" Width="27" />
+                    <TextBlock Height="19" Width="80">Vista Previa</TextBlock>
+                </StackPanel>
+            </Button>
             <!-- Boton para salir de la ventana -->
             <Button Style="{StaticResource ButtonAmarilloPlantilla}" 
-                    Content="Salir" 
                     Grid.Row="1" 
                     Height="30" 
                     Margin="0,0,10,10" 
                     VerticalAlignment="Bottom" 
                     HorizontalAlignment="Right" 
                     Name="btnSalir" 
-                    Click="btnSalir_Click" />
+                    Click="btnSalir_Click" >
+                <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                    <Image Source="/Vistas;component/images/icons/atras.png" Height="17" Width="27" />
+                    <TextBlock Height="19" Width="54">Salir</TextBlock>
+                </StackPanel>
+            </Button>
             <!-- Stack Panel del Filtrado -->
             <StackPanel Height="77" HorizontalAlignment="Left" Margin="212,6,0,0" Name="stackPanel1" VerticalAlignment="Top" Width="232" Grid.RowSpan="2">
                 <Label Content="Filtrado por Apellido:" Height="28" Name="label1" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Background="#FF78A3FC" />
