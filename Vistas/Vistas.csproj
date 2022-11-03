@@ -61,6 +61,9 @@
     <Compile Include="FormListadoClientes.xaml.cs">
       <DependentUpon>FormListadoClientes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FormPresentacion.xaml.cs">
+      <DependentUpon>FormPresentacion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FormVentas.xaml.cs">
       <DependentUpon>FormVentas.xaml</DependentUpon>
     </Compile>
@@ -84,6 +87,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FormListadoClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FormPresentacion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -225,6 +232,9 @@
     <Resource Include="Estados.xml">
       <SubType>Designer</SubType>
     </Resource>
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\equalizer.PNG" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

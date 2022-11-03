@@ -12,13 +12,13 @@
             <ColumnDefinition Width="25"/>
             <ColumnDefinition Width="5"/>
         </Grid.ColumnDefinitions>
-        <TextBlock Text="LOGIN"
+        <TextBlock Text=""
                                Foreground="DarkGray"
                                FontSize="12"
                                FontFamily="Arial"
                                Grid.Column="0"
                                VerticalAlignment="Center"
-                               Margin="10,0,0,0"/>
+                               Margin="10,0,0,0" Name="tbNombre" />
         <Button Name="btnMinimizar"
                             BorderThickness="0"
                             Content="-"

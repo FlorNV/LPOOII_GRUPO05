@@ -19,6 +19,12 @@ namespace Vistas
     /// </summary>
     public partial class ControlUsuarioBtnMinCerrar : UserControl
     {
+        public string WindowsName 
+        {
+            get { return tbNombre.Text; }
+            set { tbNombre.Text = value; } 
+        }
+
         public ControlUsuarioBtnMinCerrar()
         {
             InitializeComponent();
