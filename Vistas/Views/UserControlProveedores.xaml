@@ -19,15 +19,60 @@
                 <RowDefinition/>
             </Grid.RowDefinitions>
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-                <Button Style="{StaticResource ButtonRosa}" Content="Nuevo" Name="btnNuevo" Click="btnNuevo_Click" />
-                <Button Style="{StaticResource ButtonRosa}" Content="Modificar" Name="btnModificar" />
-                <Button Style="{StaticResource ButtonRosa}" Content="Eliminar" Name="btnEliminar" Margin="0,0,25,0" />
-                <Button Style="{StaticResource ButtonAzul}" Content="Guardar" Name="btnGuardar" Click="btnGuardar_Click" />
-                <Button Style="{StaticResource ButtonAzul}" Content="Cancelar" Name="btnCancelar" Click="btnCancelar_Click" Margin="0,0,25,0" />
-                <Button Style="{StaticResource ButtonVerde}" Content="Primero" Name="btnPrimero" />
-                <Button Style="{StaticResource ButtonVerde}" Content="Anterior" Name="btnAnterior" />
-                <Button Style="{StaticResource ButtonVerde}" Content="Siguiente" Name="btnSiguiente" />
-                <Button Style="{StaticResource ButtonVerde}" Content="Último" Name="btnUltimo" Margin="0" />
+               <Button Style="{StaticResource ButtonRosa}" Name="btnNuevo" Click="btnNuevo_Click" ToolTip="Nuevo Proveedor">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/nuevo.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="54">Nuevo</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonRosa}" Name="btnModificar" Width="89" ToolTip="Modificar Proveedor">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/editar.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="60">Modificar</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonRosa}" Name="btnEliminar" Margin="0,0,25,0" ToolTip="Eliminar Proveedor">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/eliminar.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="54">Eliminar</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonAzul}" Name="btnGuardar" Click="btnGuardar_Click" ToolTip="Guardar Proveedor">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/guardar.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="54">Guardar</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonAzul}" Name="btnCancelar" Click="btnCancelar_Click" Margin="0,0,25,0" Width="87" ToolTip="Cancelar">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/cancelar.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="54">Cancelar</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonVerde}" Name="btnPrimero" ToolTip="Volver al Primer Proveedor">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/primero.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="54">Primero</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonVerde}" Name="btnAnterior" ToolTip="Volver al Proveedor Anterior">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/anterior.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="54">Anterior</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonVerde}" Name="btnSiguiente" ToolTip="Siguiente Proveedor" Width="88">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/siguiente.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="61">Siguiente</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonVerde}" Name="btnUltimo" Margin="0" ToolTip="Último Proveedor">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/ultimo.png" Height="22" Width="27" />
+                        <TextBlock Height="19" Width="54">Último</TextBlock>
+                    </StackPanel>
+                </Button>
             </StackPanel>
             <Grid Grid.Row="1" >
                 <Grid.ColumnDefinitions>
@@ -74,14 +119,18 @@
                 </Grid>
             </Grid>
             <Button Style="{StaticResource ButtonAmarilloPlantilla}" 
-                    Content="Atrás" 
                     Grid.Row="1" 
                     Height="30" 
                     Margin="0,0,30,20" 
                     VerticalAlignment="Bottom" 
                     HorizontalAlignment="Right" 
                     Name="btnSalir" 
-                    Click="btnSalir_Click" />
+                    Click="btnSalir_Click" >
+                <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                    <Image Source="/Vistas;component/images/icons/atras.png" Height="17" Width="27" />
+                    <TextBlock Height="19" Width="54">Atrás</TextBlock>
+                </StackPanel>
+            </Button>
         </Grid>
     </Border>
 </UserControl>

@@ -57,23 +57,31 @@
             <!-- Boton para imprimir -->
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Right">
                 <Button Style="{StaticResource ButtonAzulPlantilla}" 
-                            Content="Imprimir" 
                             Grid.Row="1" 
                             Height="30" 
                             Margin="0,20,20,0" 
                             VerticalAlignment="Top" 
                             HorizontalAlignment="Right" 
-                            Name="btnImprimir" Click="btnImprimir_Click" />
+                            Name="btnImprimir" Click="btnImprimir_Click" ToolTip="Imprimir" Width="116">
+                    <StackPanel Height="29" Width="86" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/imprimir.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="66">Imprimir</TextBlock>
+                    </StackPanel>
+                </Button>
                 <!-- Boton para salir de la ventana -->
                 <Button Style="{StaticResource ButtonAmarilloPlantilla}" 
-                        Content="Salir" 
                         Grid.Row="1" 
                         Height="30" 
                         Margin="0,20,20,0" 
                         VerticalAlignment="Bottom" 
                         HorizontalAlignment="Right" 
                         Name="btnSalir" 
-                        Click="btnSalir_Click" />
+                        Click="btnSalir_Click">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/atras.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="54">Salir</TextBlock>
+                    </StackPanel>
+                </Button>
             </StackPanel>
         </StackPanel>
     </Border>
