@@ -70,6 +70,7 @@
                 <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" Name="txtNombre" />
                 <Label Grid.Column="1" Grid.Row="5" Content="Campo requerido" Visibility="Hidden" Name="lblErrorNombre" Foreground="#FB539B" />
 
+                <Label Grid.Row="6" Content="ID" Name="label4" Foreground="White" FontSize="14" />
                 <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtID" IsEnabled="False" />
             </Grid>
             <Grid Width="400" Height="180" Margin="0,20,20,20" VerticalAlignment="Center" HorizontalAlignment="Right" Grid.Row="1" Grid.ColumnSpan="2" DataContext="{StaticResource list_vendedores}" >

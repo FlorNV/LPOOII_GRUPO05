@@ -33,7 +33,7 @@
                     <RowDefinition />
                     <RowDefinition Height="60"/>
                 </Grid.RowDefinitions>
-                <miControl:ControlUsuarioBtnMinCerrar WindowsName="REPRODUCTOR" x:Name="MiControlUsuarioLogin1"/>
+                <miControl:ControlUsuarioBtnMinCerrar TitleText="REPRODUCTOR" x:Name="MiControlUsuarioLogin1"/>
                 <StackPanel Grid.Row="1" HorizontalAlignment="Center" Orientation="Vertical" VerticalAlignment="Stretch">
                     <MediaElement Height="1" Name="myAudio" Width="220" DataContext="{Binding}" />
                     <Button Content="Cargar Cancion" Height="50" Name="btnLoadSong" Width="155"  Foreground="White" FontSize="14" Click="btnLoadSong_Click" Margin="10,30,10,10">

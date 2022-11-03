@@ -12,6 +12,7 @@ using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
 using System.Windows.Media.Animation;
+using ClasesBase;
 
 namespace Vistas
 {
@@ -29,28 +30,23 @@ namespace Vistas
         private void btnIngresar_Click(object sender, RoutedEventArgs e)
         {
             ValidarInputs();
-            string szUsuario = txtUsuario.Text;
-            string szPassword = txtContrasena.Password;
-            if (szUsuario != "" && szPassword != "")
-            {
-                if ((szUsuario == "admin" && szPassword == "admin") ||
-                    (szUsuario == "vendedor" && szPassword == "vendedor"))
-                {
-                    FormPrincipal frmPrincipal = new FormPrincipal();
-                    frmPrincipal.lblUsername.Content = txtUsuario.Text;
+
+            Usuario usr = TrabajarUsuarios.VerificarUsuario(txtUsuario.Text, txtContrasena.Password);
+            //if (szUsuario != "" && szPassword != "")
+            if (usr != null) {
+                if (usr.Rol != null) {
+                    FormInicio frmPrincipal = new FormInicio(usr);
                     frmPrincipal.Show();
                     Window window = Window.GetWindow(this);
                     window.Close();
                 }
-                else
-                {
-                    Storyboard myStoryboard = (Storyboard)this.Resources["TestStoryboard"];
-                    Storyboard.SetTarget(myStoryboard.Children.ElementAt(0) as DoubleAnimationUsingKeyFrames, txtUsuario);
-                    myStoryboard.Begin();
-                    Storyboard.SetTarget(myStoryboard.Children.ElementAt(0) as DoubleAnimationUsingKeyFrames, txtContrasena);
-                    myStoryboard.Begin();
-                    clearTextBoxs();
-                }
+            } else {
+                Storyboard myStoryboard = (Storyboard)this.Resources["TestStoryboard"];
+                Storyboard.SetTarget(myStoryboard.Children.ElementAt(0) as DoubleAnimationUsingKeyFrames, txtUsuario);
+                myStoryboard.Begin();
+                Storyboard.SetTarget(myStoryboard.Children.ElementAt(0) as DoubleAnimationUsingKeyFrames, txtContrasena);
+                myStoryboard.Begin();
+                clearTextBoxs();
             }
         }
         private void ValidarInputs()
