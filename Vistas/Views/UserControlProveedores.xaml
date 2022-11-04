@@ -53,7 +53,7 @@
                     <Image Source="/images/icons/last.png" />
                 </Button>
             </StackPanel>
-            <Grid Grid.Row="2" >
+            <Grid Name="GridContainer" Grid.Row="2" DataContext="{StaticResource ListaProveedores}">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="350" />
                     <ColumnDefinition />
@@ -61,7 +61,7 @@
 
 
                 <Grid Width="300" Margin="30,50,10,50" HorizontalAlignment="Left" Grid.Row="1" 
-                      Name="grid_content" DataContext="{Binding Source={StaticResource ResourceKey=ListaProveedores}}">
+                      Name="UsuarioItem">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
                         <ColumnDefinition Width="*" />
@@ -109,7 +109,7 @@
                         <TextBox Style="{StaticResource TextBoxStyle}" Name="txtConsulta" Width="150" HorizontalContentAlignment="Left" Margin="10" TextChanged="txtConsulta_TextChanged" />
                     </StackPanel>
                     <!-- Grilla de proveedores -->
-                    <Grid Width="400" Height="300" Grid.Row="1" VerticalAlignment="Top" DataContext="{StaticResource ListaProveedores}">
+                    <Grid Width="400" Height="300" Grid.Row="1" VerticalAlignment="Top" >
                         <ListView x:Name="Proveedores" Background="Transparent" ItemsSource="{Binding}" 
                                 SelectionMode="Single" SelectionChanged="Proveedores_SelectionChanged">
                             <ListView.View>

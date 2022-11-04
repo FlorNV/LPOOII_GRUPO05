@@ -25,12 +25,13 @@ namespace Vistas.Views
         CollectionView Vista;
         private bool editMode = false;
         private CollectionViewSource vistaColeccionFiltrada;
+        private Proveedor oProveedor;
 
         public UserControlProveedores()
         {
             InitializeComponent();
 
-            Vista = (CollectionView)CollectionViewSource.GetDefaultView(grid_content.DataContext);
+            Vista = (CollectionView)CollectionViewSource.GetDefaultView(GridContainer.DataContext);
             vistaColeccionFiltrada = Resources["ListaProveedores"] as CollectionViewSource;
 
             HabilitarBotonesInicio();
@@ -41,8 +42,10 @@ namespace Vistas.Views
         {
             LimpiarCampos();
             HabilitarDeshabilitarTextBox(true);
-            HabilitarDeshabilitarBotones(true);
+            HabilitarDeshabilitarBotones(false);
             OcultarID(true);
+            this.oProveedor = new Proveedor();
+            UsuarioItem.DataContext = this.oProveedor;
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -104,8 +107,9 @@ namespace Vistas.Views
 
         private void ActualizarDatos()
         {
-            grid_content.DataContext = TrabajarProveedores.ObtenerProveedores();
-            Vista = (CollectionView)CollectionViewSource.GetDefaultView(grid_content.DataContext);
+            GridContainer.DataContext = TrabajarProveedores.ObtenerProveedores();
+            //Proveedores.DataContext = TrabajarProveedores.ObtenerProveedores();
+            Vista = (CollectionView)CollectionViewSource.GetDefaultView(GridContainer.DataContext);
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
