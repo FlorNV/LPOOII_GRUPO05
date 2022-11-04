@@ -66,7 +66,7 @@
                 </Grid.ColumnDefinitions>
 
                 <Grid Width="300" Margin="30,50,10,50" HorizontalAlignment="Left" 
-                  Name="grid_content" DataContext="{Binding Source={StaticResource ResourceKey=ListaClientes}}">
+                  Name="grid_content" DataContext="{StaticResource list_clientes}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
                         <ColumnDefinition Width="*" />
@@ -83,20 +83,20 @@
                         <RowDefinition Height="30" />
                     </Grid.RowDefinitions>
                     <Label Content="DNI" Name="label1" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" Name="txtDNI" Text="{Binding DNI}"/>
-                    <Label Grid.Column="1" Grid.Row="1" Content="Label" Visibility="Hidden" Name="lblErrorDNI" Foreground="#FB539B" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" Name="txtDNI" Text="{Binding Path=DNI, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<Label Grid.Column="1" Grid.Row="1" Content="Label" Visibility="Hidden" Name="lblErrorDNI" Foreground="#FB539B" />-->
 
                     <Label Grid.Row="2" Content="Apellido" Name="label2" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Name="txtApellido" Text="{Binding Apellido}" />
-                    <Label Grid.Column="1" Grid.Row="3" Content="Campo requerido" Visibility="Hidden" Name="lblErrorApellido" Foreground="#FB539B" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Name="txtApellido" Text="{Binding Path=Apellido, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<Label Grid.Column="1" Grid.Row="3" Content="Campo requerido" Visibility="Hidden" Name="lblErrorApellido" Foreground="#FB539B" />-->
 
                     <Label Grid.Row="4" Content="Nombre" Name="label3" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" Name="txtNombre" Text="{Binding Nombre}" />
-                    <Label Grid.Column="1" Grid.Row="5" Content="Campo requerido" Visibility="Hidden" Name="lblErrorNombre" Foreground="#FB539B" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" Name="txtNombre" Text="{Binding Path=Nombre, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<Label Grid.Column="1" Grid.Row="5" Content="Campo requerido" Visibility="Hidden" Name="lblErrorNombre" Foreground="#FB539B" />-->
 
                     <Label Grid.Row="6" Content="Dirección" Name="label4" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtDireccion" Text="{Binding Direccion}" />
-                    <Label Grid.Column="1" Grid.Row="7" Content="Campo requerido" Visibility="Hidden" Name="lblErrorDireccion" Foreground="#FB539B" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtDireccion" Text="{Binding Path=Direccion, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<Label Grid.Column="1" Grid.Row="7" Content="Campo requerido" Visibility="Hidden" Name="lblErrorDireccion" Foreground="#FB539B" />-->
 
                     <Label Grid.Row="8" Content="ID" Name="lblID" Foreground="White" FontSize="14" />
                     <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="8" Grid.Column="1" Name="txtID" Text="{Binding ID}" IsEnabled="False" />
@@ -113,8 +113,8 @@
                         <TextBox Style="{StaticResource TextBoxStyle}" Name="textBox1" Width="150" HorizontalContentAlignment="Left" Margin="10" TextChanged="textBox1_TextChanged" />
                     </StackPanel>
                     <!-- Grilla de clientes -->
-                    <Grid Width="400" Height="240" Grid.Row="1" VerticalAlignment="Top" DataContext="{StaticResource ListaClientes}">
-                        <ListView x:Name="Clientes" Background="Transparent" ItemsSource="{Binding}" 
+                    <Grid Name="GridListaClientes" Width="400" Height="240" Grid.Row="1" VerticalAlignment="Top" DataContext="{StaticResource ListaClientes}">
+                        <ListView x:Name="Clientes" Background="Transparent" ItemsSource="{Binding}"
                                 SelectionMode="Single" SelectionChanged="Clientes_SelectionChanged">
                             <ListView.View>
                                 <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}"

@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 
 using ClasesBase;
 using System.Data;
+using System.Collections.ObjectModel;
 
 namespace Vistas.Views {
     /// <summary>
@@ -22,11 +23,21 @@ namespace Vistas.Views {
     public partial class UserControlClientes : UserControl {
 
         CollectionView Vista;
+        ObservableCollection<Cliente> listaClientes;
+
+        private bool selectedItemList;
+
         private bool editMode = false;
         private CollectionViewSource vistaColeccionFiltrada;
 
         public UserControlClientes() {
             InitializeComponent();
+
+            ObjectDataProvider odp = (ObjectDataProvider)this.Resources["list_clientes"];
+            listaClientes = odp.Data as ObservableCollection<Cliente>;
+
+            selectedItemList = true;
+
             Vista = (CollectionView)CollectionViewSource.GetDefaultView(grid_content.DataContext);
             vistaColeccionFiltrada = Resources["ListaClientes"] as CollectionViewSource;
 
@@ -38,7 +49,7 @@ namespace Vistas.Views {
             LimpiarCampos();
             HabilitarDeshabilitarTextBox(true);
             HabilitarDeshabilitarBotones(false);
-
+            grid_content.DataContext = new Cliente();
             OcultarID(true);
         }
 
@@ -57,13 +68,12 @@ namespace Vistas.Views {
                         // Guardar los cambios del cliente
                         ClasesBase.TrabajarClientes.ModificarCliente(oCliente, Convert.ToInt32(txtID.Text));
                         MessageBox.Show("Cliente modificado", "Modificar");
+                        editMode = false;
                     } else {
                         // Insertar el nuevo cliente
                         ClasesBase.TrabajarClientes.InsertarCliente(oCliente);
                         MessageBox.Show("Cliente guardado", "Guardar");
                     }
-
-                    //grid_content.DataContext = TrabajarClientes.ObtenerClientes();
 
                     ActualizarDatos();
 
@@ -161,8 +171,24 @@ namespace Vistas.Views {
             txtDireccion.IsEnabled = mode;
         }
 
+        private Cliente CargarCliente() {
+            Cliente cli = new Cliente();
+            cli.DNI = txtDNI.Text;
+            cli.Apellido = txtApellido.Text;
+            cli.Nombre = txtNombre.Text;
+            cli.Direccion = txtDireccion.Text;
+            return cli;
+        }
         private bool ValidarTextBox() {
-            bool bError = false;
+            Cliente cli = CargarCliente();
+            string err = cli.isValid();
+            if (err != null) {
+                MessageBox.Show("Revise los campos por favor.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return true;
+            }
+
+            return false;
+            /*
             if (!txtDNI.Text.All(char.IsDigit)) {
                 lblErrorDNI.Content = "Este campo es numérico";
                 lblErrorDNI.Visibility = System.Windows.Visibility.Visible;
@@ -193,6 +219,7 @@ namespace Vistas.Views {
                 lblErrorDireccion.Visibility = System.Windows.Visibility.Hidden;
 
             return bError;
+             * */
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
@@ -202,19 +229,28 @@ namespace Vistas.Views {
         }
 
         private void ActualizarDatos() {
-            grid_content.DataContext = TrabajarClientes.ObtenerClientes();
-            Vista = (CollectionView)CollectionViewSource.GetDefaultView(grid_content.DataContext);
+            listaClientes = TrabajarClientes.ObtenerClientes();
+            grid_content.DataContext  = listaClientes;
+            CollectionViewSource cvs = Resources["ListaClientes"] as CollectionViewSource;
+            cvs.Source = listaClientes;
+            cvs.Filter += new FilterEventHandler(eventVistaCliente_Filter);
+            GridListaClientes.DataContext = cvs;
+            
+            Vista = (CollectionView)CollectionViewSource.GetDefaultView(GridListaClientes.DataContext);
         }
 
         private void btnPrimero_Click(object sender, RoutedEventArgs e) {
+            ValidarSelectedItem();
             Vista.MoveCurrentToFirst();
         }
 
         private void btnUltimo_Click(object sender, RoutedEventArgs e) {
+            ValidarSelectedItem();
             Vista.MoveCurrentToLast();
         }
 
         private void btnAnterior_Click(object sender, RoutedEventArgs e) {
+            ValidarSelectedItem();
             Vista.MoveCurrentToPrevious();
             if (Vista.IsCurrentBeforeFirst) {
                 Vista.MoveCurrentToLast();
@@ -222,9 +258,12 @@ namespace Vistas.Views {
         }
 
         private void btnSiguiente_Click(object sender, RoutedEventArgs e) {
-            Vista.MoveCurrentToNext();
-            if (Vista.IsCurrentAfterLast) {
-                Vista.MoveCurrentToFirst();
+            ValidarSelectedItem();
+            if (Vista != null) {
+                Vista.MoveCurrentToNext();
+                if (Vista.IsCurrentAfterLast) {
+                    Vista.MoveCurrentToFirst();
+                }
             }
         }
 
@@ -233,7 +272,15 @@ namespace Vistas.Views {
 
             habilitarEdicion(editMode);
             HabilitarDeshabilitarBotones(false);
-            ActualizarDatos();
+           // ActualizarDatos();
+        }
+
+        private void ValidarSelectedItem() {
+            if (selectedItemList) {
+                grid_content.DataContext = listaClientes;
+                Vista = (CollectionView)CollectionViewSource.GetDefaultView(grid_content.DataContext);
+                selectedItemList = false;
+            }
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e) {
@@ -277,6 +324,21 @@ namespace Vistas.Views {
         }
 
         private void Clientes_SelectionChanged(object sender, SelectionChangedEventArgs e) {
+            Cliente selection = (Cliente)Clientes.SelectedItem;
+            if (selection != null) {
+                selectedItemList = true;
+                grid_content.DataContext = new Cliente();
+                txtID.Text = selection.ID.ToString();
+                txtApellido.Text = selection.Apellido;
+                txtNombre.Text = selection.Nombre;
+                txtDNI.Text = selection.DNI;
+                txtDireccion.Text = selection.Direccion;
+
+                // Inhabilitar los TextBox
+
+                HabilitarDeshabilitarBotones(true);
+            }
+            /*
             DataRowView dataRowView = Clientes.SelectedItem as DataRowView;
             if (dataRowView != null) {
 
@@ -294,6 +356,7 @@ namespace Vistas.Views {
 
                 HabilitarDeshabilitarBotones(true);
             }
+             * */
         }
 
     }
