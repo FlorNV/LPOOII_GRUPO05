@@ -66,6 +66,7 @@ namespace Vistas.Views
                     {
                         // Guardar los cambios del proveedor
                         TrabajarProveedores.ModificarProveedor(oProveedor, Convert.ToInt32(txtID.Text));
+
                         MessageBox.Show("Proveedor modificado", "Modificar");
                     }
                     else
@@ -219,6 +220,7 @@ namespace Vistas.Views
             txtRazonSocial.Text = String.Empty;
             txtDomicilio.Text = String.Empty;
             txtTelefono.Text = String.Empty;
+            txtID.Text = String.Empty;
         }
 
         private void habilitarEdicion(bool mode)
@@ -281,7 +283,7 @@ namespace Vistas.Views
 
         //Evento que toma el cambio de texto del filtro
         private void txtConsulta_TextChanged(object sender, TextChangedEventArgs e)
-        {
+       {
             if (vistaColeccionFiltrada != null)
             {
                 vistaColeccionFiltrada.Filter += eventVistaProveedor_Filter;
@@ -310,6 +312,20 @@ namespace Vistas.Views
 
         private void Proveedores_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Proveedor selection = (Proveedor)Proveedores.SelectedItem;
+            if (selection != null) 
+            {
+                txtID.Text = selection.ID.ToString();
+                txtCUIT.Text = selection.CUIT;
+                txtRazonSocial.Text = selection.RazonSocial;
+                txtDomicilio.Text = selection.Domicilio;
+                txtTelefono.Text = selection.Telefono;
+
+                // Inhabilitar los TextBox
+
+                HabilitarDeshabilitarBotones(true);
+            }
+            /*
             DataRowView dataRowView = Proveedores.SelectedItem as DataRowView;
             if (dataRowView != null)
             {
@@ -323,6 +339,8 @@ namespace Vistas.Views
 
                 HabilitarDeshabilitarBotones(true);
             }
+             * */
         }
+
     }
 }

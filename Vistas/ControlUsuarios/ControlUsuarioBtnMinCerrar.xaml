@@ -37,7 +37,7 @@
             </Button.Style>
             <Button.Template>
                 <ControlTemplate TargetType="Button">
-                    <Border Width="20" Height="20" CornerRadius="50"  Background="{TemplateBinding Background}">
+                    <Border Width="25" Height="25" CornerRadius="50"  Background="{TemplateBinding Background}">
                         <Image HorizontalAlignment="Center" VerticalAlignment="Center" Source="/images/icons/dash.png" />
                     </Border>
                 </ControlTemplate>
