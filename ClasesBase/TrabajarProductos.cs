@@ -34,7 +34,7 @@ namespace ClasesBase
             SqlConnection cnn = new SqlConnection(ClasesBase.Properties.Settings.Default.muebleriaConnectionString);
 
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "INSERT INTO Producto (Prod_Categoria, Prod_Color, Prod_Descripcion, Prod_Precio) VALUES (@categoria, @color, @descripcion, @precio)";
+            cmd.CommandText = "INSERT INTO Producto (Prod_Categoria, Prod_Color, Prod_Descripcion, Prod_Precio, Prod_Imagen) VALUES (@categoria, @color, @descripcion, @precio, @imagen)";
             cmd.CommandType = CommandType.Text;
             cmd.Connection = cnn;
 
@@ -44,7 +44,8 @@ namespace ClasesBase
             cmd.Parameters.AddWithValue("@color", prod.Color);
             cmd.Parameters.AddWithValue("@descripcion", prod.Descripcion);
             cmd.Parameters.AddWithValue("@precio", prod.Precio);
-
+            cmd.Parameters.AddWithValue("@imagen", prod.Imagen);
+            
             // Ejecutar la query
             cnn.Open();
             cmd.ExecuteNonQuery();
@@ -76,7 +77,7 @@ namespace ClasesBase
             SqlConnection cnn = new SqlConnection(ClasesBase.Properties.Settings.Default.muebleriaConnectionString);
 
             SqlCommand cmd = new SqlCommand();
-            cmd.CommandText = "UPDATE Producto SET Prod_Categoria = @categoria, Prod_Color = @color, Prod_Descripcion = @descripcion, Prod_Precio = @precio WHERE Prod_Codigo = @cod";
+            cmd.CommandText = "UPDATE Producto SET Prod_Categoria = @categoria, Prod_Color = @color, Prod_Descripcion = @descripcion, Prod_Precio = @precio, Prod_Imagen = @imagen WHERE Prod_Codigo = @cod";
             cmd.CommandType = CommandType.Text;
             cmd.Connection = cnn;
 
@@ -86,6 +87,7 @@ namespace ClasesBase
             cmd.Parameters.AddWithValue("@color", prod.Color);
             cmd.Parameters.AddWithValue("@descripcion", prod.Descripcion);
             cmd.Parameters.AddWithValue("@precio", prod.Precio);
+            cmd.Parameters.AddWithValue("@imagen", prod.Imagen);
 
             // Ejecutar la query
             cnn.Open();
@@ -116,6 +118,7 @@ namespace ClasesBase
                 oProducto.Categoria = row["Prod_Categoria"].ToString();
                 oProducto.Color = row["Prod_Color"].ToString();
                 oProducto.Descripcion = row["Prod_Descripcion"].ToString();
+                oProducto.Imagen = row["Prod_Imagen"].ToString();
                 oProducto.Precio = Convert.ToDecimal(row["Prod_Precio"].ToString());
                 return oProducto;
             }

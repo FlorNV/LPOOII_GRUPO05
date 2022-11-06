@@ -55,6 +55,9 @@
     <ApplicationDefinition Include="App.xaml">
       <Generator>MSBuild:Compile</Generator>
     </ApplicationDefinition>
+    <Compile Include="AcercaDe.xaml.cs">
+      <DependentUpon>AcercaDe.xaml</DependentUpon>
+    </Compile>
     <Compile Include="Comprobante.xaml.cs">
       <DependentUpon>Comprobante.xaml</DependentUpon>
     </Compile>
@@ -64,6 +67,9 @@
     <Compile Include="FormListadoClientes.xaml.cs">
       <DependentUpon>FormListadoClientes.xaml</DependentUpon>
     </Compile>
+    <Compile Include="FormPresentacion.xaml.cs">
+      <DependentUpon>FormPresentacion.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FormVentas.xaml.cs">
       <DependentUpon>FormVentas.xaml</DependentUpon>
     </Compile>
@@ -72,6 +78,10 @@
     </Compile>
     <Compile Include="Resources\ValidacionGenericaTextBox.cs" />
     <Compile Include="ValidarNumero.cs" />
+    <Page Include="AcercaDe.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
     <Page Include="Comprobante.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
@@ -110,6 +120,10 @@
       <Generator>MSBuild:Compile</Generator>
     </Page>
     <Page Include="FormListadoClientes.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:Compile</Generator>
+    </Page>
+    <Page Include="FormPresentacion.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:Compile</Generator>
     </Page>
@@ -281,6 +295,7 @@
     </Resource>
   </ItemGroup>
   <ItemGroup>
+    <Resource Include="images\equalizer.PNG" />
     <Resource Include="images\icons\dollar-solid.png" />
   </ItemGroup>
   <ItemGroup>
@@ -301,6 +316,35 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="ResourceDictionary\Roles.xml" />
+    <Resource Include="media\Wildlife.wmv" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\pause_icon_white.png" />
+    <Resource Include="images\play_icon_white.png" />
+    <Resource Include="images\stop_icon_white.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\guardar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\atras.png" />
+    <Resource Include="images\icons\cancelar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\anterior.png" />
+    <Resource Include="images\icons\cargar-archivo.png" />
+    <Resource Include="images\icons\editar.png" />
+    <Resource Include="images\icons\imprimir.png" />
+    <Resource Include="images\icons\primero.png" />
+    <Resource Include="images\icons\siguiente.png" />
+    <Resource Include="images\icons\ultimo.png" />
+    <Resource Include="images\icons\vista-previa.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\nuevo.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\eliminar.png" />
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\icons\first.png" />

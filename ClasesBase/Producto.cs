@@ -54,6 +54,18 @@ namespace ClasesBase {
             }
         }
 
+        private string imagen;
+
+        public string Imagen
+        {
+            get { return imagen; }
+            set
+            {
+                imagen = value;
+                this.NotifyPropertyChanged("Imagen");
+            }
+        }
+
         public string Error {
             get { throw new NotImplementedException(); }
         }
@@ -106,5 +118,6 @@ namespace ClasesBase {
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
         }
+
     }
 }

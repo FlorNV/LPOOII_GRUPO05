@@ -12,13 +12,14 @@
             <ColumnDefinition Width="40"/>
             <ColumnDefinition Width="30"/>
         </Grid.ColumnDefinitions>
+
         <TextBlock Text="{Binding TitleText}"
                                Foreground="#fff"
                                FontSize="14"
                                FontFamily="Arial"
                                Grid.Column="0"
                                VerticalAlignment="Center"
-                               Margin="10,0,0,0"/>
+                               Margin="10,0,0,0" Name="tbNombre" />
         <Button Name="btnMinimizar"
                             BorderThickness="0"
                             Foreground="#363636"

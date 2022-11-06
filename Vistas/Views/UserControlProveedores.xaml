@@ -35,21 +35,46 @@
             </Grid.RowDefinitions>
             <Label Content="Gestión de Proveedores" FontSize="30" HorizontalAlignment="Center" Height="50" Name="lblTitle" Foreground="White" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
-                <Button Style="{StaticResource ButtonRosa}" Content="Nuevo" Name="btnNuevo" Click="btnNuevo_Click" />
-                <Button Style="{StaticResource ButtonRosa}" Content="Modificar" Name="btnModificar" Click="btnModificar_Click" />
-                <Button Style="{StaticResource ButtonRosa}" Content="Eliminar" Name="btnEliminar" Margin="0,0,25,0" Click="btnEliminar_Click" />
-                <Button Style="{StaticResource ButtonAzul}" Content="Guardar" Name="btnGuardar" Click="btnGuardar_Click" />
-                <Button Style="{StaticResource ButtonAzul}" Content="Cancelar" Name="btnCancelar" Click="btnCancelar_Click" Margin="0,0,25,0" />
-                <Button Style="{StaticResource ButtonVerde}" Name="btnPrimero" Click="btnPrimero_Click">
+                <Button Style="{StaticResource ButtonRosa}" Name="btnNuevo" Click="btnNuevo_Click" ToolTip="Nuevo Proveedor">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/nuevo.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="54">Nuevo</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonRosa}" Name="btnModificar" Width="89" ToolTip="Modificar Proveedor">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/editar.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="60">Modificar</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonRosa}" Name="btnEliminar" Margin="0,0,25,0" ToolTip="Eliminar Proveedor">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/eliminar.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="54">Eliminar</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonAzul}" Name="btnGuardar" Click="btnGuardar_Click" ToolTip="Guardar Proveedor">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/guardar.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="54">Guardar</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonAzul}" Name="btnCancelar" Click="btnCancelar_Click" Margin="0,0,25,0" Width="87" ToolTip="Cancelar">
+                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/cancelar.png" Height="17" Width="27" />
+                        <TextBlock Height="19" Width="54">Cancelar</TextBlock>
+                    </StackPanel>
+                </Button>
+                <Button Style="{StaticResource ButtonVerde}" Name="btnPrimero" ToolTip="Primer proveedor" Click="btnPrimero_Click">
                     <Image Source="/images/icons/first.png" />
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnAnterior" Click="btnAnterior_Click">
+                <Button Style="{StaticResource ButtonVerde}" Name="btnAnterior" ToolTip="Proveedor anterior" Click="btnAnterior_Click">
                     <Image Source="/images/icons/previous.png" />
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnSiguiente" Click="btnSiguiente_Click">
+                <Button Style="{StaticResource ButtonVerde}" Name="btnSiguiente" ToolTip="Proveedor siguiente" Click="btnSiguiente_Click">
                     <Image Source="/images/icons/next.png" />
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnUltimo" Margin="0" Click="btnUltimo_Click">
+                <Button Style="{StaticResource ButtonVerde}" Name="btnUltimo" Margin="0" ToolTip="Último proveedor" Click="btnUltimo_Click">
                     <Image Source="/images/icons/last.png" />
                 </Button>
             </StackPanel>
@@ -135,7 +160,12 @@
                     VerticalAlignment="Bottom" 
                     HorizontalAlignment="Right" 
                     Name="btnSalir" 
-                    Click="btnSalir_Click" />
+                    Click="btnSalir_Click" >
+                <StackPanel Height="29" Width="97" Orientation="Horizontal">
+                    <Image Source="/Vistas;component/images/icons/atras.png" Height="17" Width="27" />
+                    <TextBlock Height="19" Width="54">Atrás</TextBlock>
+                </StackPanel>
+            </Button>
         </Grid>
     </Border>
 </UserControl>
