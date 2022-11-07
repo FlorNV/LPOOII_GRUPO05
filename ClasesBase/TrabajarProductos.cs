@@ -29,6 +29,34 @@ namespace ClasesBase
             return dt;
         }
 
+        public static ObservableCollection<Producto> ObtenerProductos() {
+            SqlConnection cnn = new SqlConnection(ClasesBase.Properties.Settings.Default.muebleriaConnectionString);
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT * FROM Producto";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = cnn;
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            ObservableCollection<Producto> productos = new ObservableCollection<Producto>();
+            foreach (DataRow row in dt.Rows) {
+                Producto obj = new Producto();
+                obj.CodProducto = row["Prod_Codigo"].ToString();
+                obj.Categoria = row["Prod_Categoria"].ToString();
+                obj.Color = row["Prod_Color"].ToString();
+                obj.Descripcion = row["Prod_Descripcion"].ToString();
+                obj.Precio = Convert.ToDecimal(row["Prod_Precio"].ToString());
+                obj.Imagen = row["Prod_Imagen"].ToString();
+
+                productos.Add(obj);
+            }
+            return productos;
+        }
+
         // Insertar un producto:
         public static void InsertarProducto(Producto prod) {
             SqlConnection cnn = new SqlConnection(ClasesBase.Properties.Settings.Default.muebleriaConnectionString);

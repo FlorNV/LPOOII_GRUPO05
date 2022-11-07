@@ -92,8 +92,7 @@ namespace ClasesBase {
                     if (String.IsNullOrEmpty(Descripcion)) {
                         result = "Campo requerido.";
                     }
-                } 
-                else if(columnName == "Precio") {
+                } else if(columnName == "Precio") {
                     try {
                         decimal num;
                         if (Precio == 0 || string.IsNullOrEmpty(Precio.ToString())) {
@@ -106,10 +105,23 @@ namespace ClasesBase {
                     } catch (FormatException e) {
                         throw new FormatException("Debe ingresar un número");
                     }
-                }
+                } else if (columnName == "Imagen") {
+                    if (String.IsNullOrEmpty(Imagen)) {
+                        result = "Campo requerido.";
+                    }
+                } 
 
                 return result;
             }
+        }
+
+        public string isValid() {
+            var allProperties = GetType().GetProperties();
+            foreach (var property in allProperties) {
+                string error = this[property.Name];
+                if (error != null) return error;
+            }
+            return null;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

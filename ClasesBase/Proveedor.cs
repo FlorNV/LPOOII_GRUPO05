@@ -6,7 +6,7 @@ using System.ComponentModel;
 
 namespace ClasesBase
 {
-    public class Proveedor : INotifyPropertyChanged
+    public class Proveedor : INotifyPropertyChanged, IDataErrorInfo
     {
         private int id;
 
@@ -65,6 +65,15 @@ namespace ClasesBase
             }
         }
 
+        public string isValid() {
+            var allProperties = GetType().GetProperties();
+            foreach (var property in allProperties) {
+                string error = this[property.Name];
+                if (error != null) return error;
+            }
+            return null;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void Notificador(string nombrePropiedad)
@@ -72,6 +81,39 @@ namespace ClasesBase
             if (this.PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(nombrePropiedad));
+            }
+        }
+
+        public string Error {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string this[string columnName] {
+            get {
+                string result = null;
+                if (columnName == "CUIT") {
+                    if (String.IsNullOrEmpty(CUIT)) {
+                        result = "Campo requerido.";
+                    } else if (!CUIT.All(char.IsDigit)) {
+                        result = "Debe ingresar números";
+                    }
+                } else if (columnName == "RazonSocial") {
+                    if (String.IsNullOrEmpty(RazonSocial)) {
+                        result = "Campo requerido.";
+                    }
+                } else if (columnName == "Domicilio") {
+                    if (String.IsNullOrEmpty(Domicilio)) {
+                        result = "Campo requerido.";
+                    }
+                } else if (columnName == "Telefono") {
+                    if (String.IsNullOrEmpty(Telefono)) {
+                        result = "Campo requerido.";
+                    } else if (!Telefono.All(char.IsDigit)) {
+                        result = "Debe ingresar números";
+                    }
+                }
+
+                return result;
             }
         }
     }

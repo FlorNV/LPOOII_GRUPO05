@@ -14,6 +14,7 @@ using System.Windows.Shapes;
 
 using ClasesBase;
 using System.Data;
+using System.Collections.ObjectModel;
 
 namespace Vistas.Views
 {
@@ -23,15 +24,22 @@ namespace Vistas.Views
     public partial class UserControlProveedores : UserControl
     {
         CollectionView Vista;
+        ObservableCollection<Proveedor> listaProveedores;
+        private bool selectedItemList;
+
         private bool editMode = false;
         private CollectionViewSource vistaColeccionFiltrada;
-        private Proveedor oProveedor;
 
         public UserControlProveedores()
         {
             InitializeComponent();
 
-            Vista = (CollectionView)CollectionViewSource.GetDefaultView(GridContainer.DataContext);
+            ObjectDataProvider odp = (ObjectDataProvider)this.Resources["list_proveedores"];
+            listaProveedores = odp.Data as ObservableCollection<Proveedor>;
+
+            selectedItemList = true;
+
+            Vista = (CollectionView)CollectionViewSource.GetDefaultView(ProveedorItem.DataContext);
             vistaColeccionFiltrada = Resources["ListaProveedores"] as CollectionViewSource;
 
             HabilitarBotonesInicio();
@@ -44,8 +52,7 @@ namespace Vistas.Views
             HabilitarDeshabilitarTextBox(true);
             HabilitarDeshabilitarBotones(false);
             OcultarID(true);
-            this.oProveedor = new Proveedor();
-            UsuarioItem.DataContext = this.oProveedor;
+            ProveedorItem.DataContext = new Proveedor();
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e)
@@ -66,7 +73,7 @@ namespace Vistas.Views
                     {
                         // Guardar los cambios del proveedor
                         TrabajarProveedores.ModificarProveedor(oProveedor, Convert.ToInt32(txtID.Text));
-
+                        editMode = false;
                         MessageBox.Show("Proveedor modificado", "Modificar");
                     }
                     else
@@ -108,9 +115,14 @@ namespace Vistas.Views
 
         private void ActualizarDatos()
         {
-            GridContainer.DataContext = TrabajarProveedores.ObtenerProveedores();
-            //Proveedores.DataContext = TrabajarProveedores.ObtenerProveedores();
-            Vista = (CollectionView)CollectionViewSource.GetDefaultView(GridContainer.DataContext);
+            listaProveedores = TrabajarProveedores.ObtenerProveedores();
+            ProveedorItem.DataContext = listaProveedores;
+            CollectionViewSource cvs = Resources["ListaProveedores"] as CollectionViewSource;
+            cvs.Source = listaProveedores;
+            cvs.Filter += new FilterEventHandler(eventVistaProveedor_Filter);
+            GridListaProveedores.DataContext = cvs;
+
+            Vista = (CollectionView)CollectionViewSource.GetDefaultView(ProveedorItem.DataContext);
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)
@@ -129,16 +141,19 @@ namespace Vistas.Views
 
         private void btnPrimero_Click(object sender, RoutedEventArgs e)
         {
+            ValidarSelectedItem();
             Vista.MoveCurrentToFirst();
         }
 
         private void btnUltimo_Click(object sender, RoutedEventArgs e)
         {
+            ValidarSelectedItem();
             Vista.MoveCurrentToLast();
         }
 
         private void btnAnterior_Click(object sender, RoutedEventArgs e)
         {
+            ValidarSelectedItem();
             Vista.MoveCurrentToPrevious();
             if (Vista.IsCurrentBeforeFirst)
             {
@@ -148,10 +163,19 @@ namespace Vistas.Views
 
         private void btnSiguiente_Click(object sender, RoutedEventArgs e)
         {
+            ValidarSelectedItem();
             Vista.MoveCurrentToNext();
             if (Vista.IsCurrentAfterLast)
             {
                 Vista.MoveCurrentToFirst();
+            }
+        }
+
+        private void ValidarSelectedItem() {
+            if (selectedItemList) {
+                ProveedorItem.DataContext = listaProveedores;
+                Vista = (CollectionView)CollectionViewSource.GetDefaultView(ProveedorItem.DataContext);
+                selectedItemList = false;
             }
         }
 
@@ -231,54 +255,25 @@ namespace Vistas.Views
             txtTelefono.IsEnabled = mode;
         }
 
-        private bool ValidarTextBox()
-        {
-            bool bError = false;
-            if (txtCUIT.Text == String.Empty)
-            {
-                lblErrorCUIT.Visibility = System.Windows.Visibility.Visible;
-                bError = true;
-            }
-            else if (!txtCUIT.Text.All(char.IsDigit))
-            {
-                lblErrorCUIT.Content = "Este campo es numérico";
-                lblErrorCUIT.Visibility = System.Windows.Visibility.Visible;
-                bError = true;
-            }
-            else
-                lblErrorCUIT.Visibility = System.Windows.Visibility.Hidden;
+        private Proveedor CargarProveedor() {
+            Proveedor obj = new Proveedor();
+            obj.CUIT = txtCUIT.Text;
+            obj.Domicilio = txtDomicilio.Text;
+            obj.RazonSocial = txtRazonSocial.Text;
+            obj.Telefono = txtTelefono.Text;
+            return obj;
+        }
 
-            if (txtRazonSocial.Text == String.Empty)
-            {
-                lblErrorRazonSocial.Visibility = System.Windows.Visibility.Visible;
-                bError = true;
+        
+        private bool ValidarTextBox() {
+            Proveedor pr = CargarProveedor();
+            string err = pr.isValid();
+            if (err != null) {
+                MessageBox.Show("Revise los campos por favor.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return true;
             }
-            else
-                lblErrorRazonSocial.Visibility = System.Windows.Visibility.Hidden;
 
-            if (txtDomicilio.Text == String.Empty)
-            {
-                lblErrorDomicilio.Visibility = System.Windows.Visibility.Visible;
-                bError = true;
-            }
-            else
-                lblErrorDomicilio.Visibility = System.Windows.Visibility.Hidden;
-
-            if (txtTelefono.Text == String.Empty)
-            {
-                lblErrorTelefono.Visibility = System.Windows.Visibility.Visible;
-                bError = true;
-            }
-            else if (!txtTelefono.Text.All(char.IsDigit))
-            {
-                lblErrorTelefono.Content = "Este campo es numérico";
-                lblErrorTelefono.Visibility = System.Windows.Visibility.Visible;
-                bError = true;
-            }
-            else
-                lblErrorTelefono.Visibility = System.Windows.Visibility.Hidden;
-
-            return bError;
+            return false;
         }
 
         //Evento que toma el cambio de texto del filtro
@@ -315,6 +310,8 @@ namespace Vistas.Views
             Proveedor selection = (Proveedor)Proveedores.SelectedItem;
             if (selection != null) 
             {
+                selectedItemList = true;
+                ProveedorItem.DataContext = new Proveedor();
                 txtID.Text = selection.ID.ToString();
                 txtCUIT.Text = selection.CUIT;
                 txtRazonSocial.Text = selection.RazonSocial;

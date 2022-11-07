@@ -26,6 +26,13 @@ namespace Vistas.Views {
         private string codigo = "";
         private string imgProductoRuta = "";
 
+        CollectionView Vista;
+        ObservableCollection<Cliente> listaClientes;
+
+        private bool selectedItemList;
+
+        private CollectionViewSource vistaColeccionFiltrada;
+
         public UserControlProductos() {
             InitializeComponent();
 
@@ -300,6 +307,28 @@ namespace Vistas.Views {
             btnNuevo.IsEnabled = state;
             btnModificar.IsEnabled = state;
             btnEliminar.IsEnabled = state;
+        }
+
+        //Evento que toma el cambio de texto del filtro
+        private void textBox1_TextChanged(object sender, TextChangedEventArgs e) {
+            if (vistaColeccionFiltrada != null) {
+                vistaColeccionFiltrada.Filter += eventVistaCliente_Filter;
+            }
+        }
+        //Evento del filtro
+        //No se toca la grilla ni el data provider, solo se añade el filter
+        //al CollectionViewSource.
+        private void eventVistaCliente_Filter(object sender, FilterEventArgs e) {
+            Producto prod = e.Item as Producto;
+            if (textBox1 == null) {
+                return;
+            }
+
+            if (prod.Descripcion.StartsWith(textBox1.Text, StringComparison.CurrentCultureIgnoreCase)) {
+                e.Accepted = true;
+            } else {
+                e.Accepted = false;
+            }
         }
     }
 }

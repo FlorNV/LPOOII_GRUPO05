@@ -89,7 +89,6 @@ namespace Vistas.Views {
             LimpiarCampos();
             HabilitarBotonesInicio();
             HabilitarDeshabilitarTextBox(false);
-
             ActualizarDatos();
             OcultarID(false);
         }
@@ -179,6 +178,7 @@ namespace Vistas.Views {
             cli.Direccion = txtDireccion.Text;
             return cli;
         }
+        
         private bool ValidarTextBox() {
             Cliente cli = CargarCliente();
             string err = cli.isValid();

@@ -35,50 +35,50 @@
             </Grid.RowDefinitions>
             <Label Content="Gestión de Proveedores" FontSize="30" HorizontalAlignment="Center" Height="50" Name="lblTitle" Foreground="White" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
-                <Button Style="{StaticResource ButtonRosa}" Name="btnNuevo" Click="btnNuevo_Click" ToolTip="Nuevo Proveedor">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/nuevo.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Nuevo</TextBlock>
+                <Button Style="{StaticResource ButtonRosa}" Name="btnNuevo" Click="btnNuevo_Click" ToolTip="Nuevo Proveedor" Width="110">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/nuevo.png" Height="18" />
+                        <TextBlock Margin="10,0,0,0">Nuevo</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonRosa}" Name="btnModificar" Width="89" ToolTip="Modificar Proveedor">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/editar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="60">Modificar</TextBlock>
+                <Button Style="{StaticResource ButtonRosa}" Name="btnModificar" Width="110" Margin="10,0,10,0" ToolTip="Modificar Proveedor" Click="btnModificar_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/editar.png" Height="18" />
+                        <TextBlock Margin="10,0,0,0">Modificar</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonRosa}" Name="btnEliminar" Margin="0,0,25,0" ToolTip="Eliminar Proveedor">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/eliminar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Eliminar</TextBlock>
+                <Button Style="{StaticResource ButtonRosa}" Name="btnEliminar" Width="110" Margin="0,0,25,0" ToolTip="Eliminar Proveedor" Click="btnEliminar_Click">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/eliminar.png" Height="18" />
+                        <TextBlock Margin="10,0,0,0">Eliminar</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonAzul}" Name="btnGuardar" Click="btnGuardar_Click" ToolTip="Guardar Proveedor">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/guardar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Guardar</TextBlock>
+                <Button Style="{StaticResource ButtonAzul}" Name="btnGuardar" Click="btnGuardar_Click" Width="100" Margin="0,0,10,0" ToolTip="Guardar Proveedor">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/guardar.png" Height="16" />
+                        <TextBlock Margin="10,0,0,0">Guardar</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonAzul}" Name="btnCancelar" Click="btnCancelar_Click" Margin="0,0,25,0" Width="87" ToolTip="Cancelar">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/cancelar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Cancelar</TextBlock>
+                <Button Style="{StaticResource ButtonAzul}" Name="btnCancelar" Click="btnCancelar_Click" Margin="0,0,25,0" Width="100" ToolTip="Cancelar">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/cancelar.png" Height="16" />
+                        <TextBlock Margin="10,0,0,0">Cancelar</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource ButtonVerde}" Name="btnPrimero" ToolTip="Primer proveedor" Click="btnPrimero_Click">
                     <Image Source="/images/icons/first.png" />
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnAnterior" ToolTip="Proveedor anterior" Click="btnAnterior_Click">
+                <Button Style="{StaticResource ButtonVerde}" Name="btnAnterior" ToolTip="Proveedor anterior" Click="btnAnterior_Click" Margin="5,0,5,0">
                     <Image Source="/images/icons/previous.png" />
                 </Button>
                 <Button Style="{StaticResource ButtonVerde}" Name="btnSiguiente" ToolTip="Proveedor siguiente" Click="btnSiguiente_Click">
                     <Image Source="/images/icons/next.png" />
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnUltimo" Margin="0" ToolTip="Último proveedor" Click="btnUltimo_Click">
+                <Button Style="{StaticResource ButtonVerde}" Name="btnUltimo" Margin="5,0,0,0" ToolTip="Último proveedor" Click="btnUltimo_Click">
                     <Image Source="/images/icons/last.png" />
                 </Button>
             </StackPanel>
-            <Grid Name="GridContainer" Grid.Row="2" DataContext="{StaticResource ListaProveedores}">
+            <Grid Grid.Row="2">
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="350" />
                     <ColumnDefinition />
@@ -86,7 +86,7 @@
 
 
                 <Grid Width="300" Margin="30,50,10,50" HorizontalAlignment="Left" Grid.Row="1" 
-                      Name="UsuarioItem">
+                      Name="ProveedorItem" DataContext="{StaticResource list_proveedores}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
                         <ColumnDefinition Width="*" />
@@ -103,20 +103,21 @@
                         <RowDefinition Height="30" />
                     </Grid.RowDefinitions>
                     <Label Content="CUIT" Name="lblCUIT" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" Name="txtCUIT" Text="{Binding CUIT}"/>
-                    <Label Grid.Column="1" Grid.Row="1" Content="Campo requerido" Visibility="Hidden" Name="lblErrorCUIT" Foreground="#FB539B" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" Name="txtCUIT" Text="{Binding Path=CUIT, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
+                    <!--
+                    <Label Grid.Column="1" Grid.Row="1" Content="Campo requerido" Visibility="Hidden" Name="lblErrorCUIT" Foreground="#FB539B" /> -->
 
                     <Label Grid.Row="2" Content="Razon Social" Name="lblApellido" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Name="txtRazonSocial" Text="{Binding RazonSocial}" />
-                    <Label Grid.Column="1" Grid.Row="3" Content="Campo requerido" Visibility="Hidden" Name="lblErrorRazonSocial" Foreground="#FB539B" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Name="txtRazonSocial" Text="{Binding Path=RazonSocial, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<Label Grid.Column="1" Grid.Row="3" Content="Campo requerido" Visibility="Hidden" Name="lblErrorRazonSocial" Foreground="#FB539B" />-->
 
                     <Label Grid.Row="4" Content="Domicilio" Name="lblDomicilio" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" Name="txtDomicilio" Text="{Binding Domicilio}" />
-                    <Label Grid.Column="1" Grid.Row="5" Content="Campo requerido" Visibility="Hidden" Name="lblErrorDomicilio" Foreground="#FB539B" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" Name="txtDomicilio" Text="{Binding Path=Domicilio, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<Label Grid.Column="1" Grid.Row="5" Content="Campo requerido" Visibility="Hidden" Name="lblErrorDomicilio" Foreground="#FB539B" />-->
 
                     <Label Grid.Row="6" Content="Teléfono" Name="lblTelefono" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtTelefono" Text="{Binding Telefono}" />
-                    <Label Grid.Column="1" Grid.Row="7" Content="Campo requerido" Visibility="Hidden" Name="lblErrorTelefono" Foreground="#FB539B" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtTelefono" Text="{Binding Path=Telefono, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<Label Grid.Column="1" Grid.Row="7" Content="Campo requerido" Visibility="Hidden" Name="lblErrorTelefono" Foreground="#FB539B" />-->
 
                     <Label Grid.Row="8" Content="ID" Name="lblID" Foreground="White" FontSize="14" />
                     <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="8" Grid.Column="1" Name="txtID" Text="{Binding ID}" IsEnabled="False" />
@@ -134,7 +135,7 @@
                         <TextBox Style="{StaticResource TextBoxStyle}" Name="txtConsulta" Width="150" HorizontalContentAlignment="Left" Margin="10" TextChanged="txtConsulta_TextChanged" />
                     </StackPanel>
                     <!-- Grilla de proveedores -->
-                    <Grid Width="400" Height="300" Grid.Row="1" VerticalAlignment="Top" >
+                    <Grid Width="400" Height="300" Grid.Row="1" VerticalAlignment="Top" Name="GridListaProveedores" DataContext="{StaticResource ListaProveedores}">
                         <ListView x:Name="Proveedores" Background="Transparent" ItemsSource="{Binding}" 
                                 SelectionMode="Single" SelectionChanged="Proveedores_SelectionChanged">
                             <ListView.View>
@@ -152,18 +153,17 @@
                 </Grid>
                 
             </Grid>
-            <Button Style="{StaticResource ButtonAmarilloPlantilla}" 
-                    Content="Atrás" 
+            <Button Style="{StaticResource ButtonAmarilloPlantilla}"
                     Grid.Row="2" 
-                    Height="30" 
+                    Height="30" Width="100"
                     Margin="0,0,30,20" 
                     VerticalAlignment="Bottom" 
                     HorizontalAlignment="Right" 
                     Name="btnSalir" 
                     Click="btnSalir_Click" >
-                <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                    <Image Source="/Vistas;component/images/icons/atras.png" Height="17" Width="27" />
-                    <TextBlock Height="19" Width="54">Atrás</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Vistas;component/images/icons/atras.png" Height="16" />
+                    <TextBlock Margin="10,0,0,0">Atrás</TextBlock>
                 </StackPanel>
             </Button>
         </Grid>

@@ -5,9 +5,9 @@
              xmlns:d="http://schemas.microsoft.com/expression/blend/2008" 
              mc:Ignorable="d" 
              d:DesignHeight="533" d:DesignWidth="838" Background="Transparent"
-             xmlns:svc="clr-namespace:ClasesBase;assembly=ClasesBase">
+             xmlns:svc="clr-namespace:ClasesBase;assembly=ClasesBase"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase">
     <UserControl.Resources>
-        <svc:Producto x:Key="data"/>
         <ControlTemplate x:Key="TextBoxErrorTemplate">
             <DockPanel>
                 <AdornedElementPlaceholder />
@@ -24,10 +24,21 @@
             </Style.Triggers>
         </Style>
 
-        <ObjectDataProvider 
-            ObjectType="{x:Type svc:TrabajarProductos}"
-            MethodName="obtenerProductos"
-            x:Key="list_productos"/>
+        <ObjectDataProvider x:Key="list_productos" 
+                            ObjectType="{x:Type svc:TrabajarProductos}" 
+                            MethodName="ObtenerProductos" />
+
+        <!-- Se define la vista de la coleccion -->
+        <CollectionViewSource
+            x:Key="ListaProductos"
+            Source="{StaticResource ResourceKey=list_productos}"
+            Filter="eventVistaCliente_Filter">
+            <!--Es El evento filtrado-->
+            <!-- Se define el orden de la vista -->
+            <CollectionViewSource.SortDescriptions>
+                <componentModel:SortDescription PropertyName="Descripcion" Direction="Ascending" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
     </UserControl.Resources>
     <Border CornerRadius="15">
         <Border.Background>
@@ -44,46 +55,46 @@
             </Grid.RowDefinitions>
             <Label Content="Gestión de Productos" FontSize="30" HorizontalAlignment="Center" Height="50" Name="lblTitle" Foreground="White" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
-                <Button Style="{StaticResource ButtonRosaPlantilla}" Width="80" Name="btnNuevo" Click="btnNuevo_Click" ToolTip="Nuevo Producto">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/nuevo.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Nuevo</TextBlock>
+                <Button Style="{StaticResource ButtonRosaPlantilla}" Width="110" Name="btnNuevo" Click="btnNuevo_Click" ToolTip="Nuevo Producto">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/nuevo.png" Height="18" />
+                        <TextBlock Margin="10,0,0,0">Nuevo</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonRosaPlantilla}" Name="btnModificar" Click="btnModificar_Click" ToolTip="Modificar Producto">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/editar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="60">Modificar</TextBlock>
+                <Button Style="{StaticResource ButtonRosaPlantilla}" Name="btnModificar" Click="btnModificar_Click" ToolTip="Modificar Producto" Width="110" Margin="10,0,10,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/editar.png" Height="18" />
+                        <TextBlock Margin="10,0,0,0">Modificar</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonRosaPlantilla}" Name="btnEliminar" Margin="0,0,25,0" Click="btnEliminar_Click" ToolTip="Eliminar Producto">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/eliminar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Eliminar</TextBlock>
+                <Button Style="{StaticResource ButtonRosaPlantilla}" Name="btnEliminar" Margin="0,0,25,0" Width="110" Click="btnEliminar_Click" ToolTip="Eliminar Producto">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/eliminar.png" Height="18" />
+                        <TextBlock Margin="10,0,0,0">Eliminar</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonAzulPlantilla}" Name="btnGuardar" Click="btnGuardar_Click" ToolTip="Guardar Producto">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/guardar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Guardar</TextBlock>
+                <Button Style="{StaticResource ButtonAzulPlantilla}" Name="btnGuardar" Width="100" Margin="0,0,10,0" Click="btnGuardar_Click" ToolTip="Guardar Producto">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/guardar.png" Height="16" />
+                        <TextBlock Margin="10,0,0,0">Guardar</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonAzulPlantilla}" Name="btnCancelar" Click="btnCancelar_Click" Margin="0,0,25,0" ToolTip="Cancelar">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/cancelar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Cancelar</TextBlock>
+                <Button Style="{StaticResource ButtonAzulPlantilla}" Name="btnCancelar" Click="btnCancelar_Click" Width="100" Margin="0,0,25,0" ToolTip="Cancelar">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/cancelar.png" Height="16" />
+                        <TextBlock Margin="10,0,0,0">Cancelar</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource ButtonVerde}" Name="btnPrimero" ToolTip="Primer producto">
                     <Image Source="/images/icons/first.png" />
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnAnterior" ToolTip="Producto anterior">
+                <Button Style="{StaticResource ButtonVerde}" Name="btnAnterior" ToolTip="Producto anterior" Margin="5,0,5,0">
                     <Image Source="/images/icons/previous.png" />
                 </Button>
                 <Button Style="{StaticResource ButtonVerde}" Name="btnSiguiente" ToolTip="Producto siguiente">
                     <Image Source="/images/icons/next.png" />
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnUltimo" Margin="0" ToolTip="Último Producto">
+                <Button Style="{StaticResource ButtonVerde}" Name="btnUltimo" ToolTip="Último Producto" Margin="5,0,0,0">
                     <Image Source="/images/icons/last.png" />
                 </Button>
             </StackPanel>
@@ -94,7 +105,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <Grid Width="300" Margin="30,50,10,50" HorizontalAlignment="Left" >
+                <Grid Width="300" Margin="30,50,10,50" HorizontalAlignment="Left" Name="ProductoItem" DataContext="{StaticResource list_productos}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
                         <ColumnDefinition Width="*" />
@@ -129,40 +140,16 @@
                 </TextBox>-->
 
                     <Label Grid.Row="0" Content="Categoría" Name="label2" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="0" Grid.Column="1" Name="txtCategoria" >
-                        <TextBox.Text>
-                            <Binding Path="Categoria" Source="{StaticResource data}"
-                         ValidatesOnExceptions="True" 
-                         UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
-                        </TextBox.Text>
-                    </TextBox>
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="0" Grid.Column="1" Name="txtCategoria" Text="{Binding Path=Categoria, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
 
                     <Label Grid.Row="2" Content="Color" Name="label3" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Name="txtColor" >
-                        <TextBox.Text>
-                            <Binding Path="Color" Source="{StaticResource data}"
-                         ValidatesOnExceptions="True" 
-                         UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
-                        </TextBox.Text>
-                    </TextBox>
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Name="txtColor" Text="{Binding Path=Color, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
 
                     <Label Grid.Row="4" Content="Descripción" Name="label4" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" Name="txtDescripcion" >
-                        <TextBox.Text>
-                            <Binding Path="Descripcion" Source="{StaticResource data}"
-                         ValidatesOnExceptions="True" 
-                         UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
-                        </TextBox.Text>
-                    </TextBox>
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" Name="txtDescripcion" Text="{Binding Path=Descripcion, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
 
                     <Label Grid.Row="6" Content="Precio" Name="label5" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtPrecio" >
-                        <TextBox.Text>
-                            <Binding Path="Precio" Source="{StaticResource data}"
-                         ValidatesOnExceptions="True" 
-                         UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
-                        </TextBox.Text>
-                    </TextBox>
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtPrecio" Text="{Binding Path=Precio, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
                     
                     <Label Grid.Row="8" Content="Cargar Imagen" Name="label6" Foreground="White" FontSize="13" />
                     <Button Style="{StaticResource ButtonVerdePlantilla}"  
@@ -181,37 +168,47 @@
                     <Image Grid.Row="9" Height="117" HorizontalAlignment="Left" Margin="50,15,0,0" Name="imgProducto" Stretch="Fill" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2" />
                 </Grid>
 
-                <Grid Width="400" Height="300" Margin="0,50,30,0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right" DataContext="{StaticResource list_productos}">
-                    <ListView x:Name="Productos" Background="Transparent" ItemsSource="{Binding}" 
+                <Grid Width="400" Height="350" Margin="0,50,30,0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="60" />
+                        <RowDefinition/>
+                    </Grid.RowDefinitions>
+                    <!-- Stack Panel del Filtrado -->
+                    <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Name="stackPanel1" VerticalAlignment="Top" Width="400">
+                        <Label Content="Buscar por descripcion:" Height="28" Name="label11" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Foreground="#fff" />
+                        <TextBox Style="{StaticResource TextBoxStyle}" Name="textBox1" Width="150" HorizontalContentAlignment="Left" Margin="10" TextChanged="textBox1_TextChanged" />
+                    </StackPanel>
+                    <Grid Width="400" Height="240" Grid.Row="1" VerticalAlignment="Top" DataContext="{StaticResource ListaProductos}" Name="GridListaProductos">
+                        <ListView x:Name="Productos" Background="Transparent" ItemsSource="{Binding}" 
                   SelectionChanged="getCodigo_SelectionChanged" SelectionMode="Single" >
-                        <ListView.View>
-                            <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}"
+                            <ListView.View>
+                                <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}"
                                       ColumnHeaderTemplate="{StaticResource headerTemplate}">
-                                <GridViewColumn Width="80" Header="Código" DisplayMemberBinding="{Binding Path=Prod_Codigo}" />
-                                <GridViewColumn Width="100" Header="Categoría" DisplayMemberBinding="{Binding Path=Prod_Categoria}" />
-                                <GridViewColumn Width="80" Header="Color" DisplayMemberBinding="{Binding Path=Prod_Color}" />
-                                <GridViewColumn Width="140" Header="Descripción" DisplayMemberBinding="{Binding Path=Prod_Descripcion}" />
-                                <GridViewColumn Width="80" Header="Precio" DisplayMemberBinding="{Binding Path=Prod_Precio}" />
-                            </GridView>
-                        </ListView.View>
-                    </ListView>
+                                    <GridViewColumn Width="80" Header="Código" DisplayMemberBinding="{Binding CodProducto}" />
+                                    <GridViewColumn Width="100" Header="Categoría" DisplayMemberBinding="{Binding Path=Categoria}" />
+                                    <GridViewColumn Width="80" Header="Color" DisplayMemberBinding="{Binding Path=Color}" />
+                                    <GridViewColumn Width="140" Header="Descripción" DisplayMemberBinding="{Binding Path=Descripcion}" />
+                                    <GridViewColumn Width="80" Header="Precio" DisplayMemberBinding="{Binding Path=Precio}" />
+                                </GridView>
+                            </ListView.View>
+                        </ListView>
+                    </Grid>
                 </Grid>
             </Grid>
 
 
 
-            <Button Style="{StaticResource ButtonAmarilloPlantilla}" 
-                    Content="Atrás" 
+            <Button Style="{StaticResource ButtonAmarilloPlantilla}"
                     Grid.Row="2" 
-                    Height="30" 
+                    Height="30" Width="100"
                     Margin="0,0,30,20" 
                     VerticalAlignment="Bottom" 
                     HorizontalAlignment="Right" 
                     Name="btnSalir" 
                     Click="btnSalir_Click">
-                <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                    <Image Source="/Vistas;component/images/icons/atras.png" Height="17" Width="27" />
-                    <TextBlock Height="19" Width="54">Atrás</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Vistas;component/images/icons/atras.png" Height="16" />
+                    <TextBlock Margin="10,0,0,0">Atrás</TextBlock>
                 </StackPanel>
             </Button>
         </Grid>
