@@ -126,7 +126,8 @@ namespace Vistas.Views {
                     usr.Nombre = txtNombre.Text;
                     usr.Username = txtNombreUsuario.Text;
                     usr.Password = txtPassword.Text;
-                    usr.Rol = (cmbRoles.SelectedItem as String).Substring(38);
+                    //usr.Rol = (cmbRoles.SelectedItem as String).Substring(38);
+                    usr.Rol = cmbRoles.SelectedValue.ToString();
                     if (editMode) {
                         usr.Legajo = Convert.ToInt32(txtLegajo.Text);
                         TrabajarUsuarios.ModificarUsuario(usr); ;

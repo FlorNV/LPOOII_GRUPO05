@@ -73,14 +73,7 @@ namespace ClasesBase {
         public string this[string columnName] {
             get {
                 string result = null;
-                if (columnName == "CodProducto") { 
-                    if(String.IsNullOrEmpty(CodProducto)) {
-                        result = "Campo requerido.";
-                    } /*
-                    else if (CodProducto.Length < 3) {
-                        result = "Debe tener al menos 3 letras";
-                    }*/
-                } else if (columnName == "Categoria") {
+                if (columnName == "Categoria") {
                     if (String.IsNullOrEmpty(Categoria)) {
                         result = "Campo requerido.";
                     }
@@ -105,11 +98,13 @@ namespace ClasesBase {
                     } catch (FormatException e) {
                         throw new FormatException("Debe ingresar un número");
                     }
-                } else if (columnName == "Imagen") {
+                }
+                /*
+                else if (columnName == "Imagen") {
                     if (String.IsNullOrEmpty(Imagen)) {
                         result = "Campo requerido.";
                     }
-                } 
+                } */
 
                 return result;
             }

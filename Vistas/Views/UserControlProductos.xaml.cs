@@ -23,11 +23,10 @@ namespace Vistas.Views {
     public partial class UserControlProductos : UserControl {
 
         private bool editMode = false;
-        private string codigo = "";
         private string imgProductoRuta = "";
 
         CollectionView Vista;
-        ObservableCollection<Cliente> listaClientes;
+        ObservableCollection<Producto> listaProductos;
 
         private bool selectedItemList;
 
@@ -36,6 +35,14 @@ namespace Vistas.Views {
         public UserControlProductos() {
             InitializeComponent();
 
+            ObjectDataProvider odp = (ObjectDataProvider)this.Resources["list_productos"];
+            listaProductos = odp.Data as ObservableCollection<Producto>;
+
+            selectedItemList = true;
+
+            Vista = (CollectionView)CollectionViewSource.GetDefaultView(ProductoItem.DataContext);
+            vistaColeccionFiltrada = Resources["ListaProductos"] as CollectionViewSource;
+
             HabilitarBotonesInicio();
             HabilitarDeshabilitarTextBox(false);
         }
@@ -43,8 +50,8 @@ namespace Vistas.Views {
         private void HabilitarBotonesInicio() {
             btnCancelar.IsEnabled = false;
             btnGuardar.IsEnabled = false;
-            btnModificar.IsEnabled = false;
-            btnEliminar.IsEnabled = false;
+            btnModificar.IsEnabled = true;
+            btnEliminar.IsEnabled = true;
             btnCargarImg.IsEnabled = false;
             btnNuevo.IsEnabled = true;
         }
@@ -55,6 +62,7 @@ namespace Vistas.Views {
             LimpiarCampos();
             HabilitarDeshabilitarTextBox(true);
             HabilitarDeshabilitarBotones(false);
+            ProductoItem.DataContext = new Producto();
         }
 
         // Limpia los campos de textos
@@ -86,6 +94,14 @@ namespace Vistas.Views {
         {
             HabilitarBotonesABM(b);
             HabilitarBotonesGuardarCancelar(!b);
+            HabilitarBotonesAnteriorSiguiente(b);
+        }
+
+        private void HabilitarBotonesAnteriorSiguiente(bool state) {
+            btnPrimero.IsEnabled = state;
+            btnAnterior.IsEnabled = state;
+            btnSiguiente.IsEnabled = state;
+            btnUltimo.IsEnabled = state;
         }
 
         // Cerrar el form actual
@@ -100,6 +116,22 @@ namespace Vistas.Views {
             LimpiarCampos();
             HabilitarBotonesInicio();
             HabilitarDeshabilitarTextBox(false);
+            ActualizarDatos();
+        }
+
+        private void ActualizarDatos() {
+            try {
+                listaProductos = TrabajarProductos.ObtenerProductos();
+                ProductoItem.DataContext = listaProductos;
+                CollectionViewSource cvs = Resources["ListaProductos"] as CollectionViewSource;
+                cvs.Source = listaProductos;
+                cvs.Filter += new FilterEventHandler(eventVistaCliente_Filter);
+                GridListaProductos.DataContext = cvs;
+
+                Vista = (CollectionView)CollectionViewSource.GetDefaultView(ProductoItem.DataContext);
+            } catch (Exception x) {
+                MessageBox.Show("Error: " + x.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         // Cargar una imagen
@@ -139,52 +171,35 @@ namespace Vistas.Views {
                 MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea agregar este elemento?",
                     "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                decimal precio = 0;
-                try
-                {
-                    precio = Decimal.Parse(txtPrecio.Text);
-                }
-                catch
-                {
-                    MessageBox.Show("El campo precio debe ser un decimal!", "Verifique los campos");
-                    //lblErrorPrecio.Content = "Debe ser un decimal";
-                    //lblErrorPrecio.Visibility = System.Windows.Visibility.Visible;
-                    return;
-                }
+                if (messageBoxResult == MessageBoxResult.Yes) {
+                    try {
+                        Producto oProducto = new Producto();
+                        oProducto.Categoria = txtCategoria.Text;
+                        oProducto.Color = txtColor.Text;
+                        oProducto.Descripcion = txtDescripcion.Text;
+                        oProducto.Precio = Convert.ToDecimal(txtPrecio.Text);
+                        oProducto.Imagen = imgProductoRuta;
 
-                if (messageBoxResult == MessageBoxResult.Yes)
-                {
-
-
-                    Producto oProducto = new Producto();
-                    oProducto.Categoria = txtCategoria.Text;
-                    oProducto.Color = txtColor.Text;
-                    oProducto.Descripcion = txtDescripcion.Text;
-                    oProducto.Precio = precio;
-
-                    oProducto.Imagen = imgProductoRuta;
-
-                    if (editMode)
-                    {
-                        // Guardar los cambios del producto
-                        ClasesBase.TrabajarProductos.ModificarProducto(oProducto, codigo);
-                        MessageBox.Show("Producto modificado", "Modificar");
+                        if (editMode)
+                        {
+                            // Guardar los cambios del producto
+                            ClasesBase.TrabajarProductos.ModificarProducto(oProducto, txtCodProducto.Text);
+                            MessageBox.Show("Producto modificado", "Modificar");
+                            editMode = false;
+                        }
+                        else
+                        {
+                            // Insertar el nuevo producto
+                            ClasesBase.TrabajarProductos.InsertarProducto(oProducto);
+                            MessageBox.Show("Producto guardado", "Guardar");
+                        }
+                        //MessageBox.Show(oProducto.Imagen);
+                        ActualizarDatos();
+                        HabilitarDeshabilitarTextBox(false);
+                        HabilitarDeshabilitarBotones(true);
+                    } catch (Exception x) {
+                        MessageBox.Show("Error: " + x.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-                    else
-                    {
-                        // Insertar el nuevo producto
-                        ClasesBase.TrabajarProductos.InsertarProducto(oProducto);
-                        MessageBox.Show("Producto guardado", "Guardar");
-                    }
-
-                    MessageBox.Show(oProducto.Imagen);
-
-                    Productos.DataContext = TrabajarProductos.obtenerProductos();
-
-                    HabilitarDeshabilitarTextBox(false);
-                    HabilitarDeshabilitarBotones(true);
-
-                    LimpiarCampos();
                 }
             }
         }
@@ -192,7 +207,6 @@ namespace Vistas.Views {
         private void btnModificar_Click(object sender, RoutedEventArgs e)
         {
             editMode = true;
-
             habilitarEdicion(editMode);
             HabilitarDeshabilitarBotones(false);
         }
@@ -203,26 +217,36 @@ namespace Vistas.Views {
                     "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
-                TrabajarProductos.eliminarProducto(codigo);
-                LimpiarCampos();
-
-                HabilitarDeshabilitarBotones(true);
-
-                Productos.DataContext = TrabajarProductos.obtenerProductos();
+                try {
+                    TrabajarProductos.eliminarProducto(txtCodProducto.Text);
+                    LimpiarCampos();
+                    HabilitarDeshabilitarBotones(true);
+                    ActualizarDatos();
+                } catch (Exception x) {
+                    MessageBox.Show("Error: " + x.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
         private bool ValidarTextBox()
         {
-            if (txtCategoria.Text == String.Empty || 
-                txtColor.Text == String.Empty || 
-                txtDescripcion.Text == String.Empty || 
-                txtPrecio.Text == String.Empty)
-            {
+            Producto prd = CargarProducto();
+            string err = prd.isValid();
+            if (err != null) {
+                MessageBox.Show("Revise los campos por favor.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
                 return true;
             }
 
             return false;
+        }
+
+        private Producto CargarProducto() {
+            Producto prd = new Producto();
+            prd.Categoria = txtCategoria.Text;
+            prd.Color = txtColor.Text;
+            prd.Descripcion = txtDescripcion.Text;
+            prd.Precio = Convert.ToDecimal(txtPrecio.Text);
+            return prd;
         }
 
         private void habilitarEdicion(bool mode) {
@@ -232,8 +256,37 @@ namespace Vistas.Views {
             txtPrecio.IsEnabled = mode;
         }
 
-        private void getCodigo_SelectionChanged(object sender, SelectionChangedEventArgs e)
+        private void Productos_SelectionChanged(object sender, SelectionChangedEventArgs e)
         {
+            Producto selection = (Producto)Productos.SelectedItem;
+            if (selection != null) {
+                selectedItemList = true;
+                ProductoItem.DataContext = new Producto();
+                txtCategoria.Text = selection.Categoria;
+                txtColor.Text = selection.Color;
+                txtDescripcion.Text = selection.Descripcion;
+                txtPrecio.Text = selection.Precio.ToString();
+                txtCodProducto.Text = selection.CodProducto.ToString();
+
+                // Cargar imagen
+                if (selection.Imagen == "" || selection.Imagen == null) {
+                    imgProducto.Source = null;
+                    imgProductoRuta = "";
+                } else {
+                    BitmapImage img = new BitmapImage();
+                    img.BeginInit();
+                    img.UriSource = new Uri(selection.Imagen);
+                    img.EndInit();
+                    img.Freeze();
+
+                    imgProducto.Source = img;
+                    imgProductoRuta = selection.Imagen;
+                }
+
+                // Inhabilitar los TextBox
+                HabilitarDeshabilitarBotones(true);
+            }
+            /*
             DataRowView dataRowView = Productos.SelectedItem as DataRowView;
             if (dataRowView != null) {
                 
@@ -246,7 +299,6 @@ namespace Vistas.Views {
                 txtColor.Text = oProducto.Color;
                 txtDescripcion.Text = oProducto.Descripcion;
                 txtPrecio.Text = oProducto.Precio.ToString();
-
 
                 // Cargar imagen
                 if (oProducto.Imagen == "" || oProducto.Imagen == null)
@@ -265,6 +317,7 @@ namespace Vistas.Views {
                     imgProducto.Source = img;
                     imgProductoRuta = oProducto.Imagen;
                 }
+                
 
                 // Inhabilitar los TextBox
                 txtCategoria.IsEnabled = false;
@@ -273,11 +326,12 @@ namespace Vistas.Views {
                 txtPrecio.IsEnabled = false;
 
                 HabilitarDeshabilitarBotones(true);
-            }
+            }*/
         }
 
         private void Window_Loaded(object sender, RoutedEventArgs e) {
             //productosList = convertToObservable( TrabajarProductos.obtenerProductos());
+            ActualizarDatos();
             HabilitarDeshabilitarBotones(true);
             HabilitarDeshabilitarTextBox(false);
         }
@@ -311,8 +365,12 @@ namespace Vistas.Views {
 
         //Evento que toma el cambio de texto del filtro
         private void textBox1_TextChanged(object sender, TextChangedEventArgs e) {
-            if (vistaColeccionFiltrada != null) {
-                vistaColeccionFiltrada.Filter += eventVistaCliente_Filter;
+            try {
+                if (vistaColeccionFiltrada != null) {
+                    vistaColeccionFiltrada.Filter += eventVistaCliente_Filter;
+                }
+            } catch(Exception ex) {
+                MessageBox.Show("Error inserperado:\n" + ex, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
             }
         }
         //Evento del filtro
@@ -328,6 +386,65 @@ namespace Vistas.Views {
                 e.Accepted = true;
             } else {
                 e.Accepted = false;
+            }
+        }
+
+        private void btnPrimero_Click(object sender, RoutedEventArgs e) {
+            ValidarSelectedItem();
+            Vista.MoveCurrentToFirst();
+            // Cargar imagen
+            CargarImagenCollectionViewSource();
+        }
+
+        private void btnUltimo_Click(object sender, RoutedEventArgs e) {
+            ValidarSelectedItem();
+            Vista.MoveCurrentToLast();
+            CargarImagenCollectionViewSource();
+        }
+
+        private void btnAnterior_Click(object sender, RoutedEventArgs e) {
+            ValidarSelectedItem();
+            Vista.MoveCurrentToPrevious();
+            if (Vista.IsCurrentBeforeFirst) {
+                Vista.MoveCurrentToLast();
+            }
+            CargarImagenCollectionViewSource();
+        }
+
+        private void btnSiguiente_Click(object sender, RoutedEventArgs e) {
+            ValidarSelectedItem();
+            Vista.MoveCurrentToNext();
+            if (Vista.IsCurrentAfterLast) {
+                Vista.MoveCurrentToFirst();
+            }
+            CargarImagenCollectionViewSource();
+        }
+        private void CargarImagenCollectionViewSource() {
+            Producto selection = (Producto)Vista.CurrentItem;
+            try {
+                if (selection.Imagen == "" || selection.Imagen == null) {
+                    imgProducto.Source = null;
+                    imgProductoRuta = "";
+                } else {
+                    BitmapImage img = new BitmapImage();
+                    img.BeginInit();
+                    img.UriSource = new Uri(selection.Imagen);
+                    img.EndInit();
+                    img.Freeze();
+
+                    imgProducto.Source = img;
+                    imgProductoRuta = selection.Imagen;
+                }
+            } catch (Exception x) {
+                MessageBox.Show("Error: " + x.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
+        }
+
+        private void ValidarSelectedItem() {
+            if (selectedItemList) {
+                ProductoItem.DataContext = listaProductos;
+                Vista = (CollectionView)CollectionViewSource.GetDefaultView(ProductoItem.DataContext);
+                selectedItemList = false;
             }
         }
     }

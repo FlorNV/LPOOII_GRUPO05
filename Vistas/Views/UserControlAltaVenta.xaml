@@ -11,7 +11,7 @@
         <!-- Datos del cliente -->
         <ObjectDataProvider 
             ObjectType="{x:Type svc:TrabajarClientes}"
-            MethodName="obtenerClientes"
+            MethodName="ObtenerClientes"
             x:Key="listClientes"/>
 
         <DataTemplate x:Key="LayoutClientes" >
@@ -83,7 +83,7 @@
         </Border.Background>
         <Grid>
         <DockPanel>
-            <Label Content="Nueva Venta" Margin="0,10,0,0" FontSize="30" HorizontalAlignment="Center" Height="50" DockPanel.Dock="Top" Name="lblTitle" Foreground="White" />
+                <Label Content="Nueva Venta" Margin="0,10,0,0" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Height="50" DockPanel.Dock="Top" Name="lblTitle" Foreground="White" />
             <Grid DockPanel.Dock="Bottom" Height="400" Name="grid1" Width="750" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition />
@@ -194,7 +194,7 @@
                                 <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" Name="txtProductoCodigo" IsEnabled="False"/>
 
                                 <Label Content="Cantidad" Name="lblProductoCantidad" Grid.Column="3" Foreground="White" FontSize="14" />
-                                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="4" Name="txtProductoCantidad" >
+                                <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="4" Name="txtProductoCantidad" TextChanged="txtProductoCantidad_TextChanged">
                                     <TextBox.Text>
                                         <Binding Path="Cantidad" Source="{StaticResource data}"
                                             ValidatesOnExceptions="True" 

@@ -53,7 +53,7 @@
                 <RowDefinition Height="30" />
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="Gestión de Productos" FontSize="30" HorizontalAlignment="Center" Height="50" Name="lblTitle" Foreground="White" />
+            <Label Content="Gestión de Productos" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Height="50" Name="lblTitle" Foreground="White" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
                 <Button Style="{StaticResource ButtonRosaPlantilla}" Width="110" Name="btnNuevo" Click="btnNuevo_Click" ToolTip="Nuevo Producto">
                     <StackPanel Orientation="Horizontal">
@@ -85,16 +85,16 @@
                         <TextBlock Margin="10,0,0,0">Cancelar</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnPrimero" ToolTip="Primer producto">
+                <Button Style="{StaticResource ButtonVerde}" Name="btnPrimero" ToolTip="Primer producto" Click="btnPrimero_Click">
                     <Image Source="/images/icons/first.png" />
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnAnterior" ToolTip="Producto anterior" Margin="5,0,5,0">
+                <Button Style="{StaticResource ButtonVerde}" Name="btnAnterior" ToolTip="Producto anterior" Margin="5,0,5,0" Click="btnAnterior_Click">
                     <Image Source="/images/icons/previous.png" />
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnSiguiente" ToolTip="Producto siguiente">
+                <Button Style="{StaticResource ButtonVerde}" Name="btnSiguiente" ToolTip="Producto siguiente" Click="btnSiguiente_Click">
                     <Image Source="/images/icons/next.png" />
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnUltimo" ToolTip="Último Producto" Margin="5,0,0,0">
+                <Button Style="{StaticResource ButtonVerde}" Name="btnUltimo" ToolTip="Último Producto" Margin="5,0,0,0" Click="btnUltimo_Click">
                     <Image Source="/images/icons/last.png" />
                 </Button>
             </StackPanel>
@@ -105,7 +105,7 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <Grid Width="300" Margin="30,50,10,50" HorizontalAlignment="Left" Name="ProductoItem" DataContext="{StaticResource list_productos}">
+                <Grid Width="300" Margin="30,30,10,50" HorizontalAlignment="Left" Name="ProductoItem" DataContext="{StaticResource list_productos}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
                         <ColumnDefinition Width="*" />
@@ -119,7 +119,8 @@
                         <RowDefinition Height="30" />
                         <RowDefinition Height="30" />
                         <RowDefinition Height="30" />
-                        <RowDefinition Height="148*" />
+                        <RowDefinition Height="30" />
+                        <RowDefinition Height="100" />
                     </Grid.RowDefinitions>
                     <!--<Label Grid.Row="0" Content="Codigo" Name="lblCodigo" Foreground="White" FontSize="14" Visibility="Hidden" />
                 <TextBox  Grid.Row="0" Style="{StaticResource TextBoxStyle}"  Grid.Column="1" Name="txtCodigo" Visibility="Hidden
@@ -151,11 +152,14 @@
                     <Label Grid.Row="6" Content="Precio" Name="label5" Foreground="White" FontSize="14" />
                     <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtPrecio" Text="{Binding Path=Precio, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
                     
+                    <!-- TextBox Codigo -->
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="10" Name="txtCodProducto" Text="{Binding CodProducto}" Visibility="Hidden" IsEnabled="False" />
+                    
                     <Label Grid.Row="8" Content="Cargar Imagen" Name="label6" Foreground="White" FontSize="13" />
                     <Button Style="{StaticResource ButtonVerdePlantilla}"  
                     Grid.Row="8" 
                     Grid.Column="1" 
-                    Height="30" VerticalAlignment="Bottom" 
+                    Height="30" VerticalAlignment="Top" 
                     HorizontalAlignment="Right" 
                     Name="btnCargarImg" 
                     Click="btnCargarImg_Click" Width="200" ToolTip="Cargar imagen no mayor a 2 MB">
@@ -165,10 +169,10 @@
                         </StackPanel>
                     </Button>
 
-                    <Image Grid.Row="9" Height="117" HorizontalAlignment="Left" Margin="50,15,0,0" Name="imgProducto" Stretch="Fill" VerticalAlignment="Top" Width="200" Grid.ColumnSpan="2" />
+                    <Image Grid.Row="9" Grid.Column="1" Height="90" VerticalAlignment="Bottom"  Name="imgProducto" Stretch="Fill" Source="{Binding Imagen}"/>
                 </Grid>
 
-                <Grid Width="400" Height="350" Margin="0,50,30,0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">
+                <Grid Width="440" Height="350" Margin="0,30,30,0" Grid.Column="1" VerticalAlignment="Top" HorizontalAlignment="Right">
                     <Grid.RowDefinitions>
                         <RowDefinition Height="60" />
                         <RowDefinition/>
@@ -178,17 +182,18 @@
                         <Label Content="Buscar por descripcion:" Height="28" Name="label11" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Foreground="#fff" />
                         <TextBox Style="{StaticResource TextBoxStyle}" Name="textBox1" Width="150" HorizontalContentAlignment="Left" Margin="10" TextChanged="textBox1_TextChanged" />
                     </StackPanel>
-                    <Grid Width="400" Height="240" Grid.Row="1" VerticalAlignment="Top" DataContext="{StaticResource ListaProductos}" Name="GridListaProductos">
+                    <Grid Width="440" Height="240" Grid.Row="1" VerticalAlignment="Top" DataContext="{StaticResource ListaProductos}" Name="GridListaProductos">
                         <ListView x:Name="Productos" Background="Transparent" ItemsSource="{Binding}" 
-                  SelectionChanged="getCodigo_SelectionChanged" SelectionMode="Single" >
+                  SelectionChanged="Productos_SelectionChanged" SelectionMode="Single" >
                             <ListView.View>
                                 <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}"
                                       ColumnHeaderTemplate="{StaticResource headerTemplate}">
                                     <GridViewColumn Width="80" Header="Código" DisplayMemberBinding="{Binding CodProducto}" />
-                                    <GridViewColumn Width="100" Header="Categoría" DisplayMemberBinding="{Binding Path=Categoria}" />
-                                    <GridViewColumn Width="80" Header="Color" DisplayMemberBinding="{Binding Path=Color}" />
-                                    <GridViewColumn Width="140" Header="Descripción" DisplayMemberBinding="{Binding Path=Descripcion}" />
-                                    <GridViewColumn Width="80" Header="Precio" DisplayMemberBinding="{Binding Path=Precio}" />
+                                    <GridViewColumn Width="100" Header="Categoría" DisplayMemberBinding="{Binding Categoria}" />
+                                    <GridViewColumn Width="80" Header="Color" DisplayMemberBinding="{Binding Color}" />
+                                    <GridViewColumn Width="140" Header="Descripción" DisplayMemberBinding="{Binding Descripcion}" />
+                                    <GridViewColumn Width="80" Header="Precio" DisplayMemberBinding="{Binding Precio}" />
+                                    <GridViewColumn Width="80" Header="Imagen" DisplayMemberBinding="{Binding Imagen}" />
                                 </GridView>
                             </ListView.View>
                         </ListView>

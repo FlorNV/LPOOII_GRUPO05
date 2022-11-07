@@ -38,7 +38,7 @@
                 <RowDefinition Height="30" />
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <Label Content="Gestión de Clientes" FontSize="30" HorizontalAlignment="Center" Height="50" Name="lblTitle" Foreground="White" />
+            <Label Content="Gestión de Clientes" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Height="50" Name="lblTitle" Foreground="White" />
             <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
                 <Button Style="{StaticResource ButtonRosa}" Name="btnNuevo" Click="btnNuevo_Click" ToolTip="Nuevo Cliente" Width="110">
                     <StackPanel Orientation="Horizontal">

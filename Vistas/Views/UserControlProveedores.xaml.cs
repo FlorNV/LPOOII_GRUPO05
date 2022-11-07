@@ -63,30 +63,34 @@ namespace Vistas.Views
                    "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (messageBoxResult == MessageBoxResult.Yes)
                 {
-                    Proveedor oProveedor = new Proveedor();
-                    oProveedor.CUIT = txtCUIT.Text;
-                    oProveedor.RazonSocial = txtRazonSocial.Text;
-                    oProveedor.Domicilio = txtDomicilio.Text;
-                    oProveedor.Telefono = txtTelefono.Text;
+                    try {
+                        Proveedor oProveedor = new Proveedor();
+                        oProveedor.CUIT = txtCUIT.Text;
+                        oProveedor.RazonSocial = txtRazonSocial.Text;
+                        oProveedor.Domicilio = txtDomicilio.Text;
+                        oProveedor.Telefono = txtTelefono.Text;
 
-                    if (editMode)
-                    {
-                        // Guardar los cambios del proveedor
-                        TrabajarProveedores.ModificarProveedor(oProveedor, Convert.ToInt32(txtID.Text));
-                        editMode = false;
-                        MessageBox.Show("Proveedor modificado", "Modificar");
-                    }
-                    else
-                    {
-                        // Insertar el nuevo proveedor
-                        TrabajarProveedores.InsertarProveedor(oProveedor);
-                        MessageBox.Show("Proveedor guardado", "Guardar");
-                    }
+                        if (editMode)
+                        {
+                            // Guardar los cambios del proveedor
+                            TrabajarProveedores.ModificarProveedor(oProveedor, Convert.ToInt32(txtID.Text));
+                            editMode = false;
+                            MessageBox.Show("Proveedor modificado", "Modificar");
+                        }
+                        else
+                        {
+                            // Insertar el nuevo proveedor
+                            TrabajarProveedores.InsertarProveedor(oProveedor);
+                            MessageBox.Show("Proveedor guardado", "Guardar");
+                        }
 
-                    ActualizarDatos();
-                    OcultarID(false);
-                    HabilitarDeshabilitarTextBox(false);
-                    HabilitarDeshabilitarBotones(true);
+                        ActualizarDatos();
+                        OcultarID(false);
+                        HabilitarDeshabilitarTextBox(false);
+                        HabilitarDeshabilitarBotones(true);
+                    } catch (Exception x) {
+                        MessageBox.Show("Error: " + x.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                    }
                 }
             }
         }
@@ -105,24 +109,31 @@ namespace Vistas.Views
                     "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (messageBoxResult == MessageBoxResult.Yes)
             {
-                TrabajarProveedores.EliminarProveedor(Convert.ToInt32(txtID.Text));
-
-                LimpiarCampos();
-                HabilitarDeshabilitarBotones(true);
-                ActualizarDatos();
+                try {
+                    TrabajarProveedores.EliminarProveedor(Convert.ToInt32(txtID.Text));
+                    LimpiarCampos();
+                    HabilitarDeshabilitarBotones(true);
+                    ActualizarDatos();
+                } catch (Exception x) {
+                    MessageBox.Show("Error: " + x.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
         private void ActualizarDatos()
         {
-            listaProveedores = TrabajarProveedores.ObtenerProveedores();
-            ProveedorItem.DataContext = listaProveedores;
-            CollectionViewSource cvs = Resources["ListaProveedores"] as CollectionViewSource;
-            cvs.Source = listaProveedores;
-            cvs.Filter += new FilterEventHandler(eventVistaProveedor_Filter);
-            GridListaProveedores.DataContext = cvs;
+            try {
+                listaProveedores = TrabajarProveedores.ObtenerProveedores();
+                ProveedorItem.DataContext = listaProveedores;
+                CollectionViewSource cvs = Resources["ListaProveedores"] as CollectionViewSource;
+                cvs.Source = listaProveedores;
+                cvs.Filter += new FilterEventHandler(eventVistaProveedor_Filter);
+                GridListaProveedores.DataContext = cvs;
 
-            Vista = (CollectionView)CollectionViewSource.GetDefaultView(ProveedorItem.DataContext);
+                Vista = (CollectionView)CollectionViewSource.GetDefaultView(ProveedorItem.DataContext);
+            } catch (Exception x) {
+                MessageBox.Show("Error: " + x.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnCancelar_Click(object sender, RoutedEventArgs e)

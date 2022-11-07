@@ -58,28 +58,33 @@ namespace Vistas.Views {
                 MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea agregar este cliente?",
                    "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
                 if (messageBoxResult == MessageBoxResult.Yes) {
-                    Cliente oCliente = new Cliente();
-                    oCliente.DNI = txtDNI.Text;
-                    oCliente.Apellido = txtApellido.Text;
-                    oCliente.Nombre = txtNombre.Text;
-                    oCliente.Direccion = txtDireccion.Text;
 
-                    if (editMode) {
-                        // Guardar los cambios del cliente
-                        ClasesBase.TrabajarClientes.ModificarCliente(oCliente, Convert.ToInt32(txtID.Text));
-                        MessageBox.Show("Cliente modificado", "Modificar");
-                        editMode = false;
-                    } else {
-                        // Insertar el nuevo cliente
-                        ClasesBase.TrabajarClientes.InsertarCliente(oCliente);
-                        MessageBox.Show("Cliente guardado", "Guardar");
+                    try {
+                        Cliente oCliente = new Cliente();
+                        oCliente.DNI = txtDNI.Text;
+                        oCliente.Apellido = txtApellido.Text;
+                        oCliente.Nombre = txtNombre.Text;
+                        oCliente.Direccion = txtDireccion.Text;
+
+                        if (editMode) {
+                            // Guardar los cambios del cliente
+                            ClasesBase.TrabajarClientes.ModificarCliente(oCliente, Convert.ToInt32(txtID.Text));
+                            MessageBox.Show("Cliente modificado", "Modificar");
+                            editMode = false;
+                        } else {
+                            // Insertar el nuevo cliente
+                            ClasesBase.TrabajarClientes.InsertarCliente(oCliente);
+                            MessageBox.Show("Cliente guardado", "Guardar");
+                        }
+
+                        ActualizarDatos();
+
+                        OcultarID(false);
+                        HabilitarDeshabilitarTextBox(false);
+                        HabilitarDeshabilitarBotones(true);
+                    } catch (Exception x) {
+                        MessageBox.Show("Error: " + x.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                     }
-
-                    ActualizarDatos();
-
-                    OcultarID(false);
-                    HabilitarDeshabilitarTextBox(false);
-                    HabilitarDeshabilitarBotones(true);
                 }
             }
 
@@ -229,14 +234,18 @@ namespace Vistas.Views {
         }
 
         private void ActualizarDatos() {
-            listaClientes = TrabajarClientes.ObtenerClientes();
-            grid_content.DataContext  = listaClientes;
-            CollectionViewSource cvs = Resources["ListaClientes"] as CollectionViewSource;
-            cvs.Source = listaClientes;
-            cvs.Filter += new FilterEventHandler(eventVistaCliente_Filter);
-            GridListaClientes.DataContext = cvs;
+            try {
+                listaClientes = TrabajarClientes.ObtenerClientes();
+                grid_content.DataContext  = listaClientes;
+                CollectionViewSource cvs = Resources["ListaClientes"] as CollectionViewSource;
+                cvs.Source = listaClientes;
+                cvs.Filter += new FilterEventHandler(eventVistaCliente_Filter);
+                GridListaClientes.DataContext = cvs;
             
-            Vista = (CollectionView)CollectionViewSource.GetDefaultView(GridListaClientes.DataContext);
+                Vista = (CollectionView)CollectionViewSource.GetDefaultView(GridListaClientes.DataContext);
+            } catch (Exception x) {
+                MessageBox.Show("Error: " + x.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+            }
         }
 
         private void btnPrimero_Click(object sender, RoutedEventArgs e) {
@@ -287,12 +296,14 @@ namespace Vistas.Views {
             MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea eliminar este cliente?",
                     "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
             if (messageBoxResult == MessageBoxResult.Yes) {
-                TrabajarClientes.EliminarCliente(Convert.ToInt32(txtID.Text));
-                LimpiarCampos();
-
-                HabilitarDeshabilitarBotones(true);
-
-                ActualizarDatos();
+                try {
+                    TrabajarClientes.EliminarCliente(Convert.ToInt32(txtID.Text));
+                    LimpiarCampos();
+                    HabilitarDeshabilitarBotones(true);
+                    ActualizarDatos();
+                } catch (Exception x) {
+                    MessageBox.Show("Error: " + x.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
+                }
             }
         }
 
