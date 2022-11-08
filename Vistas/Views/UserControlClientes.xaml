@@ -10,7 +10,7 @@
     <UserControl.Resources>
         <ObjectDataProvider x:Key="list_clientes" 
                             ObjectType="{x:Type svc:TrabajarClientes}" 
-                            MethodName="ObtenerClientesStatic" />
+                            MethodName="ObtenerClientes" />
 
         <!-- Se define la vista de la coleccion -->
         <CollectionViewSource
@@ -34,74 +34,64 @@
         </Border.Background>
         <Grid>
             <Grid.RowDefinitions>
-                <RowDefinition Height="40" />
+                <RowDefinition Height="80" />
+                <RowDefinition Height="30" />
                 <RowDefinition/>
             </Grid.RowDefinitions>
-            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Margin="0,10,0,0">
-                <Button Style="{StaticResource ButtonRosa}" Name="btnNuevo" Click="btnNuevo_Click" ToolTip="Nuevo Cliente">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/nuevo.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Nuevo</TextBlock>
+            <Label Content="Gestión de Clientes" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" Height="50" Name="lblTitle" Foreground="White" />
+            <StackPanel Orientation="Horizontal" HorizontalAlignment="Center" Grid.Row="1">
+                <Button Style="{StaticResource ButtonRosa}" Name="btnNuevo" Click="btnNuevo_Click" ToolTip="Nuevo Cliente" Width="110">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/nuevo.png" Height="18" />
+                        <TextBlock Margin="10,0,0,0">Nuevo</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonRosa}" Name="btnModificar" Click="btnModificar_Click" Width="89" ToolTip="Modificar Cliente">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/editar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="60">Modificar</TextBlock>
+                <Button Style="{StaticResource ButtonRosa}" Name="btnModificar" Click="btnModificar_Click" Width="110" Margin="10,0,10,0" ToolTip="Modificar Cliente">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/editar.png" Height="18" />
+                        <TextBlock Margin="10,0,0,0">Modificar</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonRosa}" Name="btnEliminar" Margin="0,0,25,0" Click="btnEliminar_Click" ToolTip="Eliminar Cliente">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/eliminar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Eliminar</TextBlock>
+                <Button Style="{StaticResource ButtonRosa}" Name="btnEliminar" Width="110" Margin="0,0,25,0" Click="btnEliminar_Click" ToolTip="Eliminar Cliente">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/eliminar.png" Height="18" />
+                        <TextBlock Margin="10,0,0,0">Eliminar</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonAzul}" Name="btnGuardar" Click="btnGuardar_Click" ToolTip="Guardar Cliente">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/guardar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="61">Guardar</TextBlock>
+                <Button Style="{StaticResource ButtonAzul}" Name="btnGuardar" Click="btnGuardar_Click" ToolTip="Guardar Cliente" Width="100" Margin="0,0,10,0">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/guardar.png" Height="16" />
+                        <TextBlock Margin="10,0,0,0">Guardar</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonAzul}" Name="btnCancelar" Click="btnCancelar_Click" Margin="0,0,25,0" Width="87" ToolTip="Cancelar">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/cancelar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Cancelar</TextBlock>
+                <Button Style="{StaticResource ButtonAzul}" Name="btnCancelar" Click="btnCancelar_Click" Margin="0,0,25,0" Width="100" ToolTip="Cancelar">
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/cancelar.png" Height="18" />
+                        <TextBlock Margin="10,0,0,0">Cancelar</TextBlock>
                     </StackPanel>
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnPrimero" Click="btnPrimero_Click" ToolTip="Volver al Primer Cliente">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/primero.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Primero</TextBlock>
-                    </StackPanel>
+                <Button Style="{StaticResource ButtonVerde}" Name="btnPrimero" ToolTip="Primer cliente" Click="btnPrimero_Click">
+                    <Image Source="/images/icons/first.png" />
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnAnterior" Click="btnAnterior_Click" ToolTip="Volver al Cliente Anterior">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/anterior.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Anterior</TextBlock>
-                    </StackPanel>
+                <Button Style="{StaticResource ButtonVerde}" Name="btnAnterior" ToolTip="Cliente anterior" Click="btnAnterior_Click" Margin="5,0,5,0">
+                    <Image Source="/images/icons/previous.png" />
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnSiguiente" Click="btnSiguiente_Click" ToolTip="Siguiente Cliente" Width="88">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/siguiente.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="61">Siguiente</TextBlock>
-                    </StackPanel>
+                <Button Style="{StaticResource ButtonVerde}" Name="btnSiguiente" ToolTip="Cliente siguiente" Click="btnSiguiente_Click">
+                    <Image Source="/images/icons/next.png" />
                 </Button>
-                <Button Style="{StaticResource ButtonVerde}" Name="btnUltimo" Margin="0" Click="btnUltimo_Click" ToolTip="Último Cliente">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/ultimo.png" Height="22" Width="27" />
-                        <TextBlock Height="19" Width="54">Último</TextBlock>
-                    </StackPanel>
+                <Button Style="{StaticResource ButtonVerde}" Name="btnUltimo" ToolTip="Último cliente" Click="btnUltimo_Click" Margin="5,0,0,0">
+                    <Image Source="/images/icons/last.png" />
                 </Button>
             </StackPanel>
 
-            <Grid Grid.Row="1" >
+            <Grid Grid.Row="2" >
                 <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="350" />
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
 
-                <Grid  Width="300" Margin="30,50" HorizontalAlignment="Left" 
-                  Name="grid_content" DataContext="{Binding Source={StaticResource ResourceKey=ListaClientes}}">
+                <Grid Width="300" Margin="30,50,10,50" HorizontalAlignment="Left" 
+                  Name="grid_content" DataContext="{StaticResource list_clientes}">
                     <Grid.ColumnDefinitions>
                         <ColumnDefinition Width="0.5*" />
                         <ColumnDefinition Width="*" />
@@ -118,20 +108,20 @@
                         <RowDefinition Height="30" />
                     </Grid.RowDefinitions>
                     <Label Content="DNI" Name="label1" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" Name="txtDNI" Text="{Binding DNI}"/>
-                    <Label Grid.Column="1" Grid.Row="1" Content="Label" Visibility="Hidden" Name="lblErrorDNI" Foreground="#FB539B" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Column="1" Name="txtDNI" Text="{Binding Path=DNI, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<Label Grid.Column="1" Grid.Row="1" Content="Label" Visibility="Hidden" Name="lblErrorDNI" Foreground="#FB539B" />-->
 
                     <Label Grid.Row="2" Content="Apellido" Name="label2" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Name="txtApellido" Text="{Binding Apellido}" />
-                    <Label Grid.Column="1" Grid.Row="3" Content="Campo requerido" Visibility="Hidden" Name="lblErrorApellido" Foreground="#FB539B" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="2" Grid.Column="1" Name="txtApellido" Text="{Binding Path=Apellido, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<Label Grid.Column="1" Grid.Row="3" Content="Campo requerido" Visibility="Hidden" Name="lblErrorApellido" Foreground="#FB539B" />-->
 
                     <Label Grid.Row="4" Content="Nombre" Name="label3" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" Name="txtNombre" Text="{Binding Nombre}" />
-                    <Label Grid.Column="1" Grid.Row="5" Content="Campo requerido" Visibility="Hidden" Name="lblErrorNombre" Foreground="#FB539B" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="4" Grid.Column="1" Name="txtNombre" Text="{Binding Path=Nombre, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<Label Grid.Column="1" Grid.Row="5" Content="Campo requerido" Visibility="Hidden" Name="lblErrorNombre" Foreground="#FB539B" />-->
 
                     <Label Grid.Row="6" Content="Dirección" Name="label4" Foreground="White" FontSize="14" />
-                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtDireccion" Text="{Binding Direccion}" />
-                    <Label Grid.Column="1" Grid.Row="7" Content="Campo requerido" Visibility="Hidden" Name="lblErrorDireccion" Foreground="#FB539B" />
+                    <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="6" Grid.Column="1" Name="txtDireccion" Text="{Binding Path=Direccion, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
+                    <!--<Label Grid.Column="1" Grid.Row="7" Content="Campo requerido" Visibility="Hidden" Name="lblErrorDireccion" Foreground="#FB539B" />-->
 
                     <Label Grid.Row="8" Content="ID" Name="lblID" Foreground="White" FontSize="14" />
                     <TextBox Style="{StaticResource TextBoxStyle}" Grid.Row="8" Grid.Column="1" Name="txtID" Text="{Binding ID}" IsEnabled="False" />
@@ -145,15 +135,15 @@
                     <!-- Stack Panel del Filtrado -->
                     <StackPanel HorizontalAlignment="Left" Orientation="Horizontal" Name="stackPanel1" VerticalAlignment="Top" Width="400">
                         <Label Content="Buscar por Apellido:" Height="28" Name="label11" VerticalContentAlignment="Top" HorizontalContentAlignment="Center" Foreground="#fff" />
-                        <TextBox Height="26" Name="textBox1" Width="150" HorizontalContentAlignment="Left" Margin="10" TextChanged="textBox1_TextChanged" />
+                        <TextBox Style="{StaticResource TextBoxStyle}" Name="textBox1" Width="150" HorizontalContentAlignment="Left" Margin="10" TextChanged="textBox1_TextChanged" />
                     </StackPanel>
                     <!-- Grilla de clientes -->
-                    <Grid Width="400" Height="350" Grid.Row="1"  DataContext="{StaticResource ListaClientes}">
-                        <ListView x:Name="Clientes" Background="Transparent" ItemsSource="{Binding}" 
-                                SelectionMode="Single" Margin="-1,0,1,0" SelectionChanged="Clientes_SelectionChanged">
+                    <Grid Name="GridListaClientes" Width="400" Height="240" Grid.Row="1" VerticalAlignment="Top" DataContext="{StaticResource ListaClientes}">
+                        <ListView x:Name="Clientes" Background="Transparent" ItemsSource="{Binding}"
+                                SelectionMode="Single" SelectionChanged="Clientes_SelectionChanged">
                             <ListView.View>
                                 <GridView ColumnHeaderContainerStyle="{StaticResource headerStyle}"
-                                              ColumnHeaderTemplate="{StaticResource headerTemplate}">
+                                          ColumnHeaderTemplate="{StaticResource headerTemplate}">
                                     <GridViewColumn Width="100" Header="DNI" DisplayMemberBinding="{Binding DNI}" />
                                     <GridViewColumn Width="100" Header="Apellido" DisplayMemberBinding="{Binding Apellido}" />
                                     <GridViewColumn Width="100" Header="Nombre" DisplayMemberBinding="{Binding Nombre}" />
@@ -167,30 +157,34 @@
                 </Grid>
             </Grid>
             <!-- Boton Vista previa -->
-            <Button Style="{StaticResource ButtonAzulPlantilla}" 
-                    Grid.Row="1" 
+            <Button Style="{StaticResource ButtonAzulPlantilla}"
+                    Grid.Row="2" 
                     Height="30" 
-                    Margin="0,0,130,20" 
-                    Width="105"
+                    Margin="0,0,140,20" 
+                    Width="125"
                     VerticalAlignment="Bottom" 
                     HorizontalAlignment="Right" 
                     Name="btnVistaPrevia"
                     Click="btnVistaPrevia_Click" ToolTip="Vista Previa de Clientes">
-                <StackPanel Height="29" Width="108" Orientation="Horizontal">
-                    <Image Source="/Vistas;component/images/icons/vista-previa.png" Height="17" Width="27" />
-                    <TextBlock Height="19" Width="74">Vista Previa</TextBlock>
+                <StackPanel Orientation="Horizontal">
+                    <Image Source="/Vistas;component/images/icons/vista-previa.png" Height="18"/>
+                    <TextBlock Margin="10,0,0,0">Vista Previa</TextBlock>
                 </StackPanel>
             </Button>
-            <Button Style="{StaticResource ButtonAmarillo}" Grid.Row="1" Height="30" 
+            <Button Style="{StaticResource ButtonAmarillo}"
+                    Grid.Row="2" 
+                    Height="30" Width="100"
                     Margin="0,0,30,20" 
                     VerticalAlignment="Bottom" 
-                    HorizontalAlignment="Right" Name="btnSalir" Click="btnSalir_Click">
-                <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                    <Image Source="/Vistas;component/images/icons/atras.png" Height="17" Width="27" />
-                    <TextBlock Height="19" Width="54">Atrás</TextBlock>
+                    HorizontalAlignment="Right" 
+                    Name="btnSalir" 
+                    Click="btnSalir_Click" >
+                    <StackPanel Orientation="Horizontal">
+                    <Image Source="/Vistas;component/images/icons/atras.png" Height="16" />
+                    <TextBlock Margin="10,0,0,0">Atrás</TextBlock>
                 </StackPanel>
             </Button>
-
+            
         </Grid>
     </Border>
 </UserControl>

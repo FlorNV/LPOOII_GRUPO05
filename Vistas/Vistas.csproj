@@ -315,7 +315,6 @@
     <Resource Include="images\icons\right-from-bracket-solid.png" />
   </ItemGroup>
   <ItemGroup>
-    <Resource Include="ResourceDictionary\Roles.xml" />
     <Resource Include="media\Wildlife.wmv" />
   </ItemGroup>
   <ItemGroup>
@@ -345,6 +344,15 @@
   </ItemGroup>
   <ItemGroup>
     <Resource Include="images\icons\eliminar.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="images\icons\first.png" />
+    <Resource Include="images\icons\last.png" />
+    <Resource Include="images\icons\next.png" />
+    <Resource Include="images\icons\previous.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="Views\Roles.xml" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 

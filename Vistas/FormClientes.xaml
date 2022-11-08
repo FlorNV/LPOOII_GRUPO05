@@ -13,7 +13,7 @@
     <Window.Resources>
         <ObjectDataProvider x:Key="list_clientes" 
                             ObjectType="{x:Type svc:TrabajarClientes}" 
-                            MethodName="obtenerClientes" />
+                            MethodName="ObtenerClientes" />
     </Window.Resources>
     <Border CornerRadius="10">
         <Border.Background>

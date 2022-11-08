@@ -64,7 +64,7 @@ namespace Vistas.Views {
 
         private void txtProductoCantidad_TextChanged(object sender, TextChangedEventArgs e) {
             if (txtProductoPrecio != null) {
-                if (!String.IsNullOrEmpty(txtProductoPrecio.Text)) {
+                if (!String.IsNullOrEmpty(txtProductoCantidad.Text) && txtProductoCantidad.Text.All(char.IsDigit) && !String.IsNullOrEmpty(txtProductoPrecio.Text)) {
                     int cant = Convert.ToInt32(txtProductoCantidad.Text);
                     decimal precio = Convert.ToDecimal(txtProductoPrecio.Text);
                     txtProductoTotal.Text = (cant * precio).ToString();
@@ -93,12 +93,11 @@ namespace Vistas.Views {
 
                         // Asigno el resultado del nro de factura creado
                         oVenta.NroFactura = TrabajarVentas.insertarVenta(oVenta);
+                        MessageBox.Show("Venta Guardada", "Venta", MessageBoxButton.OK, MessageBoxImage.Information);
 
                         // Pasar datos al nuevo formulario
                         Comprobante com = new Comprobante(oVenta, clienteSelected, productoSelected, vendedorSelected);
                         com.Show();
-
-                        MessageBox.Show("Venta Guardada", "Venta");
                         LimpiarCampos();
                     } catch (Exception x) {
                         MessageBox.Show("Error: " + x.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
@@ -143,5 +142,6 @@ namespace Vistas.Views {
         private void btnSalir_Click(object sender, RoutedEventArgs e) {
             Content = new UserControlInicio();
         }
+
     }
 }

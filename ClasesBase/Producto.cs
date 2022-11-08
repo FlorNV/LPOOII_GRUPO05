@@ -73,14 +73,7 @@ namespace ClasesBase {
         public string this[string columnName] {
             get {
                 string result = null;
-                if (columnName == "CodProducto") { 
-                    if(String.IsNullOrEmpty(CodProducto)) {
-                        result = "Campo requerido.";
-                    } /*
-                    else if (CodProducto.Length < 3) {
-                        result = "Debe tener al menos 3 letras";
-                    }*/
-                } else if (columnName == "Categoria") {
+                if (columnName == "Categoria") {
                     if (String.IsNullOrEmpty(Categoria)) {
                         result = "Campo requerido.";
                     }
@@ -92,8 +85,7 @@ namespace ClasesBase {
                     if (String.IsNullOrEmpty(Descripcion)) {
                         result = "Campo requerido.";
                     }
-                } 
-                else if(columnName == "Precio") {
+                } else if(columnName == "Precio") {
                     try {
                         decimal num;
                         if (Precio == 0 || string.IsNullOrEmpty(Precio.ToString())) {
@@ -107,9 +99,24 @@ namespace ClasesBase {
                         throw new FormatException("Debe ingresar un número");
                     }
                 }
+                /*
+                else if (columnName == "Imagen") {
+                    if (String.IsNullOrEmpty(Imagen)) {
+                        result = "Campo requerido.";
+                    }
+                } */
 
                 return result;
             }
+        }
+
+        public string isValid() {
+            var allProperties = GetType().GetProperties();
+            foreach (var property in allProperties) {
+                string error = this[property.Name];
+                if (error != null) return error;
+            }
+            return null;
         }
 
         public event PropertyChangedEventHandler PropertyChanged;

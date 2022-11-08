@@ -78,11 +78,26 @@ namespace ClasesBase {
             }
         }
 
+        public string isValid() {
+            var allProperties = GetType().GetProperties();
+            foreach (var property in allProperties) {
+                string error = this[property.Name];
+                if (error != null) return error;
+            }
+            return null;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         protected void NotifyPropertyChanged(string propName) {
+            /*
             if (this.PropertyChanged != null)
                 this.PropertyChanged(this, new PropertyChangedEventArgs(propName));
+             * */
+            PropertyChangedEventHandler handler = PropertyChanged;
+            if (handler != null) {
+                handler(this, new PropertyChangedEventArgs(propName));
+            }
         }
 
     }

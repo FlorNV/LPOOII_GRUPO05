@@ -6,13 +6,15 @@ using System.ComponentModel;
 
 namespace ClasesBase
 {
-    public class Cliente : INotifyPropertyChanged
+    public class Cliente : INotifyPropertyChanged, IDataErrorInfo
     {
         private int id;
 
-        public int ID {
+        public int ID
+        {
             get { return id; }
-            set {
+            set
+            {
                 id = value;
                 Notificador("ID");
             }
@@ -63,6 +65,15 @@ namespace ClasesBase
             }
         }
 
+        public string isValid() {
+            var allProperties = GetType().GetProperties();
+            foreach (var property in allProperties) {
+                string error = this[property.Name];
+                if (error != null) return error;
+            }
+            return null;
+        }
+
         public event PropertyChangedEventHandler PropertyChanged;
 
         public void Notificador(string nombrePropiedad)
@@ -70,6 +81,39 @@ namespace ClasesBase
             if (this.PropertyChanged != null)
             {
                 PropertyChanged(this, new PropertyChangedEventArgs(nombrePropiedad));
+            }
+        }
+
+        public string Error {
+            get { throw new NotImplementedException(); }
+        }
+
+        public string this[string columnName] {
+            get {
+                string result = null;
+                if (columnName == "DNI") {
+                    if (String.IsNullOrEmpty(DNI)) {
+                        result = "Campo requerido.";
+                    } else if(!DNI.All(char.IsDigit)) {
+                        result = "Debe ingresar números";
+                    }else if (DNI.Length != 8) {
+                        result = "Debe contener 8 números";
+                    }
+                } else if (columnName == "Apellido") {
+                    if (String.IsNullOrEmpty(Apellido)) {
+                        result = "Campo requerido.";
+                    }
+                } else if (columnName == "Nombre") {
+                    if (String.IsNullOrEmpty(Nombre)) {
+                        result = "Campo requerido.";
+                    }
+                } else if (columnName == "Direccion") {
+                    if (String.IsNullOrEmpty(Direccion)) {
+                        result = "Campo requerido.";
+                    }
+                }
+
+                return result;
             }
         }
     }

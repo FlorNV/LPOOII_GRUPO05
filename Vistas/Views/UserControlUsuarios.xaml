@@ -6,19 +6,21 @@
              mc:Ignorable="d" 
              d:DesignHeight="540" d:DesignWidth="800" Background="Transparent"
              xmlns:svc="clr-namespace:ClasesBase;assembly=ClasesBase"
-             xmlns:validar="clr-namespace:Vistas.Resources">
+             xmlns:sva="clr-namespace:Vistas"
+             xmlns:componentModel="clr-namespace:System.ComponentModel;assembly=WindowsBase">
     
     <UserControl.Resources>
-        <svc:Usuario x:Key="data"/>
         <ObjectDataProvider 
             ObjectType="{x:Type svc:TrabajarUsuarios}"
             MethodName="ObtenerUsuarios"
             x:Key="listUsuarios"/>
 
-        <ObjectDataProvider 
-            ObjectType="{x:Type svc:TrabajarUsuarios}"
-            MethodName="Roles"
-            x:Key="roles"/>
+        <!-- Se define la vista de la coleccion
+        <CollectionViewSource
+            x:Key="ListaUsuarios"
+            Source="{StaticResource ResourceKey=listUsuarios}"
+            Filter="eventVistaUsuario_Filter">
+        </CollectionViewSource>-->
     </UserControl.Resources>
     
     <Border CornerRadius="15">
@@ -60,46 +62,28 @@
                 <ColumnDefinition Width="20" />
             </Grid.ColumnDefinitions>
             
-            <TextBlock Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Text="Gestión de Usuarios" Foreground="#fff" FontSize="24" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
+            <Grid.Resources>
+                <XmlDataProvider x:Key="tipo_roles" Source="Roles.xml" XPath="/roles"/>
+            </Grid.Resources>
+            
+            <TextBlock Grid.Column="1" Grid.ColumnSpan="5" Grid.Row="1" Text="Gestión de Usuarios" Foreground="#fff" FontSize="30" FontWeight="Bold" HorizontalAlignment="Center" VerticalAlignment="Center" />
 
             <Label Content="Apellido" Name="lblApellido" Foreground="White" Grid.Column="1" Grid.Row="3" />
-            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtApellido" Grid.Column="2" Grid.Row="3" >
-                <TextBox.Text>
-                    <Binding Path="Apellido" Source="{StaticResource data}"
-                         ValidatesOnExceptions="True" 
-                         UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
-                </TextBox.Text>
-            </TextBox>
+            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtApellido" Grid.Column="2" Grid.Row="3" Text="{Binding Path=Apellido, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}"/>
 
             <Label Content="Nombre" Name="lblNombre" Foreground="White" Grid.Column="1" Grid.Row="5" />
-            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtNombre" Grid.Column="2" Grid.Row="5">
-                <TextBox.Text>
-                    <Binding Path="Nombre" Source="{StaticResource data}"
-                         ValidatesOnExceptions="True" 
-                         UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
-                </TextBox.Text>
-            </TextBox>
+            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtNombre" Grid.Column="2" Grid.Row="5" Text="{Binding Path=Nombre, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Username" Name="lblNombreUsuario" Foreground="White" Grid.Column="1" Grid.Row="7" />
-            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtNombreUsuario" Grid.Column="2" Grid.Row="7">
-                <TextBox.Text>
-                    <Binding Path="Username" Source="{StaticResource data}"
-                         ValidatesOnExceptions="True" 
-                         UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
-                </TextBox.Text>
-            </TextBox>
+            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtNombreUsuario" Grid.Column="2" Grid.Row="7" Text="{Binding Path=Username, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Contraseña" Name="lblPassword" Foreground="White" Grid.Column="1" Grid.Row="9" />
-            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtPassword" Grid.Column="2" Grid.Row="9">
-                <TextBox.Text>
-                    <Binding Path="Password" Source="{StaticResource data}"
-                         ValidatesOnExceptions="True" 
-                         UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
-                </TextBox.Text>
-            </TextBox>
+            <TextBox Style="{StaticResource TextBoxStyle}" Name="txtPassword" Grid.Column="2" Grid.Row="9" Text="{Binding Path=Password, ValidatesOnDataErrors=True, ValidatesOnExceptions=True, UpdateSourceTrigger=PropertyChanged}" />
 
             <Label Content="Rol" Name="lblRol" Foreground="White" Grid.Column="1" Grid.Row="11" />
-            <ComboBox Name="cmbRoles"  Grid.Column="2" Grid.Row="11" VerticalAlignment="Center" Text="Seleccione" SelectionChanged="cmbRoles_SelectionChanged">
+            <ComboBox Name="cmbRoles"  Grid.Column="2" Grid.Row="11" VerticalAlignment="Center" Text="Seleccione" SelectionChanged="cmbRoles_SelectionChanged" 
+                      ItemsSource="{Binding Source={StaticResource tipo_roles},XPath=tipo/@name}"/>
+                <!--
                 <ComboBoxItem >Administrador</ComboBoxItem>
                 <ComboBoxItem IsSelected="True">Vendedor</ComboBoxItem>
                 
@@ -108,7 +92,7 @@
                          ValidatesOnExceptions="True" 
                          UpdateSourceTrigger="PropertyChanged" ValidatesOnDataErrors="True" />
                 </ComboBox.SelectedItem>
-            </ComboBox>
+            </ComboBox>-->
             
 
             <Label Content="Legajo" Name="lblLegajo" Foreground="White" Grid.Column="1" Grid.Row="13" Visibility="Hidden" />
@@ -121,15 +105,15 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource ButtonAzulPlantilla}" Width="120" Name="btnGuardar" Click="btnGuardar_Click" ToolTip="Guardar Usuario">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/guardar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Guardar</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/guardar.png" Height="16"/>
+                        <TextBlock Margin="10,0,0,0">Guardar</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource ButtonAzulPlantilla}" Width="120" Name="btnCancelar" Grid.Column="2" Click="btnCancelar_Click" ToolTip="Cancelar">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/cancelar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Cancelar</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/cancelar.png" Height="16" />
+                        <TextBlock Margin="10,0,0,0">Cancelar</TextBlock>
                     </StackPanel>
                 </Button>
             </Grid>
@@ -143,21 +127,21 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource ButtonRosaPlantilla}" Name="btnNuevo" Click="btnNuevo_Click" ToolTip="Nuevo Usuario">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/nuevo.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Nuevo</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/nuevo.png" Height="18"  />
+                        <TextBlock Margin="10,0,0,0">Nuevo</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource ButtonRosaPlantilla}" Name="btnModificar" Grid.Column="2" Click="btnModificar_Click" ToolTip="Modificar Usuario">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/editar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="63">Modificar</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/editar.png" Height="18" />
+                        <TextBlock Margin="10,0,0,0">Modificar</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource ButtonRosaPlantilla}" Name="btnEliminar" Grid.Column="4" Click="btnEliminar_Click" ToolTip="Eliminar Usuario">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/eliminar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Eliminar</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/eliminar.png" Height="18" />
+                        <TextBlock Margin="10,0,0,0">Eliminar</TextBlock>
                     </StackPanel>
                 </Button>
             </Grid>
