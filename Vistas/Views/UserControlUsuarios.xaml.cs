@@ -21,10 +21,12 @@ namespace Vistas.Views {
     public partial class UserControlUsuarios : UserControl {
 
         private bool editMode = false;
+        private Usuario user;
 
-        public UserControlUsuarios() {
+        public UserControlUsuarios(Usuario userLog) {
             InitializeComponent();
 
+            user = userLog;
             HabilitarBotonesInicio();
             HabilitarDeshabilitarTextBox(false);
         }
@@ -117,49 +119,68 @@ namespace Vistas.Views {
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e) {
             if (cmbRoles.SelectedItem != null) {
-                MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea guardar este elemento?",
-                   "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
+                if (TrabajarUsuarios.ObtenerUsuarioPorUsername(txtNombreUsuario.Text) == null)
+                {
+                    MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea guardar este elemento?",
+                    "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                if (messageBoxResult == MessageBoxResult.Yes) {
-                    Usuario usr = new Usuario();
-                    usr.Apellido = txtApellido.Text;
-                    usr.Nombre = txtNombre.Text;
-                    usr.Username = txtNombreUsuario.Text;
-                    usr.Password = txtPassword.Text;
-                    //usr.Rol = (cmbRoles.SelectedItem as String).Substring(38);
-                    usr.Rol = cmbRoles.SelectedValue.ToString();
-                    if (editMode) {
-                        usr.Legajo = Convert.ToInt32(txtLegajo.Text);
-                        TrabajarUsuarios.ModificarUsuario(usr); ;
-                        MessageBox.Show("Usuario modificado", "Modificar");
-                    } else {
-                        TrabajarUsuarios.InsertarUsuario(usr);
-                        MessageBox.Show("Usuario guardado", "Guardar");
+                    if (messageBoxResult == MessageBoxResult.Yes)
+                    {
+                        Usuario usr = new Usuario();
+                        usr.Apellido = txtApellido.Text;
+                        usr.Nombre = txtNombre.Text;
+                        usr.Username = txtNombreUsuario.Text;
+                        usr.Password = txtPassword.Text;
+                        //usr.Rol = (cmbRoles.SelectedItem as String).Substring(38);
+                        usr.Rol = cmbRoles.SelectedValue.ToString();
+                        if (editMode)
+                        {
+                            usr.Legajo = Convert.ToInt32(txtLegajo.Text);
+                            TrabajarUsuarios.ModificarUsuario(usr); ;
+                            MessageBox.Show("Usuario modificado", "Modificar");
+                        }
+                        else
+                        {
+                            TrabajarUsuarios.InsertarUsuario(usr);
+                            MessageBox.Show("Usuario guardado", "Guardar");
+                        }
+
+                        Usuarios.DataContext = TrabajarUsuarios.ObtenerUsuarios();
+
+                        HabilitarDeshabilitarTextBox(false);
+                        HabilitarBotonesInicio();
+
+                        LimpiarCampos();
                     }
-
-                    Usuarios.DataContext = TrabajarUsuarios.ObtenerUsuarios();
-
-                    HabilitarDeshabilitarTextBox(false);
-                    HabilitarBotonesInicio();
-
-                    LimpiarCampos();
+                } else {
+                    MessageBox.Show("Este nombre de usuario ya esta registrado en el sistema.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             } else {
-                MessageBox.Show("Seleccione un Rol", "Info", MessageBoxButton.OK, MessageBoxImage.Information);
+                MessageBox.Show("Seleccione un Rol", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e) {
             if(!String.IsNullOrEmpty(txtLegajo.Text)) {
-                MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea eliminar este usuario?",
-                    "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
-                if (messageBoxResult == MessageBoxResult.Yes) {
-                    TrabajarUsuarios.EliminarUsuario(Convert.ToInt32(txtLegajo.Text));
-                    LimpiarCampos();
+                if (txtNombreUsuario.Text != "admin") {
+                    if (txtNombreUsuario.Text != user.Username) {
+                        MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea eliminar este usuario?",
+                        "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Warning);
+                        if (messageBoxResult == MessageBoxResult.Yes)
+                        {
+                            TrabajarUsuarios.EliminarUsuario(Convert.ToInt32(txtLegajo.Text));
+                            LimpiarCampos();
 
-                    HabilitarBotonesInicio();
-                    HabilitarDeshabilitarTextBox(false);
-                    Usuarios.DataContext = TrabajarUsuarios.ObtenerUsuarios();
+                            HabilitarBotonesInicio();
+                            HabilitarDeshabilitarTextBox(false);
+                            Usuarios.DataContext = TrabajarUsuarios.ObtenerUsuarios();
+                        }
+                    } else {
+                        MessageBox.Show("No puedes eliminar tu cuenta", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
+                    }
+                }
+                else {
+                    MessageBox.Show("No puedes eliminar a este usuario", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
             }
         }

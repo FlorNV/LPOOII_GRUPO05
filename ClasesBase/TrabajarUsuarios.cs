@@ -135,5 +135,31 @@ namespace ClasesBase {
 
             return null;
         }
+
+        public static Usuario ObtenerUsuarioPorUsername(string username)
+        {
+            SqlConnection cnn = new SqlConnection(ClasesBase.Properties.Settings.Default.muebleriaConnectionString);
+
+            SqlCommand cmd = new SqlCommand();
+            cmd.CommandText = "SELECT * FROM Usuario WHERE Usu_Username = @username";
+            cmd.CommandType = CommandType.Text;
+            cmd.Connection = cnn;
+            cmd.Parameters.AddWithValue("@username", username);
+
+            SqlDataAdapter da = new SqlDataAdapter(cmd);
+
+            DataTable dt = new DataTable();
+            da.Fill(dt);
+
+            foreach (DataRow row in dt.Rows)
+            {
+                Usuario usuario = new Usuario();
+                usuario.Username = row["Usu_Username"].ToString();
+                usuario.Rol = row["Usu_Rol"].ToString();
+                return usuario;
+            }
+
+            return null;
+        }
     }
 }

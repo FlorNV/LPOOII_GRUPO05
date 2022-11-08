@@ -18,6 +18,7 @@ namespace Vistas {
     /// Lógica de interacción para FormInicio.xaml
     /// </summary>
     public partial class FormInicio : Window {
+        private Usuario user;
         public FormInicio(Usuario userLog) {
             InitializeComponent();
             textUsername.Text = userLog.Username;
@@ -27,6 +28,8 @@ namespace Vistas {
             if (userLog.Rol == "Vendedor") {
                 btnUsuarios.IsEnabled = false;
             }
+
+            user = userLog;
         }
 
         private void btnProductos_Click(object sender, RoutedEventArgs e) {
@@ -50,7 +53,7 @@ namespace Vistas {
         }
 
         private void btnUsuarios_Click(object sender, RoutedEventArgs e) {
-            DataContext = new UserControlUsuarios();
+            DataContext = new UserControlUsuarios(user);
         }
 
         private void btnCerrarSesion_Click(object sender, RoutedEventArgs e) {
