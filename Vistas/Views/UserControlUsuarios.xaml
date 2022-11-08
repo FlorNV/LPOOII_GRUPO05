@@ -105,15 +105,15 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource ButtonAzulPlantilla}" Width="120" Name="btnGuardar" Click="btnGuardar_Click" ToolTip="Guardar Usuario">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/guardar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Guardar</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/guardar.png" Height="16"/>
+                        <TextBlock Margin="10,0,0,0">Guardar</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource ButtonAzulPlantilla}" Width="120" Name="btnCancelar" Grid.Column="2" Click="btnCancelar_Click" ToolTip="Cancelar">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/cancelar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Cancelar</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/cancelar.png" Height="16" />
+                        <TextBlock Margin="10,0,0,0">Cancelar</TextBlock>
                     </StackPanel>
                 </Button>
             </Grid>
@@ -127,21 +127,21 @@
                     <ColumnDefinition />
                 </Grid.ColumnDefinitions>
                 <Button Style="{StaticResource ButtonRosaPlantilla}" Name="btnNuevo" Click="btnNuevo_Click" ToolTip="Nuevo Usuario">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/nuevo.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Nuevo</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/nuevo.png" Height="18"  />
+                        <TextBlock Margin="10,0,0,0">Nuevo</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource ButtonRosaPlantilla}" Name="btnModificar" Grid.Column="2" Click="btnModificar_Click" ToolTip="Modificar Usuario">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/editar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="63">Modificar</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/editar.png" Height="18" />
+                        <TextBlock Margin="10,0,0,0">Modificar</TextBlock>
                     </StackPanel>
                 </Button>
                 <Button Style="{StaticResource ButtonRosaPlantilla}" Name="btnEliminar" Grid.Column="4" Click="btnEliminar_Click" ToolTip="Eliminar Usuario">
-                    <StackPanel Height="29" Width="97" Orientation="Horizontal">
-                        <Image Source="/Vistas;component/images/icons/eliminar.png" Height="17" Width="27" />
-                        <TextBlock Height="19" Width="54">Eliminar</TextBlock>
+                    <StackPanel Orientation="Horizontal">
+                        <Image Source="/Vistas;component/images/icons/eliminar.png" Height="18" />
+                        <TextBlock Margin="10,0,0,0">Eliminar</TextBlock>
                     </StackPanel>
                 </Button>
             </Grid>

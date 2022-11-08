@@ -301,6 +301,7 @@ namespace Vistas.Views {
                     LimpiarCampos();
                     HabilitarDeshabilitarBotones(true);
                     ActualizarDatos();
+                    HabilitarDeshabilitarTextBox(false);
                 } catch (Exception x) {
                     MessageBox.Show("Error: " + x.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
                 }

@@ -113,6 +113,7 @@ namespace Vistas.Views
                     TrabajarProveedores.EliminarProveedor(Convert.ToInt32(txtID.Text));
                     LimpiarCampos();
                     HabilitarDeshabilitarBotones(true);
+                    HabilitarDeshabilitarTextBox(false);
                     ActualizarDatos();
                 } catch (Exception x) {
                     MessageBox.Show("Error: " + x.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);

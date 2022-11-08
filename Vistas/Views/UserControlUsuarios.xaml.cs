@@ -158,7 +158,7 @@ namespace Vistas.Views {
                     LimpiarCampos();
 
                     HabilitarBotonesInicio();
-
+                    HabilitarDeshabilitarTextBox(false);
                     Usuarios.DataContext = TrabajarUsuarios.ObtenerUsuarios();
                 }
             }

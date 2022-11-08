@@ -221,6 +221,7 @@ namespace Vistas.Views {
                     TrabajarProductos.eliminarProducto(txtCodProducto.Text);
                     LimpiarCampos();
                     HabilitarDeshabilitarBotones(true);
+                    HabilitarDeshabilitarTextBox(false);
                     ActualizarDatos();
                 } catch (Exception x) {
                     MessageBox.Show("Error: " + x.Message, "Error", MessageBoxButton.OK, MessageBoxImage.Error);
