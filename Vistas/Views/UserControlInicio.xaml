@@ -33,6 +33,7 @@
             <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" >
                 <Label Content="Bienvenido al Sistema" FontSize="54" FontWeight="DemiBold" Foreground="#fff" HorizontalAlignment="Center" />
             </StackPanel>
+            <Image Grid.Column="3" Height="35" HorizontalAlignment="Left" Margin="159,6,0,0" Name="imgInfo" Stretch="Fill" VerticalAlignment="Top" Width="35" Source="/Vistas;component/images/icons/information.png" MouseDown="imgInfo_MouseDown" />
         </Grid>
     </Border>
 </UserControl>

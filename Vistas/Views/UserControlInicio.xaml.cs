@@ -20,5 +20,11 @@ namespace Vistas.Views {
         public UserControlInicio() {
             InitializeComponent();
         }
+
+        private void imgInfo_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            AcercaDe acercaDe = new AcercaDe();
+            acercaDe.Show();
+        }
     }
 }
