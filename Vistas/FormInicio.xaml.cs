@@ -68,5 +68,6 @@ namespace Vistas {
                 this.Close();
             }
         }
+
     }
 }

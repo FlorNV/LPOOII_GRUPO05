@@ -45,7 +45,7 @@ namespace Vistas
         {
             video.LoadedBehavior = MediaState.Manual;
             video.UnloadedBehavior = MediaState.Stop;
-            video.Source = new Uri(@"C:\Users\admin\Documents\Visual Studio 2010\Projects\LPOOII_GRUPO05\Vistas\media\Wildlife.wmv");
+            video.Source = new Uri(@"C:\Repositorios\LPOOII_GRUPO05\Vistas\media\Wildlife.wmv");
         }
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)

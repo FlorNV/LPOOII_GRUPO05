@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using System.IO;
 
 namespace Vistas.Views {
     /// <summary>
@@ -19,6 +20,13 @@ namespace Vistas.Views {
     public partial class UserControlInicio : UserControl {
         public UserControlInicio() {
             InitializeComponent();
+        }
+
+        private void imgInfo_MouseDown(object sender, MouseButtonEventArgs e)
+        {
+            AcercaDe acercaDe = new AcercaDe();
+            acercaDe.Show();
+            MessageBox.Show(Directory.GetCurrentDirectory().Remove(38) + "media\\Wildlife.wmv");
         }
     }
 }
