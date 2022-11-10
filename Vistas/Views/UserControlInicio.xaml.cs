@@ -11,7 +11,6 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
-using System.IO;
 
 namespace Vistas.Views {
     /// <summary>
@@ -26,7 +25,6 @@ namespace Vistas.Views {
         {
             AcercaDe acercaDe = new AcercaDe();
             acercaDe.Show();
-            MessageBox.Show(Directory.GetCurrentDirectory().Remove(38) + "media\\Wildlife.wmv");
         }
     }
 }

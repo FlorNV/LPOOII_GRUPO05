@@ -11,6 +11,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using System.Windows.Threading;
+using System.IO;
 
 namespace Vistas
 {
@@ -45,7 +46,7 @@ namespace Vistas
         {
             video.LoadedBehavior = MediaState.Manual;
             video.UnloadedBehavior = MediaState.Stop;
-            video.Source = new Uri(@"C:\Repositorios\LPOOII_GRUPO05\Vistas\media\Wildlife.wmv");
+            video.Source = new Uri(Directory.GetCurrentDirectory().Remove(38) + "media\\Wildlife.wmv");
         }
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
