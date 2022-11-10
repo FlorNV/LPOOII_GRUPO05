@@ -46,7 +46,9 @@ namespace Vistas
         {
             video.LoadedBehavior = MediaState.Manual;
             video.UnloadedBehavior = MediaState.Stop;
-            video.Source = new Uri(Directory.GetCurrentDirectory().Remove(38) + "media\\Wildlife.wmv");
+            var CurrentDirectory = Directory.GetCurrentDirectory();
+            var VistasDirectory = CurrentDirectory.Substring(0, CurrentDirectory.Length - 9);
+            video.Source = new Uri(VistasDirectory + "\\media\\Wildlife.wmv");
         }
 
         private void btnPlay_Click(object sender, RoutedEventArgs e)
