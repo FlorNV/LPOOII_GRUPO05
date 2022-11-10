@@ -122,47 +122,61 @@ namespace Vistas.Views {
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e) {
-            if (cmbRoles.SelectedItem != null) {
-                if (TrabajarUsuarios.ObtenerUsuarioPorUsername(txtNombreUsuario.Text) == null)
-                {
-                    MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea guardar este elemento?",
+            if (!ValidarTextBox()) {
+                if (cmbRoles.SelectedItem != null) {
+                    if (TrabajarUsuarios.ObtenerUsuarioPorUsername(txtNombreUsuario.Text) == null) {
+                        MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea guardar este elemento?",
                     "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
 
-                    if (messageBoxResult == MessageBoxResult.Yes)
-                    {
-                        Usuario usr = new Usuario();
-                        usr.Apellido = txtApellido.Text;
-                        usr.Nombre = txtNombre.Text;
-                        usr.Username = txtNombreUsuario.Text;
-                        usr.Password = txtPassword.Text;
-                        //usr.Rol = (cmbRoles.SelectedItem as String).Substring(38);
-                        usr.Rol = cmbRoles.SelectedValue.ToString();
-                        if (editMode)
-                        {
-                            usr.Legajo = Convert.ToInt32(txtLegajo.Text);
-                            TrabajarUsuarios.ModificarUsuario(usr); ;
-                            MessageBox.Show("Usuario modificado", "Modificar");
-                            
+                        if (messageBoxResult == MessageBoxResult.Yes) {
+                            Usuario usr = CargarUsuario();
+                            if (editMode) {
+                                TrabajarUsuarios.ModificarUsuario(usr); ;
+                                MessageBox.Show("Usuario modificado", "Modificar");
+
+                            } else {
+                                TrabajarUsuarios.InsertarUsuario(usr);
+                                MessageBox.Show("Usuario guardado", "Guardar");
+                            }
+
+                            Usuarios.DataContext = TrabajarUsuarios.ObtenerUsuarios();
+
+                            HabilitarDeshabilitarTextBox(false);
+                            HabilitarBotonesInicio();
+
+                            LimpiarCampos();
                         }
-                        else
-                        {
-                            TrabajarUsuarios.InsertarUsuario(usr);
-                            MessageBox.Show("Usuario guardado", "Guardar");
-                        }
-
-                        Usuarios.DataContext = TrabajarUsuarios.ObtenerUsuarios();
-
-                        HabilitarDeshabilitarTextBox(false);
-                        HabilitarBotonesInicio();
-
-                        LimpiarCampos();
+                    } else {
+                        MessageBox.Show("Este nombre de usuario ya esta registrado en el sistema.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
                 } else {
-                    MessageBox.Show("Este nombre de usuario ya esta registrado en el sistema.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
+                    MessageBox.Show("Seleccione un Rol", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
-            } else {
-                MessageBox.Show("Seleccione un Rol", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
             }
+        }
+
+        private bool ValidarTextBox() {
+            Usuario pr = CargarUsuario();
+            string err = pr.isValid();
+            if (err != null) {
+                MessageBox.Show("Revise los campos por favor.", "Error", MessageBoxButton.OK, MessageBoxImage.Warning);
+                return true;
+            }
+
+            return false;
+        }
+
+        private Usuario CargarUsuario() {
+            Usuario obj = new Usuario();
+            obj.Apellido = txtApellido.Text;
+            obj.Nombre = txtNombre.Text;
+            obj.Username = txtNombreUsuario.Text;
+            obj.Password = txtPassword.Text;
+            obj.Rol = cmbRoles.SelectedValue.ToString();
+            if(editMode)
+                obj.Legajo = Convert.ToInt32(txtLegajo.Text);
+
+            return obj;
         }
 
         private void btnEliminar_Click(object sender, RoutedEventArgs e) {
