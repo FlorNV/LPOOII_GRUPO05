@@ -111,10 +111,14 @@ namespace Vistas.Views {
         }
 
         private void btnModificar_Click(object sender, RoutedEventArgs e) {
-            editMode = true;
+            if (txtNombreUsuario.Text != "admin") {
+                editMode = true;
 
-            habilitarEdicion(editMode);
-            HabilitarDeshabilitarBotones(false);
+                habilitarEdicion(editMode);
+                HabilitarDeshabilitarBotones(false);
+            } else {
+                MessageBox.Show("No puedes modificar a este usuario", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
+            }
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e) {
@@ -138,6 +142,7 @@ namespace Vistas.Views {
                             usr.Legajo = Convert.ToInt32(txtLegajo.Text);
                             TrabajarUsuarios.ModificarUsuario(usr); ;
                             MessageBox.Show("Usuario modificado", "Modificar");
+                            
                         }
                         else
                         {
