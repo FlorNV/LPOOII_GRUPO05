@@ -122,8 +122,9 @@ namespace Vistas.Views {
         }
 
         private void btnGuardar_Click(object sender, RoutedEventArgs e) {
-            if (!ValidarTextBox()) {
-                if (cmbRoles.SelectedItem != null) {
+            if (cmbRoles.SelectedItem != null) {
+                if (!ValidarTextBox()) {
+                
                     if (TrabajarUsuarios.ObtenerUsuarioPorUsername(txtNombreUsuario.Text) == null) {
                         MessageBoxResult messageBoxResult = MessageBox.Show("¿Está seguro de que desea guardar este elemento?",
                     "Confirmación", MessageBoxButton.YesNo, MessageBoxImage.Question);
@@ -149,9 +150,9 @@ namespace Vistas.Views {
                     } else {
                         MessageBox.Show("Este nombre de usuario ya esta registrado en el sistema.", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
                     }
-                } else {
-                    MessageBox.Show("Seleccione un Rol", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
                 }
+            } else {
+                MessageBox.Show("Seleccione un Rol", "Aviso", MessageBoxButton.OK, MessageBoxImage.Information);
             }
         }
 
