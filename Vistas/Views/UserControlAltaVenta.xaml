@@ -210,7 +210,7 @@
                             </Grid>
                         </StackPanel>
                     </GroupBox>
-                        <Button Height="30" Name="button1" Style="{StaticResource ButtonAmarillo}" ToolTip="Estado de la Venta" Width="100" Click="button1_Click">
+                        <Button Height="30" Name="button1" Margin="0,15" Style="{StaticResource ButtonAmarillo}" ToolTip="Estado de la Venta" Width="100" Click="button1_Click">
                             <StackPanel Orientation="Horizontal">
                                 <Image Height="20" Source="/Vistas;component/images/icons/list-solid.png" Width="22" />
                                 <TextBlock Margin="10,0,0,0">Estado</TextBlock>

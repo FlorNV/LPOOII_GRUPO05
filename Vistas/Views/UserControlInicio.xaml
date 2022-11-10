@@ -33,10 +33,10 @@
             <StackPanel Grid.Column="0" Grid.ColumnSpan="4" Grid.Row="1" >
                 <Label Content="Bienvenido al Sistema" FontSize="54" FontWeight="DemiBold" Foreground="#fff" HorizontalAlignment="Center" />
             </StackPanel>
-            <Button Height="30" HorizontalAlignment="Right" Margin="0,0,6,26" Name="btnAcercaDe" Style="{StaticResource ButtonAmarilloPlantilla}" VerticalAlignment="Bottom" Width="100" Grid.Column="3" Grid.Row="5" Click="btnAcercaDe_Click">
+            <Button Height="30" Width="120" HorizontalAlignment="Right" Margin="0,0,6,26" Name="btnAcercaDe" Style="{StaticResource ButtonAmarilloPlantilla}" VerticalAlignment="Bottom" Grid.Column="3" Grid.Row="5" Click="btnAcercaDe_Click">
                 <StackPanel Orientation="Horizontal">
-                    <Image Height="16" Source="/Vistas;component/images/icons/vista-previa.png" />
-                    <TextBlock Margin="10,0,0,0">Acerca De</TextBlock>
+                    <Image Height="18" Source="/Vistas;component/images/icons/vista-previa.png" />
+                    <TextBlock Margin="10,0,0,0" FontSize="16">Acerca De</TextBlock>
                 </StackPanel>
             </Button>
         </Grid>
