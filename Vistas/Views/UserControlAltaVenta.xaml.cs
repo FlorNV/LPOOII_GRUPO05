@@ -143,5 +143,12 @@ namespace Vistas.Views {
             Content = new UserControlInicio();
         }
 
+        private void button1_Click(object sender, RoutedEventArgs e)
+        {
+            ListaDeEstados win = new ListaDeEstados();
+            win.Show();
+
+        }
+
     }
 }

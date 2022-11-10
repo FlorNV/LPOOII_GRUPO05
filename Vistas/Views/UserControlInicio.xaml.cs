@@ -20,5 +20,11 @@ namespace Vistas.Views {
         public UserControlInicio() {
             InitializeComponent();
         }
+
+        private void btnAcercaDe_Click(object sender, RoutedEventArgs e)
+        {
+            AcercaDe win = new AcercaDe();
+            win.Show();
+        }
     }
 }
